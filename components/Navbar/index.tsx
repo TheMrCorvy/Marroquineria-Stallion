@@ -247,7 +247,7 @@ const Navbar: FC = () => {
 	return (
 		<>
 			<div className={classes.grow}>
-				<AppBar position="static">
+				<AppBar position="fixed">
 					<Toolbar>
 						<IconButton
 							edge="start"
@@ -265,6 +265,8 @@ const Navbar: FC = () => {
 								</Typography>
 							</Button>
 						</Link>
+
+						<div className={classes.grow} />
 
 						<div className={classes.search}>
 							<div className={classes.searchIcon}>
