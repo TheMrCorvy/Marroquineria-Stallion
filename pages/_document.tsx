@@ -11,6 +11,8 @@ class MyDocument extends Document {
 				<body>
 					<Main />
 					<NextScript />
+					{/**MercadoPago */}
+					<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
 				</body>
 			</Html>
 		)

@@ -1,6 +1,5 @@
 import { FC, MouseEvent, useState } from "react"
 
-import { fade, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 import {
 	AppBar,
 	Toolbar,
@@ -11,6 +10,8 @@ import {
 	MenuItem,
 	Menu,
 } from "@material-ui/core"
+
+import { fade, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import MenuIcon from "@material-ui/icons/Menu"
 import SearchIcon from "@material-ui/icons/Search"
@@ -87,6 +88,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Navbar: FC = () => {
 	const classes = useStyles()
+
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null)
 
