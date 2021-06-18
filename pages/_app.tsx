@@ -24,6 +24,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 					rel="stylesheet"
 					href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 				/>
+
+				{/**MercadoPago */}
+				<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
 			</Head>
 			<Component {...pageProps} />
 		</>
