@@ -9,6 +9,12 @@ import {
 	Badge,
 	MenuItem,
 	Menu,
+	Drawer,
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemText,
+	Divider,
 } from "@material-ui/core"
 
 import { fade, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
@@ -16,6 +22,7 @@ import { fade, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 import MenuIcon from "@material-ui/icons/Menu"
 import SearchIcon from "@material-ui/icons/Search"
 import AccountCircle from "@material-ui/icons/AccountCircle"
+import InboxIcon from "@material-ui/icons/MoveToInbox"
 import MailIcon from "@material-ui/icons/Mail"
 import NotificationsIcon from "@material-ui/icons/Notifications"
 import MoreIcon from "@material-ui/icons/MoreVert"
@@ -92,6 +99,8 @@ const Navbar: FC = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null)
 
+	const [open, setOpen] = useState(false)
+
 	const isMenuOpen = Boolean(anchorEl)
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
@@ -110,6 +119,10 @@ const Navbar: FC = () => {
 
 	const handleMobileMenuOpen = (event: MouseEvent<HTMLElement>) => {
 		setMobileMoreAnchorEl(event.currentTarget)
+	}
+
+	const toggleDrawer = () => {
+		setOpen(!open)
 	}
 
 	const menuId = "primary-search-account-menu"
@@ -170,72 +183,100 @@ const Navbar: FC = () => {
 	)
 
 	return (
-		<div className={classes.grow}>
-			<AppBar position="static">
-				<Toolbar>
-					<IconButton
-						edge="start"
-						className={classes.menuButton}
-						color="inherit"
-						aria-label="open drawer"
-					>
-						<MenuIcon />
-					</IconButton>
-					<Typography className={classes.title} variant="h6" noWrap>
-						Material-UI
-					</Typography>
-					<div className={classes.search}>
-						<div className={classes.searchIcon}>
-							<SearchIcon />
+		<>
+			<div className={classes.grow}>
+				<AppBar position="static">
+					<Toolbar>
+						<IconButton
+							edge="start"
+							className={classes.menuButton}
+							color="inherit"
+							aria-label="open drawer"
+							onClick={toggleDrawer}
+						>
+							<MenuIcon />
+						</IconButton>
+						<Typography className={classes.title} variant="h6" noWrap>
+							Marroquinería Stallion
+						</Typography>
+						<div className={classes.search}>
+							<div className={classes.searchIcon}>
+								<SearchIcon />
+							</div>
+							<InputBase
+								placeholder="Buscar productos"
+								classes={{
+									root: classes.inputRoot,
+									input: classes.inputInput,
+								}}
+								inputProps={{ "aria-label": "search" }}
+							/>
 						</div>
-						<InputBase
-							placeholder="Search…"
-							classes={{
-								root: classes.inputRoot,
-								input: classes.inputInput,
-							}}
-							inputProps={{ "aria-label": "search" }}
-						/>
-					</div>
-					<div className={classes.grow} />
-					<div className={classes.sectionDesktop}>
-						<IconButton aria-label="show 4 new mails" color="inherit">
-							<Badge badgeContent={4} color="secondary">
-								<MailIcon />
-							</Badge>
-						</IconButton>
-						<IconButton aria-label="show 17 new notifications" color="inherit">
-							<Badge badgeContent={17} color="secondary">
-								<NotificationsIcon />
-							</Badge>
-						</IconButton>
-						<IconButton
-							edge="end"
-							aria-label="account of current user"
-							aria-controls={menuId}
-							aria-haspopup="true"
-							onClick={handleProfileMenuOpen}
-							color="inherit"
-						>
-							<AccountCircle />
-						</IconButton>
-					</div>
-					<div className={classes.sectionMobile}>
-						<IconButton
-							aria-label="show more"
-							aria-controls={mobileMenuId}
-							aria-haspopup="true"
-							onClick={handleMobileMenuOpen}
-							color="inherit"
-						>
-							<MoreIcon />
-						</IconButton>
-					</div>
-				</Toolbar>
-			</AppBar>
-			{renderMobileMenu}
-			{renderMenu}
-		</div>
+						<div className={classes.grow} />
+						<div className={classes.sectionDesktop}>
+							<IconButton aria-label="show 4 new mails" color="inherit">
+								<Badge badgeContent={4} color="secondary">
+									<MailIcon />
+								</Badge>
+							</IconButton>
+							<IconButton aria-label="show 17 new notifications" color="inherit">
+								<Badge badgeContent={17} color="secondary">
+									<NotificationsIcon />
+								</Badge>
+							</IconButton>
+							<IconButton
+								edge="end"
+								aria-label="account of current user"
+								aria-controls={menuId}
+								aria-haspopup="true"
+								onClick={handleProfileMenuOpen}
+								color="inherit"
+							>
+								<AccountCircle />
+							</IconButton>
+						</div>
+						<div className={classes.sectionMobile}>
+							<IconButton
+								aria-label="show more"
+								aria-controls={mobileMenuId}
+								aria-haspopup="true"
+								onClick={handleMobileMenuOpen}
+								color="inherit"
+							>
+								<MoreIcon />
+							</IconButton>
+						</div>
+					</Toolbar>
+				</AppBar>
+				{renderMobileMenu}
+				{renderMenu}
+			</div>
+			<Drawer anchor="left" open={open} onClose={toggleDrawer}>
+				<div role="presentation" onClick={toggleDrawer} onKeyDown={toggleDrawer}>
+					<List>
+						{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+							<ListItem button key={text}>
+								<ListItemIcon>
+									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+								</ListItemIcon>
+								<ListItemText primary={text} />
+							</ListItem>
+						))}
+					</List>
+					<Divider />
+					<List>
+						{["All mail", "Trash", "Spam"].map((text, index) => (
+							<ListItem button key={text}>
+								<ListItemIcon>
+									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+								</ListItemIcon>
+								<ListItemText primary={text} />
+							</ListItem>
+						))}
+					</List>
+				</div>
+			</Drawer>
+		</>
 	)
 }
 
