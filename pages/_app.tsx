@@ -1,7 +1,24 @@
+import { useEffect } from "react"
+
 import type { AppProps } from "next/app"
 import Head from "next/head"
 
+import PropTypes from "prop-types"
+
+import { ThemeProvider } from "@material-ui/core/styles"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import theme from "../theme"
+
 function MyApp({ Component, pageProps }: AppProps) {
+	useEffect(() => {
+		// Remove the server-side injected CSS.
+		const jssStyles = document.querySelector("#jss-server-side")
+
+		if (jssStyles && jssStyles.parentElement) {
+			jssStyles.parentElement.removeChild(jssStyles)
+		}
+	}, [])
+
 	return (
 		<>
 			<Head>
@@ -28,8 +45,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 				{/**MercadoPago */}
 				<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
 			</Head>
-			<Component {...pageProps} />
+			<ThemeProvider theme={theme}>
+				{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+				<CssBaseline />
+				<Component {...pageProps} />
+			</ThemeProvider>
 		</>
 	)
 }
+
+MyApp.propTypes = {
+	Component: PropTypes.elementType.isRequired,
+	pageProps: PropTypes.object.isRequired,
+}
+
 export default MyApp
