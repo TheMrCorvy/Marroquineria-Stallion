@@ -15,6 +15,7 @@ import {
 	ListItemIcon,
 	ListItemText,
 	Divider,
+	Button,
 } from "@material-ui/core"
 
 import { fade, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
@@ -152,32 +153,10 @@ const Navbar: FC = () => {
 			open={isMobileMenuOpen}
 			onClose={handleMobileMenuClose}
 		>
-			<MenuItem>
-				<IconButton aria-label="show 4 new mails" color="inherit">
-					<Badge badgeContent={4} color="secondary">
-						<MailIcon />
-					</Badge>
-				</IconButton>
-				<p>Messages</p>
-			</MenuItem>
-			<MenuItem>
-				<IconButton aria-label="show 11 new notifications" color="inherit">
-					<Badge badgeContent={11} color="secondary">
-						<NotificationsIcon />
-					</Badge>
-				</IconButton>
-				<p>Notifications</p>
-			</MenuItem>
+			<MenuItem>{/* <Button color="inherit">Login</Button> */}</MenuItem>
+			<MenuItem>{/* <Button color="inherit">Login</Button> */}</MenuItem>
 			<MenuItem onClick={handleProfileMenuOpen}>
-				<IconButton
-					aria-label="account of current user"
-					aria-controls="primary-search-account-menu"
-					aria-haspopup="true"
-					color="inherit"
-				>
-					<AccountCircle />
-				</IconButton>
-				<p>Profile</p>
+				{/* <Button color="inherit">Login</Button> */}
 			</MenuItem>
 		</Menu>
 	)
@@ -214,26 +193,9 @@ const Navbar: FC = () => {
 						</div>
 						<div className={classes.grow} />
 						<div className={classes.sectionDesktop}>
-							<IconButton aria-label="show 4 new mails" color="inherit">
-								<Badge badgeContent={4} color="secondary">
-									<MailIcon />
-								</Badge>
-							</IconButton>
-							<IconButton aria-label="show 17 new notifications" color="inherit">
-								<Badge badgeContent={17} color="secondary">
-									<NotificationsIcon />
-								</Badge>
-							</IconButton>
-							<IconButton
-								edge="end"
-								aria-label="account of current user"
-								aria-controls={menuId}
-								aria-haspopup="true"
-								onClick={handleProfileMenuOpen}
-								color="inherit"
-							>
-								<AccountCircle />
-							</IconButton>
+							<Button color="inherit">Login</Button>
+							<Button color="inherit">Login</Button>
+							<Button color="inherit">Login</Button>
 						</div>
 						<div className={classes.sectionMobile}>
 							<IconButton
