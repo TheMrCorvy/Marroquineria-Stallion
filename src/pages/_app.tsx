@@ -9,6 +9,9 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import theme from "../../theme"
 
+import { Provider } from "react-redux"
+import store from "../redux/store"
+
 import Layout from "../components/Layout"
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -45,11 +48,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 				/>
 			</Head>
 			<ThemeProvider theme={theme}>
-				{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-				<CssBaseline />
-				<Layout>
-					<Component {...pageProps} />
-				</Layout>
+				<Provider store={store}>
+					{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+					<CssBaseline />
+					<Layout>
+						<Component {...pageProps} />
+					</Layout>
+				</Provider>
 			</ThemeProvider>
 		</>
 	)

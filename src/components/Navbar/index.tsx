@@ -1,6 +1,6 @@
 import Link from "next/Link"
 
-import { FC, MouseEvent, useState } from "react"
+import { FC, MouseEvent, useState, useEffect } from "react"
 
 import {
 	AppBar,
@@ -26,6 +26,9 @@ import MenuIcon from "@material-ui/icons/Menu"
 import SearchIcon from "@material-ui/icons/Search"
 import MoreIcon from "@material-ui/icons/MoreVert"
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
+
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -107,6 +110,8 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const Navbar: FC = () => {
+	const { cart } = useSelector((state: RootState) => state.cart)
+
 	const classes = useStyles()
 
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null)
@@ -114,6 +119,10 @@ const Navbar: FC = () => {
 	const [open, setOpen] = useState(false)
 
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+
+	useEffect(() => {
+		console.log(cart)
+	}, [cart])
 
 	const handleMobileMenuClose = () => {
 		setMobileMoreAnchorEl(null)
@@ -139,7 +148,7 @@ const Navbar: FC = () => {
 					</Link>
 					<Link href="/carrito">
 						<IconButton color="inherit" component="a">
-							<Badge badgeContent={4} color="secondary">
+							<Badge badgeContent={cart.count} color="secondary">
 								<ShoppingCartIcon />
 							</Badge>
 						</IconButton>
@@ -170,7 +179,7 @@ const Navbar: FC = () => {
 					<MenuItem>
 						<Link href="/carrito">
 							<IconButton color="inherit" component="a">
-								<Badge badgeContent={4} color="secondary">
+								<Badge badgeContent={cart.count} color="secondary">
 									<ShoppingCartIcon />
 								</Badge>
 							</IconButton>
@@ -232,7 +241,7 @@ const Navbar: FC = () => {
 					<Link href="/categorías">
 						<ListItem button component="a">
 							<ListItemIcon>
-								<Badge badgeContent={4} color="secondary">
+								<Badge badgeContent={cart.count} color="secondary">
 									<ShoppingCartIcon />
 								</Badge>
 							</ListItemIcon>
