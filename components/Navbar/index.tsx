@@ -189,28 +189,46 @@ const Navbar: FC = () => {
 					onKeyDown={toggleDrawer}
 					className={classes.drawer}
 				>
+					<Link href="/">
+						<ListItem button component="a">
+							<ListItemText primary="Inicio" />
+						</ListItem>
+					</Link>
+
+					<Divider className={classes.divider} />
+
 					<ListItem button>
 						<ListItemText primary="Testiomnios" />
 					</ListItem>
+
 					<Divider className={classes.divider} />
+
 					<ListItem button>
 						<ListItemText primary="Galería" />
 					</ListItem>
+
 					<Divider className={classes.divider} />
+
 					<ListItem button>
 						<ListItemText primary="Contacto / Cómo llegar" />
 					</ListItem>
+
 					<Divider className={classes.divider} />
+
 					<ListItem button>
 						<ListItemText primary="Pedir Cotización" />
 					</ListItem>
+
 					<Divider className={classes.divider} />
+
 					<Link href="/categorías">
 						<ListItem button component="a">
 							<ListItemText>Categorías</ListItemText>
 						</ListItem>
 					</Link>
+
 					<Divider className={classes.divider} />
+
 					<Link href="/categorías">
 						<ListItem button component="a">
 							<ListItemIcon>
