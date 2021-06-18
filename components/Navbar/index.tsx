@@ -1,3 +1,5 @@
+import Link from "next/Link"
+
 import { FC, MouseEvent, useState } from "react"
 
 import {
@@ -6,7 +8,6 @@ import {
 	IconButton,
 	Typography,
 	InputBase,
-	Badge,
 	MenuItem,
 	Menu,
 	Drawer,
@@ -16,17 +17,15 @@ import {
 	ListItemText,
 	Divider,
 	Button,
+	Badge,
 } from "@material-ui/core"
 
 import { fade, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import MenuIcon from "@material-ui/icons/Menu"
 import SearchIcon from "@material-ui/icons/Search"
-import AccountCircle from "@material-ui/icons/AccountCircle"
-import InboxIcon from "@material-ui/icons/MoveToInbox"
-import MailIcon from "@material-ui/icons/Mail"
-import NotificationsIcon from "@material-ui/icons/Notifications"
 import MoreIcon from "@material-ui/icons/MoreVert"
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -38,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		title: {
 			display: "none",
+			textTransform: "capitalize",
 			[theme.breakpoints.up("sm")]: {
 				display: "block",
 			},
@@ -91,31 +91,32 @@ const useStyles = makeStyles((theme: Theme) =>
 				display: "none",
 			},
 		},
+		divider: {
+			marginTop: "0.15rem",
+			marginBottom: "0.15rem",
+		},
+		drawer: {
+			height: "60%",
+			display: "flex",
+			justifyContent: "space-around",
+			flexDirection: "column",
+			marginTop: "auto",
+			marginBottom: "auto",
+		},
 	})
 )
 
 const Navbar: FC = () => {
 	const classes = useStyles()
 
-	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null)
 
 	const [open, setOpen] = useState(false)
 
-	const isMenuOpen = Boolean(anchorEl)
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
-
-	const handleProfileMenuOpen = (event: MouseEvent<HTMLElement>) => {
-		setAnchorEl(event.currentTarget)
-	}
 
 	const handleMobileMenuClose = () => {
 		setMobileMoreAnchorEl(null)
-	}
-
-	const handleMenuClose = () => {
-		setAnchorEl(null)
-		handleMobileMenuClose()
 	}
 
 	const handleMobileMenuOpen = (event: MouseEvent<HTMLElement>) => {
@@ -126,40 +127,104 @@ const Navbar: FC = () => {
 		setOpen(!open)
 	}
 
-	const menuId = "primary-search-account-menu"
-	const renderMenu = (
-		<Menu
-			anchorEl={anchorEl}
-			anchorOrigin={{ vertical: "top", horizontal: "right" }}
-			id={menuId}
-			keepMounted
-			transformOrigin={{ vertical: "top", horizontal: "right" }}
-			open={isMenuOpen}
-			onClose={handleMenuClose}
-		>
-			<MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
-		</Menu>
-	)
+	const renderMenus = (option: "desktop" | "mobile" | "drawer") => {
+		if (option === "desktop") {
+			return (
+				<div className={classes.sectionDesktop}>
+					<Button color="inherit">Pedir Cotización</Button>
+					<Link href="/categorias">
+						<Button color="inherit" component="a">
+							Categorías
+						</Button>
+					</Link>
+					<Link href="/carrito">
+						<IconButton color="inherit" component="a">
+							<Badge badgeContent={4} color="secondary">
+								<ShoppingCartIcon />
+							</Badge>
+						</IconButton>
+					</Link>
+				</div>
+			)
+		}
 
-	const mobileMenuId = "primary-search-account-menu-mobile"
-	const renderMobileMenu = (
-		<Menu
-			anchorEl={mobileMoreAnchorEl}
-			anchorOrigin={{ vertical: "top", horizontal: "right" }}
-			id={mobileMenuId}
-			keepMounted
-			transformOrigin={{ vertical: "top", horizontal: "right" }}
-			open={isMobileMenuOpen}
-			onClose={handleMobileMenuClose}
-		>
-			<MenuItem>{/* <Button color="inherit">Login</Button> */}</MenuItem>
-			<MenuItem>{/* <Button color="inherit">Login</Button> */}</MenuItem>
-			<MenuItem onClick={handleProfileMenuOpen}>
-				{/* <Button color="inherit">Login</Button> */}
-			</MenuItem>
-		</Menu>
-	)
+		if (option === "mobile") {
+			return (
+				<Menu
+					anchorEl={mobileMoreAnchorEl}
+					anchorOrigin={{ vertical: "top", horizontal: "right" }}
+					id="primary-search-account-menu-mobile"
+					keepMounted
+					transformOrigin={{ vertical: "top", horizontal: "right" }}
+					open={isMobileMenuOpen}
+					onClose={handleMobileMenuClose}
+				>
+					<MenuItem>Pedir cotización</MenuItem>
+					<Divider className={classes.divider} />
+					<MenuItem>
+						<Link href="/categorias">
+							<Typography component="a">Categorías</Typography>
+						</Link>
+					</MenuItem>
+					<Divider className={classes.divider} />
+					<MenuItem>
+						<Link href="/carrito">
+							<IconButton color="inherit" component="a">
+								<Badge badgeContent={4} color="secondary">
+									<ShoppingCartIcon />
+								</Badge>
+							</IconButton>
+						</Link>
+						<Typography component="p">Carrito</Typography>
+					</MenuItem>
+				</Menu>
+			)
+		}
+
+		if (option === "drawer") {
+			return (
+				<List
+					role="presentation"
+					onClick={toggleDrawer}
+					onKeyDown={toggleDrawer}
+					className={classes.drawer}
+				>
+					<ListItem button>
+						<ListItemText primary="Testiomnios" />
+					</ListItem>
+					<Divider className={classes.divider} />
+					<ListItem button>
+						<ListItemText primary="Galería" />
+					</ListItem>
+					<Divider className={classes.divider} />
+					<ListItem button>
+						<ListItemText primary="Contacto / Cómo llegar" />
+					</ListItem>
+					<Divider className={classes.divider} />
+					<ListItem button>
+						<ListItemText primary="Pedir Cotización" />
+					</ListItem>
+					<Divider className={classes.divider} />
+					<Link href="/categorías">
+						<ListItem button component="a">
+							<ListItemText>Categorías</ListItemText>
+						</ListItem>
+					</Link>
+					<Divider className={classes.divider} />
+					<Link href="/categorías">
+						<ListItem button component="a">
+							<ListItemIcon>
+								<Badge badgeContent={4} color="secondary">
+									<ShoppingCartIcon />
+								</Badge>
+							</ListItemIcon>
+							<ListItemText>Carrito</ListItemText>
+						</ListItem>
+					</Link>
+				</List>
+			)
+		}
+	}
 
 	return (
 		<>
@@ -175,9 +240,14 @@ const Navbar: FC = () => {
 						>
 							<MenuIcon />
 						</IconButton>
-						<Typography className={classes.title} variant="h6" noWrap>
-							Marroquinería Stallion
-						</Typography>
+						<Link href="/">
+							<Button color="inherit" component="a" className={classes.title}>
+								<Typography variant="h6" noWrap>
+									Marroquinería Stallion
+								</Typography>
+							</Button>
+						</Link>
+
 						<div className={classes.search}>
 							<div className={classes.searchIcon}>
 								<SearchIcon />
@@ -191,16 +261,15 @@ const Navbar: FC = () => {
 								inputProps={{ "aria-label": "search" }}
 							/>
 						</div>
+
 						<div className={classes.grow} />
-						<div className={classes.sectionDesktop}>
-							<Button color="inherit">Login</Button>
-							<Button color="inherit">Login</Button>
-							<Button color="inherit">Login</Button>
-						</div>
+
+						{renderMenus("desktop")}
+
 						<div className={classes.sectionMobile}>
 							<IconButton
 								aria-label="show more"
-								aria-controls={mobileMenuId}
+								aria-controls="primary-search-account-menu-mobile"
 								aria-haspopup="true"
 								onClick={handleMobileMenuOpen}
 								color="inherit"
@@ -210,33 +279,11 @@ const Navbar: FC = () => {
 						</div>
 					</Toolbar>
 				</AppBar>
-				{renderMobileMenu}
-				{renderMenu}
+
+				{renderMenus("mobile")}
 			</div>
 			<Drawer anchor="left" open={open} onClose={toggleDrawer}>
-				<div role="presentation" onClick={toggleDrawer} onKeyDown={toggleDrawer}>
-					<List>
-						{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-							<ListItem button key={text}>
-								<ListItemIcon>
-									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-								</ListItemIcon>
-								<ListItemText primary={text} />
-							</ListItem>
-						))}
-					</List>
-					<Divider />
-					<List>
-						{["All mail", "Trash", "Spam"].map((text, index) => (
-							<ListItem button key={text}>
-								<ListItemIcon>
-									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-								</ListItemIcon>
-								<ListItemText primary={text} />
-							</ListItem>
-						))}
-					</List>
-				</div>
+				{renderMenus("drawer")}
 			</Drawer>
 		</>
 	)
