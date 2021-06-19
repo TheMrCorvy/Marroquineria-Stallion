@@ -25,6 +25,7 @@ import CloseIcon from "@material-ui/icons/Close"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 import { toggleCartModal } from "../redux/actions/cartActions"
+import CartListItems from "./CartListItems"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -34,6 +35,14 @@ const useStyles = makeStyles((theme: Theme) =>
 		title: {
 			marginLeft: theme.spacing(2),
 			flex: 1,
+		},
+		mobileDialogContent: {
+			paddingTop: 35,
+			minHeight: "100%",
+			backgroundColor: "#f5f5f5",
+		},
+		dialog: {
+			backgroundColor: "#f5f5f5",
 		},
 	})
 )
@@ -56,7 +65,7 @@ const ShoppingCartModal: FC = () => {
 	if (smallScreen) {
 		return (
 			<Dialog fullScreen open={cart.open} onClose={handleClose}>
-				<AppBar className={classes.appBar}>
+				<AppBar className={classes.appBar} position="fixed">
 					<Toolbar>
 						<IconButton
 							edge="start"
@@ -67,22 +76,17 @@ const ShoppingCartModal: FC = () => {
 							<CloseIcon />
 						</IconButton>
 						<Typography variant="h6" className={classes.title}>
-							Sound
+							Carrito
 						</Typography>
 						<Button autoFocus color="inherit" onClick={handleClose}>
-							save
+							Comprar
 						</Button>
 					</Toolbar>
 				</AppBar>
-				<List>
-					<ListItem button>
-						<ListItemText primary="Phone ringtone" secondary="Titania" />
-					</ListItem>
-					<Divider />
-					<ListItem button>
-						<ListItemText primary="Default notification ringtone" secondary="Tethys" />
-					</ListItem>
-				</List>
+
+				<DialogContent className={classes.mobileDialogContent}>
+					<CartListItems />
+				</DialogContent>
 			</Dialog>
 		)
 	} else {
@@ -92,22 +96,20 @@ const ShoppingCartModal: FC = () => {
 				onClose={handleClose}
 				aria-labelledby="alert-dialog-title"
 				aria-describedby="alert-dialog-description"
+				maxWidth="lg"
 			>
-				<DialogTitle id="alert-dialog-title">
-					{"Use Google's location service?"}
+				<DialogTitle id="alert-dialog-title" className={classes.dialog}>
+					Carrito de Compras
 				</DialogTitle>
-				<DialogContent>
-					<DialogContentText id="alert-dialog-description">
-						Let Google help apps determine location. This means sending anonymous
-						location data to Google, even when no apps are running.
-					</DialogContentText>
+				<DialogContent className={classes.dialog}>
+					<CartListItems />
 				</DialogContent>
-				<DialogActions>
-					<Button onClick={handleClose} color="primary">
-						Disagree
+				<DialogActions className={classes.dialog}>
+					<Button onClick={handleClose} color="secondary">
+						Volver
 					</Button>
 					<Button onClick={handleClose} color="primary" autoFocus>
-						Agree
+						Comprar Ahora
 					</Button>
 				</DialogActions>
 			</Dialog>

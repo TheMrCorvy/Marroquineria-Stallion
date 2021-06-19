@@ -177,12 +177,10 @@ const Navbar: FC = () => {
 						</Link>
 					</MenuItem>
 					<Divider className={classes.divider} />
-					<MenuItem>
-						<IconButton color="inherit" onClick={openCartModal}>
-							<Badge badgeContent={cart.count} color="secondary">
-								<ShoppingCartIcon />
-							</Badge>
-						</IconButton>
+					<MenuItem color="inherit" onClick={openCartModal}>
+						<Badge badgeContent={cart.count} color="secondary">
+							<ShoppingCartIcon />
+						</Badge>
 						<Typography component="p">Carrito</Typography>
 					</MenuItem>
 				</Menu>
