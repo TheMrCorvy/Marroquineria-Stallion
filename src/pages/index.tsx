@@ -13,6 +13,10 @@ const useStyles = makeStyles({
 	textCenter: {
 		textAlign: "center",
 	},
+	image: {
+		maxHeight: "100%",
+		maxWidth: "100%",
+	},
 })
 
 export default function Home() {
@@ -29,6 +33,17 @@ export default function Home() {
 						<Typography variant="body1">
 							Tienda de Equipaje en Ciudad Autónoma de Buenos Aires
 						</Typography>
+					</Grid>
+				</Grid>
+			</Container>
+			<Container maxWidth="lg">
+				<Grid container justify="center">
+					<Grid item xs={12}>
+						<img
+							src=""
+							alt="Tienda online de Marroquinería Stallion"
+							className={classes.image}
+						/>
 					</Grid>
 				</Grid>
 			</Container>

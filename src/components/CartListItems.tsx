@@ -3,7 +3,7 @@ import { FC, useEffect } from "react"
 import { Paper, Grid, ButtonBase, Typography, Button } from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
-import { green } from "@material-ui/core/colors"
+import { green, red } from "@material-ui/core/colors"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -17,8 +17,13 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderRadius: 10,
 		},
 		image: {
-			width: 128,
-			height: 128,
+			maxWidth: 150,
+			maxHeight: 150,
+
+			[theme.breakpoints.down("sm")]: {
+				maxWidth: "100%",
+				maxHeight: "100%",
+			},
 		},
 		img: {
 			margin: "auto",
@@ -40,6 +45,13 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		textGreen: {
 			color: green[500],
+		},
+		redBtn: {
+			color: red[500],
+			borderColor: red[500],
+			"&:hover": {
+				backgroundColor: red[100],
+			},
 		},
 	})
 )
@@ -65,7 +77,7 @@ const CartListItems: FC = () => {
 									<img
 										className={classes.img}
 										alt="complex"
-										src="https://murcianoticias.es/curiosidades/wp-content/uploads/2017/03/banner.jpg"
+										src="https://lh3.googleusercontent.com/h3x-kjIKBKVCgHL78IovJbtMHDxhdpC7zIYKtJhwhoIUGOqptzwNhFCCutsLRvuZMH4tfeLMWcPiqNqF=w960-h960-n-o-v1"
 									/>
 								</ButtonBase>
 							</Grid>
@@ -91,13 +103,28 @@ const CartListItems: FC = () => {
 										</Typography>
 									</Typography>
 								</Grid>
-								<Grid item xs={6} className={classes.textCenter}>
+								<Grid item xs={12} md={4} className={classes.textCenter}>
 									<Button size="small" variant="outlined" color="primary">
 										Agregar uno más
 									</Button>
 								</Grid>
-								<Grid item xs={6} className={classes.textCenter}>
-									<Button size="small" variant="outlined" color="secondary">
+								<Grid item xs={12} md={4} className={classes.textCenter}>
+									<Button
+										size="small"
+										variant="outlined"
+										color="secondary"
+										className={classes.redBtn}
+									>
+										Remover uno
+									</Button>
+								</Grid>
+								<Grid item xs={12} md={4} className={classes.textCenter}>
+									<Button
+										size="small"
+										variant="contained"
+										disableElevation
+										color="secondary"
+									>
 										Quitar Producto
 									</Button>
 								</Grid>

@@ -112,7 +112,13 @@ const ShoppingCartModal: FC = () => {
 					<Button onClick={handleClose} color="secondary">
 						Volver
 					</Button>
-					<Button onClick={handleClose} color="primary" autoFocus>
+					<Button
+						onClick={handleClose}
+						color="primary"
+						autoFocus
+						variant="outlined"
+						size="large"
+					>
 						Comprar Ahora
 					</Button>
 				</DialogActions>
