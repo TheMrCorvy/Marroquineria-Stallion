@@ -5,9 +5,8 @@ import { makeStyles } from "@material-ui/core/styles"
 const useStyles = makeStyles({
 	container: {
 		backgroundColor: "#f5f5f5",
-		borderBottomLeftRadius: 10,
-		borderBottomRightRadius: 10,
-		paddingTop: 50,
+		borderBottomLeftRadius: 15,
+		borderBottomRightRadius: 15,
 		paddingBottom: 50,
 	},
 	textCenter: {
@@ -30,6 +29,7 @@ const useStyles = makeStyles({
 	},
 	title: {
 		marginTop: "3rem",
+		fontFamily: "Arial",
 	},
 })
 
@@ -41,7 +41,9 @@ export default function Home() {
 			<Container maxWidth="lg" className={classes.container}>
 				<Grid container justify="center" spacing={4}>
 					<Grid item xs={12} className={classes.textCenter}>
-						<Typography variant="h3">Stallion Marroquinería</Typography>
+						<Typography variant="h3" className={classes.title}>
+							Stallion Marroquinería
+						</Typography>
 					</Grid>
 					<Grid item xs={12} className={classes.textCenter}>
 						<Typography variant="body1">
