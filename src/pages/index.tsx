@@ -119,7 +119,7 @@ export default function Home() {
 					</Grid>
 				</Grid>
 			</Container>
-			<Container maxWidth="lg" className={classes.contactContainer}>
+			<Container maxWidth="lg" className={classes.contactContainer} id="contacto">
 				<Grid container justify="space-around">
 					<Grid item xs={12} className={classes.textCenter} id="galeria">
 						<Typography variant="h3" className={classes.title}>
@@ -136,6 +136,72 @@ export default function Home() {
 							allowFullScreen
 							loading="lazy"
 						></iframe>
+					</Grid>
+					<Grid item xs={12} md={4} className={classes.textCenter}>
+						<Typography variant="h6" gutterBottom paragraph>
+							Contacto
+						</Typography>
+						<Typography variant="body1">011 4381-6833</Typography>
+					</Grid>
+					<Grid item xs={12} md={4} className={classes.textCenter}>
+						<Typography variant="h6" gutterBottom paragraph>
+							Dirección
+						</Typography>
+						<Typography variant="body1">
+							<strong>San José 155</strong> C1076AAC
+						</Typography>
+						<Typography variant="body1">
+							Ciudad Autónoma de Buenos Aires, Argentina
+						</Typography>
+					</Grid>
+					<Grid item xs={12} md={4} className={classes.textCenter}>
+						<Typography variant="h6" gutterBottom paragraph>
+							Horarios de atención
+						</Typography>
+						<Grid container justify="center" style={{ textAlign: "left" }}>
+							<Grid item xs={12} md={6}>
+								<Grid container spacing={1}>
+									<Grid item xs={12}>
+										<Typography variant="body1">
+											Lunes: 8:30 - 19:00 hs
+										</Typography>
+									</Grid>
+									<Grid item xs={12}>
+										<Typography variant="body1">
+											Martes: 8:30 - 19:00 hs
+										</Typography>
+									</Grid>
+									<Grid item xs={12}>
+										<Typography variant="body1">
+											Miércoles: 8:30 - 19:00 hs
+										</Typography>
+									</Grid>
+									<Grid item xs={12}>
+										<Typography variant="body1">
+											Jueves: 8:30 - 19:00 hs
+										</Typography>
+									</Grid>
+									<Grid item xs={12}>
+										<Typography variant="body1">
+											Viernes: 8:30 - 19:00 hs
+										</Typography>
+									</Grid>
+									<Grid item xs={12}>
+										<Typography variant="body1">
+											Sábado: 10:00 - 13:00 hs
+										</Typography>
+									</Grid>
+									<Grid item xs={12}>
+										<Typography variant="body1">
+											Domingo:{" "}
+											<Typography color="secondary" component="span">
+												Cerrado
+											</Typography>
+										</Typography>
+									</Grid>
+								</Grid>
+							</Grid>
+						</Grid>
 					</Grid>
 				</Grid>
 			</Container>

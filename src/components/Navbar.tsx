@@ -203,12 +203,6 @@ const Navbar: FC = () => {
 
 					<Divider className={classes.divider} />
 
-					<ListItem button>
-						<ListItemText primary="Testiomnios" />
-					</ListItem>
-
-					<Divider className={classes.divider} />
-
 					<Link href="/#galeria">
 						<ListItem button component="a">
 							<ListItemText primary="Galería" />
@@ -217,9 +211,11 @@ const Navbar: FC = () => {
 
 					<Divider className={classes.divider} />
 
-					<ListItem button>
-						<ListItemText primary="Contacto / Cómo llegar" />
-					</ListItem>
+					<Link href="/#contacto">
+						<ListItem button component="a">
+							<ListItemText primary="Contacto / Cómo llegar" />
+						</ListItem>
+					</Link>
 
 					<Divider className={classes.divider} />
 
