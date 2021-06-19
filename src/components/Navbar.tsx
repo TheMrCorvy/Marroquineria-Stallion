@@ -209,9 +209,11 @@ const Navbar: FC = () => {
 
 					<Divider className={classes.divider} />
 
-					<ListItem button>
-						<ListItemText primary="Galería" />
-					</ListItem>
+					<Link href="/#galeria">
+						<ListItem button component="a">
+							<ListItemText primary="Galería" />
+						</ListItem>
+					</Link>
 
 					<Divider className={classes.divider} />
 

@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@material-ui/core"
+import { Container, Grid, Typography, Paper, Divider } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
@@ -16,6 +16,20 @@ const useStyles = makeStyles({
 	image: {
 		maxHeight: "100%",
 		maxWidth: "100%",
+		borderRadius: 15,
+	},
+	imgContainer: {
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		borderRadius: 15,
+		padding: 10,
+	},
+	galeryContainer: {
+		marginTop: "3rem",
+	},
+	title: {
+		marginTop: "3rem",
 	},
 })
 
@@ -36,14 +50,56 @@ export default function Home() {
 					</Grid>
 				</Grid>
 			</Container>
-			<Container maxWidth="lg">
-				<Grid container justify="center">
-					<Grid item xs={12}>
+			<Container maxWidth="lg" className={classes.galeryContainer}>
+				<Grid container justify="center" spacing={7}>
+					<Grid item xs={12} className={classes.imgContainer}>
 						<img
-							src=""
+							src="/images/main_home.jpg"
 							alt="Tienda online de Marroquinería Stallion"
 							className={classes.image}
 						/>
+					</Grid>
+					<Grid item xs={12} className={classes.textCenter} id="galeria">
+						<Typography variant="h3" className={classes.title}>
+							Galería
+						</Typography>
+						<Divider />
+					</Grid>
+					<Grid item xs={12} sm={6} lg={4}>
+						<Paper elevation={4} className={classes.imgContainer}>
+							<img
+								src="/images/galery_1.jpg"
+								alt="Tienda online de Marroquinería Stallion"
+								className={classes.image}
+							/>
+						</Paper>
+					</Grid>
+					<Grid item xs={12} sm={6} lg={4}>
+						<Paper elevation={4} className={classes.imgContainer}>
+							<img
+								src="/images/galery_2.jpg"
+								alt="Tienda online de Marroquinería Stallion"
+								className={classes.image}
+							/>
+						</Paper>
+					</Grid>
+					<Grid item xs={12} sm={6} lg={4}>
+						<Paper elevation={4} className={classes.imgContainer}>
+							<img
+								src="/images/galery_3.jpg"
+								alt="Tienda online de Marroquinería Stallion"
+								className={classes.image}
+							/>
+						</Paper>
+					</Grid>
+					<Grid item xs={12} sm={6} lg={4}>
+						<Paper elevation={4} className={classes.imgContainer}>
+							<img
+								src="/images/galery_4.jpg"
+								alt="Tienda online de Marroquinería Stallion"
+								className={classes.image}
+							/>
+						</Paper>
 					</Grid>
 				</Grid>
 			</Container>
