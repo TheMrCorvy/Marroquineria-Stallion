@@ -3,6 +3,7 @@ import { FC } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 
 import Navbar from "./Navbar"
+import ShoppingCartModal from "./ShoppingCartModal"
 
 const useStyles = makeStyles({
 	paddingTop: {
@@ -14,10 +15,13 @@ const Layout: FC = ({ children }) => {
 	const classes = useStyles()
 
 	return (
-		<div className={classes.paddingTop}>
-			<Navbar />
-			{children}
-		</div>
+		<>
+			<ShoppingCartModal />
+			<div className={classes.paddingTop}>
+				<Navbar />
+				{children}
+			</div>
+		</>
 	)
 }
 

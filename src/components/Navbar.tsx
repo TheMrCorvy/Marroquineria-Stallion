@@ -1,6 +1,6 @@
 import Link from "next/Link"
 
-import { FC, MouseEvent, useState, useEffect } from "react"
+import { FC, MouseEvent, useState } from "react"
 
 import {
 	AppBar,
@@ -27,8 +27,9 @@ import SearchIcon from "@material-ui/icons/Search"
 import MoreIcon from "@material-ui/icons/MoreVert"
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 
-import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
+import { useSelector, useDispatch } from "react-redux"
+import { RootState } from "../redux/store"
+import { toggleCartModal } from "../redux/actions/cartActions"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -112,6 +113,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const Navbar: FC = () => {
 	const { cart } = useSelector((state: RootState) => state.cart)
 
+	const dispatch = useDispatch()
+
 	const classes = useStyles()
 
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null)
@@ -119,10 +122,6 @@ const Navbar: FC = () => {
 	const [open, setOpen] = useState(false)
 
 	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
-
-	useEffect(() => {
-		console.log(cart)
-	}, [cart])
 
 	const handleMobileMenuClose = () => {
 		setMobileMoreAnchorEl(null)
@@ -136,6 +135,10 @@ const Navbar: FC = () => {
 		setOpen(!open)
 	}
 
+	const openCartModal = () => {
+		dispatch(toggleCartModal(true))
+	}
+
 	const renderMenus = (option: "desktop" | "mobile" | "drawer") => {
 		if (option === "desktop") {
 			return (
@@ -146,13 +149,11 @@ const Navbar: FC = () => {
 							Categorías
 						</Button>
 					</Link>
-					<Link href="/carrito">
-						<IconButton color="inherit" component="a">
-							<Badge badgeContent={cart.count} color="secondary">
-								<ShoppingCartIcon />
-							</Badge>
-						</IconButton>
-					</Link>
+					<IconButton color="inherit" onClick={openCartModal}>
+						<Badge badgeContent={cart.count} color="secondary">
+							<ShoppingCartIcon />
+						</Badge>
+					</IconButton>
 				</div>
 			)
 		}
@@ -177,13 +178,11 @@ const Navbar: FC = () => {
 					</MenuItem>
 					<Divider className={classes.divider} />
 					<MenuItem>
-						<Link href="/carrito">
-							<IconButton color="inherit" component="a">
-								<Badge badgeContent={cart.count} color="secondary">
-									<ShoppingCartIcon />
-								</Badge>
-							</IconButton>
-						</Link>
+						<IconButton color="inherit" onClick={openCartModal}>
+							<Badge badgeContent={cart.count} color="secondary">
+								<ShoppingCartIcon />
+							</Badge>
+						</IconButton>
 						<Typography component="p">Carrito</Typography>
 					</MenuItem>
 				</Menu>
@@ -238,16 +237,14 @@ const Navbar: FC = () => {
 
 					<Divider className={classes.divider} />
 
-					<Link href="/categorías">
-						<ListItem button component="a">
-							<ListItemIcon>
-								<Badge badgeContent={cart.count} color="secondary">
-									<ShoppingCartIcon />
-								</Badge>
-							</ListItemIcon>
-							<ListItemText>Carrito</ListItemText>
-						</ListItem>
-					</Link>
+					<ListItem button onClick={openCartModal}>
+						<ListItemIcon>
+							<Badge badgeContent={cart.count} color="secondary">
+								<ShoppingCartIcon />
+							</Badge>
+						</ListItemIcon>
+						<ListItemText>Carrito</ListItemText>
+					</ListItem>
 				</List>
 			)
 		}
