@@ -2,6 +2,8 @@ import { Container, Grid, Typography, Paper, Divider } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
+import ListProductsSection from "../components/ListProductsSection"
+
 const useStyles = makeStyles({
 	container: {
 		backgroundColor: "#f5f5f5",
@@ -67,7 +69,7 @@ export default function Home() {
 				</Grid>
 			</Container>
 			<Container maxWidth="lg" className={classes.galeryContainer}>
-				<Grid container justify="center" spacing={4}>
+				<Grid container>
 					<Grid item xs={12} className={classes.imgContainer}>
 						<img
 							src="/images/main_home.jpg"
@@ -75,6 +77,11 @@ export default function Home() {
 							className={classes.image}
 						/>
 					</Grid>
+				</Grid>
+			</Container>
+			<ListProductsSection />
+			<Container maxWidth="lg">
+				<Grid container justify="center" spacing={4}>
 					<Grid item xs={12} className={classes.textCenter} id="galeria">
 						<Typography variant="h3" className={classes.title}>
 							Galería

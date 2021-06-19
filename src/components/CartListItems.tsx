@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			display: "block",
 			maxWidth: "100%",
 			maxHeight: "100%",
+			borderRadius: 7,
 		},
 		productName: {
 			textTransform: "capitalize",

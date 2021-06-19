@@ -1,0 +1,10 @@
+entonces, sería basicamente un div con un fondo de color y border radius muy fuewrte, que tendría un zindex de -1
+
+Después un segundo div que tendría un padding X altura igual al padding y overflow Y: hidden
+
+Abajo de este div irian las cosas genéricas como el titulo "nuestros productos", el menú de categorías, las paginas 
+y los resultados, y la barra de busqueda
+
+entonces al hacer click en uno de los productos, se le envía al componente del div contraido la info que tiene q pedir de la api
+una vez traidos los datos, se muestran en pantalla, y se expande la altura del div, dando la animacion de que los productos caen
+ hacia abajo para mostrar al producto elegido
