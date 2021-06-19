@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme: Theme) =>
 		dialog: {
 			backgroundColor: "#f5f5f5",
 		},
+		grow: {
+			flexGrow: 1,
+		},
 	})
 )
 
@@ -75,11 +78,11 @@ const ShoppingCartModal: FC = () => {
 						>
 							<CloseIcon />
 						</IconButton>
-						<Typography variant="h6" className={classes.title}>
-							Carrito
-						</Typography>
-						<Button autoFocus color="inherit" onClick={handleClose}>
-							Comprar
+
+						<div className={classes.grow} />
+
+						<Button autoFocus variant="outlined" color="inherit" onClick={handleClose}>
+							Comprar Ahora
 						</Button>
 					</Toolbar>
 				</AppBar>
@@ -96,7 +99,8 @@ const ShoppingCartModal: FC = () => {
 				onClose={handleClose}
 				aria-labelledby="alert-dialog-title"
 				aria-describedby="alert-dialog-description"
-				maxWidth="lg"
+				maxWidth="md"
+				fullWidth
 			>
 				<DialogTitle id="alert-dialog-title" className={classes.dialog}>
 					Carrito de Compras
