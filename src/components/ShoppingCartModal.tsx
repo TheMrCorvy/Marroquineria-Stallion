@@ -5,16 +5,10 @@ import {
 	Dialog,
 	DialogActions,
 	DialogContent,
-	DialogContentText,
 	DialogTitle,
 	useMediaQuery,
 	AppBar,
 	Toolbar,
-	Typography,
-	List,
-	ListItem,
-	ListItemText,
-	Divider,
 	IconButton,
 } from "@material-ui/core"
 
@@ -25,7 +19,9 @@ import CloseIcon from "@material-ui/icons/Close"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 import { toggleCartModal } from "../redux/actions/cartActions"
+
 import CartListItems from "./CartListItems"
+import DialogTransition from "./DialogTransition"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -67,7 +63,12 @@ const ShoppingCartModal: FC = () => {
 
 	if (smallScreen) {
 		return (
-			<Dialog fullScreen open={cart.open} onClose={handleClose}>
+			<Dialog
+				fullScreen
+				open={cart.open}
+				onClose={handleClose}
+				TransitionComponent={DialogTransition}
+			>
 				<AppBar className={classes.appBar} position="fixed">
 					<Toolbar>
 						<IconButton
@@ -101,6 +102,7 @@ const ShoppingCartModal: FC = () => {
 				aria-describedby="alert-dialog-description"
 				maxWidth="md"
 				fullWidth
+				TransitionComponent={DialogTransition}
 			>
 				<DialogTitle id="alert-dialog-title" className={classes.dialog}>
 					Carrito de Compras
