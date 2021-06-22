@@ -80,9 +80,9 @@ export default function Home() {
 				</Grid>
 			</Container>
 			<ListProductsSection />
-			<Container maxWidth="lg">
+			<Container maxWidth="lg" id="galeria">
 				<Grid container justify="center" spacing={4}>
-					<Grid item xs={12} className={classes.textCenter} id="galeria">
+					<Grid item xs={12} className={classes.textCenter}>
 						<Typography variant="h3" className={classes.title}>
 							Galería
 						</Typography>
@@ -142,6 +142,7 @@ export default function Home() {
 							className={classes.map}
 							allowFullScreen
 							loading="lazy"
+							title="Ecuéntranos en Google Maps"
 						></iframe>
 					</Grid>
 					<Grid item xs={12} md={4} className={classes.textCenter}>

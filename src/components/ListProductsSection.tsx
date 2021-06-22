@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, MouseEvent, useState } from "react"
 
 import {
 	Card,
@@ -13,9 +13,13 @@ import {
 	Link,
 	Breadcrumbs,
 	Divider,
+	Menu,
+	MenuItem,
 } from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -44,28 +48,43 @@ const useStyles = makeStyles((theme: Theme) =>
 			top: 0,
 			left: "2.5%",
 			width: "95%",
-			height: "100%",
+			height: "50vh",
 			background: "linear-gradient(35deg, #fb6340 0, #fbb140 100%)",
 			borderRadius: 35,
 			zIndex: -1,
 		},
 		textCenter: {
 			textAlign: "center",
-			paddingTop: "auto",
 			alignItems: "center",
 			padding: 25,
 			[theme.breakpoints.down("sm")]: {
 				padding: 10,
 			},
 		},
+		menuBtn: {
+			marginTop: 20,
+			color: "white",
+			borderColor: "white",
+			borderRadius: 7,
+		},
 	})
 )
 
 const ListProductsSection: FC = () => {
+	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
+	const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+		setAnchorEl(event.currentTarget)
+	}
+
+	const handleClose = () => {
+		setAnchorEl(null)
+	}
+
 	const classes = useStyles()
 
 	return (
-		<Container maxWidth="lg" className={classes.galeryContainer}>
+		<Container maxWidth="lg" className={classes.galeryContainer} id="productos">
 			<div className={classes.background} />
 			<Grid container>
 				<Grid item className={classes.bgRed}>
@@ -81,6 +100,29 @@ const ListProductsSection: FC = () => {
 						<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
 							<Typography variant="h6">Nuestros Productos</Typography>
 							<Divider />
+							<Button
+								aria-controls="simple-menu"
+								aria-haspopup="true"
+								onClick={handleClick}
+								className={classes.menuBtn}
+								variant="outlined"
+								endIcon={<ExpandMoreIcon />}
+								color="primary"
+								size="small"
+							>
+								Categorías
+							</Button>
+							<Menu
+								id="simple-menu"
+								anchorEl={anchorEl}
+								keepMounted
+								open={Boolean(anchorEl)}
+								onClose={handleClose}
+							>
+								<MenuItem onClick={handleClose}>Profile</MenuItem>
+								<MenuItem onClick={handleClose}>My account</MenuItem>
+								<MenuItem onClick={handleClose}>Logout</MenuItem>
+							</Menu>
 						</Grid>
 						<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
 							<Typography variant="subtitle2">

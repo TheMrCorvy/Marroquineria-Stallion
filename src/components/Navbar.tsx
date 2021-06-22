@@ -18,6 +18,7 @@ import {
 	Divider,
 	Button,
 	Badge,
+	Tooltip,
 } from "@material-ui/core"
 
 import { fade, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
@@ -107,6 +108,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginTop: "auto",
 			marginBottom: "auto",
 		},
+		navbarBtn: {
+			marginLeft: 20,
+		},
 	})
 )
 
@@ -139,21 +143,39 @@ const Navbar: FC = () => {
 		dispatch(toggleCartModal(true))
 	}
 
+	const scrollToElement = async (id: string, block: ScrollLogicalPosition = "center") => {
+		const element = document.getElementById(id)
+
+		if (element) {
+			element.scrollIntoView({ behavior: "smooth", block })
+		}
+	}
+
 	const renderMenus = (option: "desktop" | "mobile" | "drawer") => {
 		if (option === "desktop") {
 			return (
 				<div className={classes.sectionDesktop}>
-					<Button color="inherit">Pedir Cotización</Button>
-					<Link href="/categorias">
-						<Button color="inherit" component="a">
-							Categorías
-						</Button>
-					</Link>
-					<IconButton color="inherit" onClick={openCartModal}>
-						<Badge badgeContent={cart.count} color="secondary">
-							<ShoppingCartIcon />
-						</Badge>
-					</IconButton>
+					<Button color="inherit" className={classes.navbarBtn}>
+						Pedir Cotización
+					</Button>
+					<Button
+						color="inherit"
+						className={classes.navbarBtn}
+						onClick={() => scrollToElement("productos")}
+					>
+						Productos
+					</Button>
+					<Tooltip title="Carrito de Compras" placement="bottom">
+						<IconButton
+							color="inherit"
+							className={classes.navbarBtn}
+							onClick={openCartModal}
+						>
+							<Badge badgeContent={cart.count} color="secondary">
+								<ShoppingCartIcon />
+							</Badge>
+						</IconButton>
+					</Tooltip>
 				</div>
 			)
 		}
@@ -170,13 +192,13 @@ const Navbar: FC = () => {
 					onClose={handleMobileMenuClose}
 				>
 					<MenuItem>Pedir cotización</MenuItem>
+
 					<Divider className={classes.divider} />
-					<MenuItem>
-						<Link href="/categorias">
-							<Typography component="a">Categorías</Typography>
-						</Link>
-					</MenuItem>
+
+					<MenuItem onClick={() => scrollToElement("productos")}>Productos</MenuItem>
+
 					<Divider className={classes.divider} />
+
 					<MenuItem color="inherit" onClick={openCartModal}>
 						<Badge badgeContent={cart.count} color="secondary">
 							<ShoppingCartIcon />
@@ -189,12 +211,7 @@ const Navbar: FC = () => {
 
 		if (option === "drawer") {
 			return (
-				<List
-					role="presentation"
-					onClick={toggleDrawer}
-					onKeyDown={toggleDrawer}
-					className={classes.drawer}
-				>
+				<List role="presentation" onKeyDown={toggleDrawer} className={classes.drawer}>
 					<Link href="/">
 						<ListItem button component="a">
 							<ListItemText primary="Inicio" />
@@ -203,19 +220,15 @@ const Navbar: FC = () => {
 
 					<Divider className={classes.divider} />
 
-					<Link href="/#galeria">
-						<ListItem button component="a">
-							<ListItemText primary="Galería" />
-						</ListItem>
-					</Link>
+					<ListItem button onClick={() => scrollToElement("galeria", "start")}>
+						<ListItemText primary="Galería" />
+					</ListItem>
 
 					<Divider className={classes.divider} />
 
-					<Link href="/#contacto">
-						<ListItem button component="a">
-							<ListItemText primary="Contacto / Cómo llegar" />
-						</ListItem>
-					</Link>
+					<ListItem button onClick={() => scrollToElement("contacto")}>
+						<ListItemText primary="Contacto / Cómo llegar" />
+					</ListItem>
 
 					<Divider className={classes.divider} />
 
@@ -225,11 +238,9 @@ const Navbar: FC = () => {
 
 					<Divider className={classes.divider} />
 
-					<Link href="/categorías">
-						<ListItem button component="a">
-							<ListItemText>Categorías</ListItemText>
-						</ListItem>
-					</Link>
+					<ListItem button onClick={() => scrollToElement("productos")}>
+						<ListItemText>Productos</ListItemText>
+					</ListItem>
 
 					<Divider className={classes.divider} />
 
