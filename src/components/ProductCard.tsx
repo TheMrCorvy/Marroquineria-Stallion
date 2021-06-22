@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useState, useEffect } from "react"
 
 import {
 	Card,
@@ -20,9 +20,12 @@ import { makeStyles } from "@material-ui/core/styles"
 import { green } from "@material-ui/core/colors"
 
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
-import CropFreeIcon from "@material-ui/icons/CropFree"
+import FilterCenterFocusIcon from "@material-ui/icons/FilterCenterFocus"
 
-interface Props {
+import { ProductCardProps } from "../misc/types"
+
+type Props = {
+	product: ProductCardProps
 	loading: boolean
 }
 
@@ -54,15 +57,27 @@ const useStyles = makeStyles({
 		marginLeft: "auto",
 		marginRight: "auto",
 		marginBottom: 15,
-		borderRadius: 7,
+		borderRadius: 8,
 	},
 	loadingImage: {
 		borderRadius: 15,
 	},
 })
 
-const ProductCard: FC<Props> = ({ loading }) => {
+const ProductCard: FC<Props> = ({ product, loading }) => {
 	const classes = useStyles()
+
+	const { title, id, imgUrl, description, price } = product
+
+	const [desc, setDesc] = useState(description)
+
+	useEffect(() => {
+		if (description.length >= 120) {
+			const cutDesc = description.substring(0, 115)
+
+			setDesc(cutDesc + " (...)")
+		}
+	}, [])
 
 	if (loading) {
 		return (
@@ -98,7 +113,7 @@ const ProductCard: FC<Props> = ({ loading }) => {
 					avatar={
 						<Tooltip title="Ver Producto" placement="right">
 							<IconButton aria-label="settings" color="primary">
-								<CropFreeIcon />
+								<FilterCenterFocusIcon />
 							</IconButton>
 						</Tooltip>
 					}
@@ -113,11 +128,7 @@ const ProductCard: FC<Props> = ({ loading }) => {
 				/>
 				<CardContent>
 					<CardActionArea className={classes.cardaction}>
-						<CardMedia
-							className={classes.media}
-							image="/images/galery_1.jpg"
-							title="Paella dish"
-						/>
+						<CardMedia className={classes.media} image={imgUrl} title={title} />
 					</CardActionArea>
 
 					<Typography
@@ -127,19 +138,19 @@ const ProductCard: FC<Props> = ({ loading }) => {
 						component="h2"
 						className={classes.textCenter}
 					>
-						Nombre producto
+						{title}
 					</Typography>
 					<Typography variant="subtitle1" className={classes.textGreen} gutterBottom>
-						$19.00
+						${price}
 					</Typography>
 					<Typography variant="body2" color="textSecondary" component="p">
-						Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt ut
-						similique modi, voluptas suscipit
+						{desc}
 					</Typography>
 				</CardContent>
 				<CardActions disableSpacing>
 					<Button
-						variant="outlined"
+						variant="contained"
+						disableElevation
 						size="small"
 						color="secondary"
 						className={classes.buyNow}

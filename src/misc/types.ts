@@ -1,5 +1,4 @@
 export interface ProductCardProps {
-	loading: boolean
 	id: number
 	imgUrl: string
 	title: string

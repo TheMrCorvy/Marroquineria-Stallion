@@ -6,6 +6,10 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
+import Pagination from "@material-ui/lab/Pagination"
+
+import { ProductCardProps } from "../misc/types"
+
 import ProductCard from "./ProductCard"
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -54,11 +58,36 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderColor: "white",
 			borderRadius: 7,
 		},
+		productList: {
+			paddingLeft: 10,
+			paddingRight: 10,
+
+			[theme.breakpoints.down("sm")]: {
+				maxHeight: "100vh",
+				overflowY: "scroll",
+				marginTop: 5,
+				paddingLeft: 0,
+				paddingRight: 0,
+				"&::-webkit-scrollbar": {
+					display: "none",
+				},
+			},
+		},
+		pagination: {
+			marginBottom: "5rem",
+			marginTop: "3rem",
+		},
 	})
 )
 
 const ListProductsSection: FC = () => {
+	const classes = useStyles()
+
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
+	const [loading, setLoading] = useState(false)
+
+	const [products, setProducts] = useState<ProductCardProps[] | []>(apiProducts)
 
 	const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget)
@@ -68,12 +97,28 @@ const ListProductsSection: FC = () => {
 		setAnchorEl(null)
 	}
 
-	const classes = useStyles()
+	const handlePageChange = (event: object, page: number) => {
+		// const productsSection = document.getElementById("productos")
+		// const productsContainer = document.getElementById("products-list")
+		// if (productsSection && productsContainer) {
+		// 	productsContainer.scrollTo({ top: 0, behavior: "smooth" })
+		// 	productsContainer.addEventListener(
+		// 		"scroll",
+		// 		() => {
+		// 			productsSection.scrollIntoView({
+		// 				behavior: "smooth",
+		// 				block: "start",
+		// 			})
+		// 		},
+		// 		false
+		// 	)
+		// }
+	}
 
 	return (
 		<Container maxWidth="lg" className={classes.galeryContainer} id="productos">
 			<div className={classes.background} />
-			<Grid container>
+			<Grid container justify="center" spacing={4}>
 				<Grid item className={classes.bgRed}>
 					<Grid container justify="space-around">
 						<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
@@ -113,17 +158,35 @@ const ListProductsSection: FC = () => {
 						</Grid>
 						<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
 							<Typography variant="subtitle2">
-								Mostrando 1 - 15 de 100 Resultados
+								Mostrando 1 - 10 de 100 Resultados
 							</Typography>
 						</Grid>
 
-						<Grid item xs={12} sm={6} md={4} lg={3}>
-							<ProductCard loading={true} />
-						</Grid>
-						<Grid item xs={12} sm={6} md={4} lg={3}>
-							<ProductCard loading={false} />
+						<Grid item xs={12}>
+							<Grid
+								container
+								justify="space-around"
+								spacing={4}
+								className={classes.productList}
+								id="products-list"
+							>
+								{products.map((product, index) => (
+									<Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+										<ProductCard product={product} loading={loading} />
+									</Grid>
+								))}
+							</Grid>
 						</Grid>
 					</Grid>
+				</Grid>
+
+				<Grid item className={classes.pagination}>
+					<Pagination
+						count={10}
+						color="primary"
+						onChange={handlePageChange}
+						size="small"
+					/>
 				</Grid>
 			</Grid>
 		</Container>
@@ -131,3 +194,38 @@ const ListProductsSection: FC = () => {
 }
 
 export default ListProductsSection
+
+const apiProducts: ProductCardProps[] = [
+	{
+		id: 1,
+		title: "producto 1",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
+		price: "19.00",
+		imgUrl: "/images/galery_1.jpg",
+	},
+	{
+		id: 1,
+		title: "producto 1",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
+		price: "19.00",
+		imgUrl: "/images/galery_1.jpg",
+	},
+	{
+		id: 1,
+		title: "producto 1",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
+		price: "19.00",
+		imgUrl: "/images/galery_1.jpg",
+	},
+	{
+		id: 1,
+		title: "producto 1",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
+		price: "19.00",
+		imgUrl: "/images/galery_1.jpg",
+	},
+]
