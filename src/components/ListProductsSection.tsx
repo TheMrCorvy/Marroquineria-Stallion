@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			height: 140,
 		},
 		galeryContainer: {
-			marginTop: "3rem",
 			position: "relative",
 			minHeight: "50vh",
 			paddingLeft: 30,
@@ -116,80 +115,86 @@ const ListProductsSection: FC = () => {
 	}
 
 	return (
-		<Container maxWidth="lg" className={classes.galeryContainer} id="productos">
-			<div className={classes.background} />
-			<Grid container justify="center" spacing={4}>
-				<Grid item className={classes.bgRed}>
-					<Grid container justify="space-around">
-						<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
-							<Typography color="inherit" style={{ color: "white" }} variant="body1">
-								Inicio{" "}
-								<Typography component="span" color="textPrimary">
-									/ Productos
+		<div style={{ paddingTop: "5rem" }} id="productos">
+			<Container maxWidth="lg" className={classes.galeryContainer}>
+				<div className={classes.background} />
+				<Grid container justify="center" spacing={4}>
+					<Grid item className={classes.bgRed}>
+						<Grid container justify="space-around">
+							<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
+								<Typography
+									color="inherit"
+									style={{ color: "white" }}
+									variant="body1"
+								>
+									Inicio{" "}
+									<Typography component="span" color="textPrimary">
+										/ Productos
+									</Typography>
 								</Typography>
-							</Typography>
-						</Grid>
-						<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
-							<Typography variant="h6">Nuestros Productos</Typography>
-							<Divider />
-							<Button
-								aria-controls="simple-menu"
-								aria-haspopup="true"
-								onClick={handleClick}
-								className={classes.menuBtn}
-								variant="outlined"
-								endIcon={<ExpandMoreIcon />}
-								color="primary"
-								size="small"
-							>
-								Categorías
-							</Button>
-							<Menu
-								id="simple-menu"
-								anchorEl={anchorEl}
-								keepMounted
-								open={Boolean(anchorEl)}
-								onClose={handleClose}
-							>
-								<MenuItem onClick={handleClose}>Profile</MenuItem>
-								<MenuItem onClick={handleClose}>My account</MenuItem>
-								<MenuItem onClick={handleClose}>Logout</MenuItem>
-							</Menu>
-						</Grid>
-						<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
-							<Typography variant="subtitle2">
-								Mostrando 1 - 10 de 100 Resultados
-							</Typography>
-						</Grid>
+							</Grid>
+							<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
+								<Typography variant="h6">Nuestros Productos</Typography>
+								<Divider />
+								<Button
+									aria-controls="simple-menu"
+									aria-haspopup="true"
+									onClick={handleClick}
+									className={classes.menuBtn}
+									variant="outlined"
+									endIcon={<ExpandMoreIcon />}
+									color="primary"
+									size="small"
+								>
+									Categorías
+								</Button>
+								<Menu
+									id="simple-menu"
+									anchorEl={anchorEl}
+									keepMounted
+									open={Boolean(anchorEl)}
+									onClose={handleClose}
+								>
+									<MenuItem onClick={handleClose}>Profile</MenuItem>
+									<MenuItem onClick={handleClose}>My account</MenuItem>
+									<MenuItem onClick={handleClose}>Logout</MenuItem>
+								</Menu>
+							</Grid>
+							<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
+								<Typography variant="subtitle2">
+									Mostrando 1 - 10 de 100 Resultados
+								</Typography>
+							</Grid>
 
-						<Grid item xs={12}>
-							<Grid
-								container
-								justify="space-around"
-								spacing={4}
-								className={classes.productList}
-								id="products-list"
-							>
-								{products.map((product, index) => (
-									<Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-										<ProductCard product={product} loading={loading} />
-									</Grid>
-								))}
+							<Grid item xs={12}>
+								<Grid
+									container
+									justify="space-around"
+									spacing={4}
+									className={classes.productList}
+									id="products-list"
+								>
+									{products.map((product, index) => (
+										<Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+											<ProductCard product={product} loading={loading} />
+										</Grid>
+									))}
+								</Grid>
 							</Grid>
 						</Grid>
 					</Grid>
-				</Grid>
 
-				<Grid item className={classes.pagination}>
-					<Pagination
-						count={10}
-						color="primary"
-						onChange={handlePageChange}
-						size="small"
-					/>
+					<Grid item className={classes.pagination}>
+						<Pagination
+							count={10}
+							color="primary"
+							onChange={handlePageChange}
+							size="small"
+						/>
+					</Grid>
 				</Grid>
-			</Grid>
-		</Container>
+			</Container>
+		</div>
 	)
 }
 

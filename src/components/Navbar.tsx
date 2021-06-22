@@ -143,11 +143,11 @@ const Navbar: FC = () => {
 		dispatch(toggleCartModal(true))
 	}
 
-	const scrollToElement = async (id: string, block: ScrollLogicalPosition = "center") => {
+	const scrollToElement = async (id: string) => {
 		const element = document.getElementById(id)
 
 		if (element) {
-			element.scrollIntoView({ behavior: "smooth", block })
+			element.scrollIntoView({ behavior: "smooth", block: "start" })
 		}
 	}
 
@@ -220,7 +220,7 @@ const Navbar: FC = () => {
 
 					<Divider className={classes.divider} />
 
-					<ListItem button onClick={() => scrollToElement("galeria", "start")}>
+					<ListItem button onClick={() => scrollToElement("galeria")}>
 						<ListItemText primary="Galería" />
 					</ListItem>
 
