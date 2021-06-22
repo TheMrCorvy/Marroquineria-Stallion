@@ -118,7 +118,10 @@ const ListProductsSection: FC = () => {
 						</Grid>
 
 						<Grid item xs={12} sm={6} md={4} lg={3}>
-							<ProductCard />
+							<ProductCard loading={true} />
+						</Grid>
+						<Grid item xs={12} sm={6} md={4} lg={3}>
+							<ProductCard loading={false} />
 						</Grid>
 					</Grid>
 				</Grid>
