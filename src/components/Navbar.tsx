@@ -292,6 +292,7 @@ const Navbar: FC = () => {
 									input: classes.inputInput,
 								}}
 								inputProps={{ "aria-label": "search" }}
+								onClick={() => scrollToElement("productos")}
 							/>
 						</div>
 

@@ -1,25 +1,12 @@
 import { FC, MouseEvent, useState } from "react"
 
-import {
-	Card,
-	Container,
-	Grid,
-	CardActionArea,
-	CardActions,
-	CardContent,
-	CardMedia,
-	Button,
-	Typography,
-	Link,
-	Breadcrumbs,
-	Divider,
-	Menu,
-	MenuItem,
-} from "@material-ui/core"
+import { Container, Grid, Button, Typography, Divider, Menu, MenuItem } from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+
+import ProductCard from "./ProductCard"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -128,6 +115,10 @@ const ListProductsSection: FC = () => {
 							<Typography variant="subtitle2">
 								Mostrando 1 - 15 de 100 Resultados
 							</Typography>
+						</Grid>
+
+						<Grid item xs={12} sm={6} md={4} lg={3}>
+							<ProductCard />
 						</Grid>
 					</Grid>
 				</Grid>
