@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			paddingRight: 10,
 
 			[theme.breakpoints.down("sm")]: {
-				height: "65vh",
+				height: "67vh",
 				overflowX: "scroll",
 				display: "flex",
 				marginTop: 5,
@@ -82,11 +82,11 @@ const useStyles = makeStyles((theme: Theme) =>
 				justifyContent: "space-between",
 				paddingRight: 0,
 				boxShadow: "inset 0 0 10px #000000",
+				borderRadius: 8,
 			},
 		},
 		pagination: {
-			marginBottom: "5rem",
-			marginTop: "3rem",
+			marginBottom: "3rem",
 		},
 		scrollBtn: {
 			boxShadow: "none",
@@ -251,7 +251,7 @@ const apiProducts: ProductCardProps[] = [
 	},
 	{
 		id: 1,
-		title: "producto 1",
+		title: "producto 2",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
@@ -259,7 +259,7 @@ const apiProducts: ProductCardProps[] = [
 	},
 	{
 		id: 1,
-		title: "producto 1",
+		title: "producto 3",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
@@ -267,7 +267,7 @@ const apiProducts: ProductCardProps[] = [
 	},
 	{
 		id: 1,
-		title: "producto 1",
+		title: "producto 4",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",

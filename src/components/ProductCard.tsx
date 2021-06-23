@@ -38,8 +38,8 @@ const useStyles = makeStyles((theme: Theme) =>
 				width: "30vw",
 			},
 			[theme.breakpoints.down("xs")]: {
-				width: "20rem",
-				maxWidth: "83vw",
+				width: "25rem",
+				maxWidth: "85vw",
 				maxHeight: "65vh",
 			},
 		},
