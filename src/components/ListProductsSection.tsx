@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			paddingRight: 10,
 
 			[theme.breakpoints.down("sm")]: {
-				height: "70vh",
+				height: "65vh",
 				overflowX: "scroll",
 				display: "flex",
 				marginTop: 5,
