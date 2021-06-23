@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			zIndex: -1,
 
 			[theme.breakpoints.down("sm")]: {
-				height: "150vh",
+				height: "155vh",
 			},
 		},
 		textCenter: {
@@ -110,11 +110,6 @@ const useStyles = makeStyles((theme: Theme) =>
 		scrollBtn: {
 			boxShadow: "none",
 		},
-		// lowZIndex: {
-		// 	[theme.breakpoints.down("sm")]: {
-		// 		zIndex: -1,
-		// 	},
-		// },
 		showProduct: {
 			minHeight: "70vh",
 		},
