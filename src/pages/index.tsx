@@ -33,7 +33,6 @@ const useStyles = makeStyles({
 	},
 	title: {
 		marginTop: "3rem",
-		fontFamily: "Arial",
 	},
 	contactContainer: {
 		marginTop: "3rem",
@@ -48,6 +47,10 @@ const useStyles = makeStyles({
 		width: "100%",
 		paddingTop: "3rem",
 		paddingBottom: "3rem",
+	},
+	contactInfo: {
+		textAlign: "center",
+		marginTop: 50,
 	},
 })
 
@@ -131,9 +134,7 @@ export default function Home() {
 			<Container maxWidth="lg" className={classes.contactContainer} id="contacto">
 				<Grid container justify="space-around">
 					<Grid item xs={12} className={classes.textCenter} id="galeria">
-						<Typography variant="h3" className={classes.title}>
-							Comunícate con Nosotros
-						</Typography>
+						<Typography variant="h3">Comunícate con Nosotros</Typography>
 						<Divider />
 					</Grid>
 					<Grid item xs={12}>
@@ -147,13 +148,13 @@ export default function Home() {
 							title="Ecuéntranos en Google Maps"
 						></iframe>
 					</Grid>
-					<Grid item xs={12} md={4} className={classes.textCenter}>
+					<Grid item xs={12} md={4} className={classes.contactInfo}>
 						<Typography variant="h6" gutterBottom paragraph>
 							Contacto
 						</Typography>
 						<Typography variant="body1">011 4381-6833</Typography>
 					</Grid>
-					<Grid item xs={12} md={4} className={classes.textCenter}>
+					<Grid item xs={12} md={4} className={classes.contactInfo}>
 						<Typography variant="h6" gutterBottom paragraph>
 							Dirección
 						</Typography>
@@ -164,7 +165,7 @@ export default function Home() {
 							Ciudad Autónoma de Buenos Aires, Argentina
 						</Typography>
 					</Grid>
-					<Grid item xs={12} md={4} className={classes.textCenter}>
+					<Grid item xs={12} md={4} className={classes.contactInfo}>
 						<Typography variant="h6" gutterBottom paragraph>
 							Horarios de atención
 						</Typography>

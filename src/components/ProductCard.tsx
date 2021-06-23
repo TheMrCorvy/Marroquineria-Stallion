@@ -100,6 +100,8 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 
 	const showProduct = () => {
 		dispatch(displayProduct(productFromProps))
+
+		document.getElementById("productos")?.scrollIntoView({ behavior: "smooth", block: "start" })
 	}
 
 	if (loading) {

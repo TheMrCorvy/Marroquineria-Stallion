@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, ChangeEvent, useState } from "react"
 
 import {
 	Button,
@@ -9,6 +9,8 @@ import {
 	Tooltip,
 	Divider,
 	ButtonBase,
+	TextField,
+	IconButton,
 	useMediaQuery,
 } from "@material-ui/core"
 
@@ -17,6 +19,8 @@ import { green } from "@material-ui/core/colors"
 
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation"
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
+import PlusOneIcon from "@material-ui/icons/PlusOne"
+import ExposureNeg1Icon from "@material-ui/icons/ExposureNeg1"
 
 import ShopTwoIcon from "@material-ui/icons/ShopTwo"
 
@@ -78,6 +82,8 @@ const ShowProduct: FC = () => {
 
 	const dispatch = useDispatch()
 
+	const [units, setUnits] = useState<number>(1)
+
 	const classes = useStyles()
 
 	const theme = useTheme()
@@ -88,6 +94,14 @@ const ShowProduct: FC = () => {
 		dispatch(clearProduct())
 	}
 
+	const modifyUnits = (action: "+1" | "-1") => {
+		if (action === "+1") {
+			setUnits(units + 1)
+		} else {
+			setUnits(units - 1)
+		}
+	}
+
 	if (!product) {
 		return null
 	} else {
@@ -96,13 +110,15 @@ const ShowProduct: FC = () => {
 				<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
 					<Typography color="inherit" style={{ color: "white" }} variant="body1">
 						Productos{" "}
-						<Typography component="span" color="textPrimary">
-							/ Nombre Producto
+						<Typography component="span" color="textPrimary" className={classes.title}>
+							/ {product.title}
 						</Typography>
 					</Typography>
 				</Grid>
 				<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
-					<Typography variant="h6">Nombre Producto</Typography>
+					<Typography variant="h6" className={classes.title}>
+						{product.title}
+					</Typography>
 					<Divider />
 				</Grid>
 				<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
@@ -208,11 +224,44 @@ const ShowProduct: FC = () => {
 										container
 										justify="space-around"
 										style={{ height: "100%" }}
+										spacing={4}
 									>
 										<Grid item xs={12} className={classes.textCenter}>
 											<Typography variant="subtitle1" color="primary">
 												Unidades en Stock: 5
 											</Typography>
+										</Grid>
+										<Grid item xs={12} className={classes.textCenter}>
+											<TextField
+												id="filled-basic"
+												value={units}
+												onChange={() => {}}
+												variant="filled"
+												disabled
+												error={units < 1 || units > 5}
+												helperText="Las unidades no pueden ser mayores al stock, o menores a 1"
+												InputProps={{
+													startAdornment: (
+														<IconButton
+															color="secondary"
+															onClick={() => modifyUnits("+1")}
+														>
+															<PlusOneIcon />
+														</IconButton>
+													),
+													endAdornment: (
+														<IconButton
+															color="primary"
+															onClick={() => modifyUnits("-1")}
+														>
+															<ExposureNeg1Icon />
+														</IconButton>
+													),
+													classes: {
+														input: classes.textCenter,
+													},
+												}}
+											/>
 										</Grid>
 										<Grid item xs={12}>
 											<Button

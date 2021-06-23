@@ -47,15 +47,31 @@ const useStyles = makeStyles((theme: Theme) =>
 			poaition: "relative",
 			width: "100%",
 		},
-		background: {
+		bgLow: {
 			position: "absolute",
 			top: 0,
 			left: "2.5%",
 			width: "95%",
+			height: "50vh",
 			transition: "1s",
 			background: "linear-gradient(35deg, #fb6340 0, #fbb140 100%)",
 			borderRadius: 35,
 			zIndex: -1,
+		},
+		bgHigh: {
+			position: "absolute",
+			top: 0,
+			left: "2.5%",
+			width: "95%",
+			height: "90vh",
+			transition: "1s",
+			background: "linear-gradient(35deg, #fb6340 0, #fbb140 100%)",
+			borderRadius: 35,
+			zIndex: -1,
+
+			[theme.breakpoints.down("sm")]: {
+				height: "150vh",
+			},
 		},
 		textCenter: {
 			textAlign: "center",
@@ -94,23 +110,23 @@ const useStyles = makeStyles((theme: Theme) =>
 		scrollBtn: {
 			boxShadow: "none",
 		},
-		lowZIndex: {
-			[theme.breakpoints.down("sm")]: {
-				zIndex: -1,
-			},
-		},
+		// lowZIndex: {
+		// 	[theme.breakpoints.down("sm")]: {
+		// 		zIndex: -1,
+		// 	},
+		// },
 		showProduct: {
 			minHeight: "70vh",
 		},
 		dNone: {
-			height: 0,
-			overflow: "hidden",
-			transition: "1.5s",
+			visibility: "hidden",
+			opacity: 0,
+			transition: "visibility 0s, opacity 1s linear",
 		},
 		dBlock: {
-			height: "auto",
-			overflow: "unset",
-			transition: "1.5s",
+			visibility: "visible",
+			opacity: 1,
+			transition: "visibility 0s, opacity 1s linear",
 		},
 	})
 )
@@ -153,9 +169,17 @@ const ListProductsSection: FC = () => {
 	return (
 		<div style={{ paddingTop: "5rem" }} id="productos">
 			<Container maxWidth="lg" className={classes.galeryContainer}>
-				<div className={classes.background} style={{ height: product ? "90vh" : "50vh" }} />
+				<div className={!product ? classes.bgLow : classes.bgHigh} />
 
-				<Grid item xs={12}>
+				<Grid
+					item
+					xs={12}
+					style={{
+						visibility: product ? "visible" : "hidden",
+						opacity: product ? 1 : 0,
+						transition: "1.5s",
+					}}
+				>
 					<ShowProduct />
 				</Grid>
 
@@ -216,15 +240,7 @@ const ListProductsSection: FC = () => {
 									id="products-list"
 								>
 									{products.map((product, index) => (
-										<Grid
-											item
-											xs={12}
-											sm={6}
-											md={4}
-											lg={3}
-											key={index}
-											className={classes.lowZIndex}
-										>
+										<Grid item xs={12} sm={6} md={4} lg={3} key={index}>
 											<ProductCard
 												productFromProps={product}
 												loading={loading}
