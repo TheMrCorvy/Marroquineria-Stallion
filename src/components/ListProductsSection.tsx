@@ -81,6 +81,7 @@ const useStyles = makeStyles((theme: Theme) =>
 				flexWrap: "unset",
 				justifyContent: "space-between",
 				paddingRight: 0,
+				boxShadow: "inset 0 0 10px #000000",
 			},
 		},
 		pagination: {
@@ -89,6 +90,11 @@ const useStyles = makeStyles((theme: Theme) =>
 		},
 		scrollBtn: {
 			boxShadow: "none",
+		},
+		lowZIndex: {
+			[theme.breakpoints.down("sm")]: {
+				zIndex: -1,
+			},
 		},
 	})
 )
@@ -187,7 +193,15 @@ const ListProductsSection: FC = () => {
 									id="products-list"
 								>
 									{products.map((product, index) => (
-										<Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+										<Grid
+											item
+											xs={12}
+											sm={6}
+											md={4}
+											lg={3}
+											key={index}
+											className={classes.lowZIndex}
+										>
 											<ProductCard product={product} loading={loading} />
 										</Grid>
 									))}
