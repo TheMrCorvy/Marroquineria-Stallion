@@ -22,11 +22,9 @@ import ShopTwoIcon from "@material-ui/icons/ShopTwo"
 
 import Image from "next/image"
 
-import { ProductCardProps } from "../misc/types"
-
-type Props = {
-	product: ProductCardProps | undefined
-}
+import { useSelector, useDispatch } from "react-redux"
+import { RootState } from "../redux/store"
+import { clearProduct } from "../redux/actions/productActions"
 
 const useStyles = makeStyles({
 	container: {
@@ -75,12 +73,20 @@ const useStyles = makeStyles({
 	},
 })
 
-const ShowProduct: FC<Props> = ({ product }) => {
+const ShowProduct: FC = () => {
+	const { product } = useSelector((state: RootState) => state.product)
+
+	const dispatch = useDispatch()
+
 	const classes = useStyles()
 
 	const theme = useTheme()
 
 	const smallScreen = useMediaQuery(theme.breakpoints.down("md"))
+
+	const removeProduct = () => {
+		dispatch(clearProduct())
+	}
 
 	if (!product) {
 		return null
@@ -107,6 +113,7 @@ const ShowProduct: FC<Props> = ({ product }) => {
 							color="secondary"
 							startIcon={<CancelPresentationIcon />}
 							className={classes.backBtn}
+							onClick={removeProduct}
 						>
 							Volver
 						</Button>

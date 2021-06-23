@@ -1,13 +1,7 @@
-import { ProductActions, ProductState, SET_PRODUCT_TO_DISPLAY } from "../types"
+import { CLEAR_PRODUCT, ProductActions, ProductState, SET_PRODUCT_TO_DISPLAY } from "../types"
 
-const initialState = {
-	product: {
-		id: 0,
-		imgUrl: "",
-		title: "",
-		description: "",
-		price: "",
-	},
+const initialState: ProductState = {
+	product: null,
 }
 
 const productReducer = (state = initialState, action: ProductActions): ProductState => {
@@ -18,8 +12,14 @@ const productReducer = (state = initialState, action: ProductActions): ProductSt
 				product: action.payload,
 			}
 
+		case CLEAR_PRODUCT:
+			return {
+				...state,
+				product: action.payload,
+			}
+
 		default:
-			return { ...state }
+			return state
 	}
 }
 

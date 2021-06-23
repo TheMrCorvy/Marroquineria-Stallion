@@ -98,10 +98,6 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 		}
 	}, [description])
 
-	useEffect(() => {
-		console.log(product)
-	}, [product])
-
 	const showProduct = () => {
 		dispatch(displayProduct(productFromProps))
 	}

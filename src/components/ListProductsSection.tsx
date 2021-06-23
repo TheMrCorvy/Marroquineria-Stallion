@@ -19,6 +19,9 @@ import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt"
 
 import Pagination from "@material-ui/lab/Pagination"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../redux/store"
+
 import { ProductCardProps } from "../misc/types"
 
 import ProductCard from "./ProductCard"
@@ -49,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			top: 0,
 			left: "2.5%",
 			width: "95%",
-			height: "50vh", //85 o 90
+			transition: "1s",
 			background: "linear-gradient(35deg, #fb6340 0, #fbb140 100%)",
 			borderRadius: 35,
 			zIndex: -1,
@@ -99,10 +102,22 @@ const useStyles = makeStyles((theme: Theme) =>
 		showProduct: {
 			minHeight: "70vh",
 		},
+		dNone: {
+			height: 0,
+			overflow: "hidden",
+			transition: "1.5s",
+		},
+		dBlock: {
+			height: "auto",
+			overflow: "unset",
+			transition: "1.5s",
+		},
 	})
 )
 
 const ListProductsSection: FC = () => {
+	const { product } = useSelector((state: RootState) => state.product)
+
 	const classes = useStyles()
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -138,11 +153,11 @@ const ListProductsSection: FC = () => {
 	return (
 		<div style={{ paddingTop: "5rem" }} id="productos">
 			<Container maxWidth="lg" className={classes.galeryContainer}>
-				<div className={classes.background} />
+				<div className={classes.background} style={{ height: product ? "90vh" : "50vh" }} />
 
-				{/* <Grid item xs={12} className={classes.showProduct}>
-					<ShowProduct product={apiProducts[0]} />
-				</Grid> */}
+				<Grid item xs={12}>
+					<ShowProduct />
+				</Grid>
 
 				<Grid container justify="center" spacing={4}>
 					<Grid item className={classes.bgRed}>

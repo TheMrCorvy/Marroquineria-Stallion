@@ -27,9 +27,10 @@ export type CartAction = CartCountItemsAction | CartOpenAction
 /*********************************************************************************** Products */
 
 export const SET_PRODUCT_TO_DISPLAY = "SET_PRODUCT_TO_DISPLAY"
+export const CLEAR_PRODUCT = "CLEAR_PRODUCT"
 
 export interface ProductState {
-	product: ProductCardProps
+	product: ProductCardProps | null
 }
 
 export interface DisplayProductAction {
@@ -37,4 +38,9 @@ export interface DisplayProductAction {
 	payload: ProductCardProps
 }
 
-export type ProductActions = DisplayProductAction
+export interface ClearProductAction {
+	type: typeof CLEAR_PRODUCT
+	payload: null
+}
+
+export type ProductActions = DisplayProductAction | ClearProductAction
