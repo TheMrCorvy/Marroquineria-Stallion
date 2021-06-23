@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			[theme.breakpoints.down("xs")]: {
 				width: "20rem",
 				maxWidth: "83vw",
-				maxHeight: "57vh",
+				maxHeight: "65vh",
 			},
 		},
 		header: {
