@@ -10,6 +10,7 @@ import {
 	MenuItem,
 	Fab,
 	Hidden,
+	Tooltip,
 } from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
@@ -22,6 +23,7 @@ import Pagination from "@material-ui/lab/Pagination"
 import { ProductCardProps } from "../misc/types"
 
 import ProductCard from "./ProductCard"
+import ShowProduct from "./ShowProduct"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -38,7 +40,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			paddingRight: 30,
 		},
 		bgRed: {
-			// background: "red",
 			minHeight: 50,
 			display: "flex",
 			poaition: "relative",
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			top: 0,
 			left: "2.5%",
 			width: "95%",
-			height: "50vh",
+			height: "85vh",
 			background: "linear-gradient(35deg, #fb6340 0, #fbb140 100%)",
 			borderRadius: 35,
 			zIndex: -1,
@@ -96,6 +97,9 @@ const useStyles = makeStyles((theme: Theme) =>
 				zIndex: -1,
 			},
 		},
+		showProduct: {
+			minHeight: "70vh",
+		},
 	})
 )
 
@@ -136,6 +140,11 @@ const ListProductsSection: FC = () => {
 		<div style={{ paddingTop: "5rem" }} id="productos">
 			<Container maxWidth="lg" className={classes.galeryContainer}>
 				<div className={classes.background} />
+
+				<Grid item xs={12} className={classes.showProduct}>
+					<ShowProduct product={apiProducts[0]} />
+				</Grid>
+
 				<Grid container justify="center" spacing={4}>
 					<Grid item className={classes.bgRed}>
 						<Grid container justify="space-around">
