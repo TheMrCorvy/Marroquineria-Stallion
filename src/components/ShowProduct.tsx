@@ -106,7 +106,7 @@ const ShowProduct: FC = () => {
 		return null
 	} else {
 		return (
-			<Grid container justify="space-around" className={classes.container} spacing={4}>
+			<Grid container justify="space-around" spacing={4}>
 				<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
 					<Typography color="inherit" style={{ color: "white" }} variant="body1">
 						Productos{" "}
