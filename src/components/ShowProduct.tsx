@@ -9,9 +9,10 @@ import {
 	Tooltip,
 	Divider,
 	ButtonBase,
+	useMediaQuery,
 } from "@material-ui/core"
 
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
 
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation"
 
@@ -52,16 +53,22 @@ const useStyles = makeStyles({
 	image: {
 		maxWidth: 150,
 		maxHeight: 150,
-
-		// [theme.breakpoints.down("sm")]: {
-		//     maxWidth: "100%",
-		//     maxHeight: "100%",
-		// },
+	},
+	media: {
+		borderRadius: 20,
+	},
+	mainImg: {
+		borderRadius: 25,
+		marginTop: 10,
 	},
 })
 
 const ShowProduct: FC<Props> = ({ product }) => {
 	const classes = useStyles()
+
+	const theme = useTheme()
+
+	const smallScreen = useMediaQuery(theme.breakpoints.down("md"))
 
 	if (!product) {
 		return null
@@ -99,42 +106,75 @@ const ShowProduct: FC<Props> = ({ product }) => {
 						<CardContent>
 							<Grid container justify="space-between">
 								<Grid item xs={12} md={4}>
-									<Typography variant="h5" className={classes.title} paragraph>
-										{product.title}
-									</Typography>
-									<Typography variant="body2" paragraph gutterBottom>
-										{product.description}
-									</Typography>
-
-									<Grid container justify="space-between" spacing={4}>
-										<Grid item xs={4}>
-											<ButtonBase className={classes.image}>
-												<Image
-													className={classes.img}
-													alt="complex"
-													src={require("../../public/images/galery_4.jpg")}
-												/>
-											</ButtonBase>
+									<Grid
+										container
+										direction="column"
+										justify="space-between"
+										spacing={smallScreen ? 0 : 5}
+									>
+										<Grid item xs={12}>
+											<Typography
+												variant="h5"
+												className={classes.title}
+												paragraph
+											>
+												{product.title}
+											</Typography>
 										</Grid>
-										<Grid item xs={4}>
-											<ButtonBase className={classes.image}>
-												<Image
-													className={classes.img}
-													alt="complex"
-													src={require("../../public/images/galery_4.jpg")}
-												/>
-											</ButtonBase>
+										<Grid item xs={12}>
+											<Typography variant="body2" paragraph gutterBottom>
+												{product.description}
+											</Typography>
 										</Grid>
-										<Grid item xs={4}>
-											<ButtonBase className={classes.image}>
-												<Image
-													className={classes.img}
-													alt="complex"
-													src={require("../../public/images/galery_4.jpg")}
-												/>
-											</ButtonBase>
+										<Grid item xs={12}>
+											<Grid container justify="space-between" spacing={4}>
+												<Grid item xs={4}>
+													<ButtonBase className={classes.image}>
+														<Image
+															className={classes.img}
+															alt="complex"
+															src={require("../../public/images/galery_4.jpg")}
+														/>
+													</ButtonBase>
+												</Grid>
+												<Grid item xs={4}>
+													<ButtonBase className={classes.image}>
+														<Image
+															className={classes.img}
+															alt="complex"
+															src={require("../../public/images/galery_4.jpg")}
+														/>
+													</ButtonBase>
+												</Grid>
+												<Grid item xs={4}>
+													<ButtonBase className={classes.image}>
+														<Image
+															className={classes.img}
+															alt="complex"
+															src={require("../../public/images/galery_4.jpg")}
+														/>
+													</ButtonBase>
+												</Grid>
+											</Grid>
 										</Grid>
 									</Grid>
+								</Grid>
+
+								<Grid
+									item
+									xs={12}
+									md={4}
+									style={{ paddingTop: 15, paddingBottom: 10 }}
+								>
+									<Image
+										src={product.imgUrl as any}
+										title={product.title}
+										alt={product.title}
+										width="auto"
+										height="auto"
+										layout="responsive"
+										className={classes.mainImg}
+									/>
 								</Grid>
 							</Grid>
 						</CardContent>
