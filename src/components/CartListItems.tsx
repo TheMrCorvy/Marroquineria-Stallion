@@ -5,6 +5,8 @@ import { Paper, Grid, ButtonBase, Typography, Button } from "@material-ui/core"
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 import { green, red } from "@material-ui/core/colors"
 
+import Image from "next/image"
+
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		root: {
@@ -75,10 +77,10 @@ const CartListItems: FC = () => {
 							</Grid>
 							<Grid item xs={12} className={classes.marginTop}>
 								<ButtonBase className={classes.image}>
-									<img
+									<Image
 										className={classes.img}
 										alt="complex"
-										src="https://lh3.googleusercontent.com/h3x-kjIKBKVCgHL78IovJbtMHDxhdpC7zIYKtJhwhoIUGOqptzwNhFCCutsLRvuZMH4tfeLMWcPiqNqF=w960-h960-n-o-v1"
+										src={require("../../public/images/galery_4.jpg")}
 									/>
 								</ButtonBase>
 							</Grid>

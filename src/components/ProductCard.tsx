@@ -88,7 +88,7 @@ const ProductCard: FC<Props> = ({ product, loading }) => {
 
 			setDesc(cutDesc + " (...)")
 		}
-	}, [])
+	}, [description])
 
 	if (loading) {
 		return (

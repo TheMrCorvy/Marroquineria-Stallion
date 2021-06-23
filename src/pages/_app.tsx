@@ -36,16 +36,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<meta name="description" content="Tienda virtual Marroquinería Stallion" />
 				<meta name="keywords" content="Marroquineria Stallion" />
 				<title>Marroquinería Stallion</title>
-
-				{/**material UI */}
-				<link
-					rel="stylesheet"
-					href="https://fonts.googleapis.com/icon?family=Material+Icons"
-				/>
-				<link
-					rel="stylesheet"
-					href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-				/>
 			</Head>
 			<ThemeProvider theme={theme}>
 				<Provider store={store}>

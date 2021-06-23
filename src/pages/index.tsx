@@ -2,6 +2,8 @@ import { Container, Grid, Typography, Paper, Divider } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
+import Image from "next/image"
+
 import ListProductsSection from "../components/ListProductsSection"
 
 const useStyles = makeStyles({
@@ -71,8 +73,8 @@ export default function Home() {
 			<Container maxWidth="lg" className={classes.galeryContainer}>
 				<Grid container>
 					<Grid item xs={12} className={classes.imgContainer}>
-						<img
-							src="/images/main_home.jpg"
+						<Image
+							src={require("../../public/images/main_home.jpg")}
 							alt="Tienda online de Marroquinería Stallion"
 							className={classes.image}
 						/>
@@ -90,8 +92,8 @@ export default function Home() {
 					</Grid>
 					<Grid item xs={12} sm={6} lg={4}>
 						<Paper className={classes.imgContainer}>
-							<img
-								src="/images/galery_1.jpg"
+							<Image
+								src={require("../../public/images/galery_1.jpg")}
 								alt="Tienda online de Marroquinería Stallion"
 								className={classes.image}
 							/>
@@ -99,8 +101,8 @@ export default function Home() {
 					</Grid>
 					<Grid item xs={12} sm={6} lg={4}>
 						<Paper className={classes.imgContainer}>
-							<img
-								src="/images/galery_2.jpg"
+							<Image
+								src={require("../../public/images/galery_2.jpg")}
 								alt="Tienda online de Marroquinería Stallion"
 								className={classes.image}
 							/>
@@ -108,8 +110,8 @@ export default function Home() {
 					</Grid>
 					<Grid item xs={12} sm={6} lg={4}>
 						<Paper className={classes.imgContainer}>
-							<img
-								src="/images/galery_3.jpg"
+							<Image
+								src={require("../../public/images/galery_3.jpg")}
 								alt="Tienda online de Marroquinería Stallion"
 								className={classes.image}
 							/>
@@ -117,8 +119,8 @@ export default function Home() {
 					</Grid>
 					<Grid item xs={12} sm={6} lg={4}>
 						<Paper className={classes.imgContainer}>
-							<img
-								src="/images/galery_4.jpg"
+							<Image
+								src={require("../../public/images/galery_4.jpg")}
 								alt="Tienda online de Marroquinería Stallion"
 								className={classes.image}
 							/>

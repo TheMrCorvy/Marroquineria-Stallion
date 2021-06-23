@@ -7,12 +7,25 @@ class MyDocument extends Document {
 	render() {
 		return (
 			<Html lang="es">
-				<Head />
+				<Head>
+					{/**material UI */}
+					<link
+						rel="stylesheet"
+						href="https://fonts.googleapis.com/icon?family=Material+Icons"
+					/>
+					<link
+						rel="stylesheet"
+						href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+					/>
+				</Head>
 				<body>
 					<Main />
 					<NextScript />
 					{/**MercadoPago */}
-					<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+					<script
+						async
+						src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"
+					></script>
 				</body>
 			</Html>
 		)
