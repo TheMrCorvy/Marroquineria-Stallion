@@ -15,7 +15,7 @@ import {
 
 import { Skeleton } from "@material-ui/lab"
 
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import { green } from "@material-ui/core/colors"
 
@@ -29,40 +29,49 @@ type Props = {
 	loading: boolean
 }
 
-const useStyles = makeStyles({
-	card: {
-		borderRadius: 25,
-	},
-	header: {
-		paddingBottom: 0,
-	},
-	media: {
-		height: 0,
-		paddingTop: "56.25%", // 16:9
-		borderRadius: 15,
-	},
-	cardaction: {
-		borderRadius: 15,
-		marginBottom: "2rem",
-	},
-	textCenter: {
-		textAlign: "center",
-		marginBottom: 0,
-	},
-	textGreen: {
-		color: green[600],
-		textAlign: "center",
-	},
-	buyNow: {
-		marginLeft: "auto",
-		marginRight: "auto",
-		marginBottom: 15,
-		borderRadius: 8,
-	},
-	loadingImage: {
-		borderRadius: 15,
-	},
-})
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		card: {
+			borderRadius: 25,
+
+			[theme.breakpoints.down("sm")]: {
+				width: "35vw",
+			},
+			[theme.breakpoints.down("xs")]: {
+				width: "82vw",
+			},
+		},
+		header: {
+			paddingBottom: 0,
+		},
+		media: {
+			height: 0,
+			paddingTop: "56.25%", // 16:9
+			borderRadius: 15,
+		},
+		cardaction: {
+			borderRadius: 15,
+			marginBottom: "2rem",
+		},
+		textCenter: {
+			textAlign: "center",
+			marginBottom: 0,
+		},
+		textGreen: {
+			color: green[600],
+			textAlign: "center",
+		},
+		buyNow: {
+			marginLeft: "auto",
+			marginRight: "auto",
+			marginBottom: 15,
+			borderRadius: 8,
+		},
+		loadingImage: {
+			borderRadius: 15,
+		},
+	})
+)
 
 const ProductCard: FC<Props> = ({ product, loading }) => {
 	const classes = useStyles()

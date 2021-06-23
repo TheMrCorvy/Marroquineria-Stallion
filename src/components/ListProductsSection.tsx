@@ -63,18 +63,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 			[theme.breakpoints.down("sm")]: {
 				maxHeight: "60vh",
-				overflowY: "scroll",
-				whiteSpace: "nowrap",
-				position: "relative",
+				overflowX: "scroll",
 				display: "flex",
-				justifyContent: "space-between",
 				marginTop: 5,
 				paddingLeft: 0,
 				flexWrap: "unset",
+				justifyContent: "space-between",
 				paddingRight: 0,
-				"&::-webkit-scrollbar": {
-					display: "none",
-				},
 			},
 		},
 		pagination: {
