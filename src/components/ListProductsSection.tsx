@@ -1,10 +1,21 @@
 import { FC, MouseEvent, useState } from "react"
 
-import { Container, Grid, Button, Typography, Divider, Menu, MenuItem } from "@material-ui/core"
+import {
+	Container,
+	Grid,
+	Button,
+	Typography,
+	Divider,
+	Menu,
+	MenuItem,
+	Fab,
+	Hidden,
+} from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt"
 
 import Pagination from "@material-ui/lab/Pagination"
 
@@ -76,6 +87,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginBottom: "5rem",
 			marginTop: "3rem",
 		},
+		scrollBtn: {
+			boxShadow: "none",
+		},
 	})
 )
 
@@ -101,6 +115,14 @@ const ListProductsSection: FC = () => {
 
 		if (productsContainer) {
 			productsContainer.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+		}
+	}
+
+	const scrollProducts = () => {
+		const productsContainer = document.getElementById("products-list")
+
+		if (productsContainer) {
+			productsContainer.scrollBy({ top: 0, left: +200, behavior: "smooth" })
 		}
 	}
 
@@ -173,6 +195,20 @@ const ListProductsSection: FC = () => {
 							</Grid>
 						</Grid>
 					</Grid>
+
+					<Hidden mdUp>
+						<Grid item xs={12} className={classes.textCenter}>
+							<Fab
+								color="primary"
+								aria-label="scroll"
+								size="small"
+								className={classes.scrollBtn}
+								onClick={scrollProducts}
+							>
+								<ArrowRightAltIcon />
+							</Fab>
+						</Grid>
+					</Hidden>
 
 					<Grid item className={classes.pagination}>
 						<Pagination

@@ -35,10 +35,12 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderRadius: 25,
 
 			[theme.breakpoints.down("sm")]: {
-				width: "35vw",
+				width: "30vw",
 			},
 			[theme.breakpoints.down("xs")]: {
-				width: "82vw",
+				width: "20rem",
+				maxWidth: "83vw",
+				maxHeight: "57vh",
 			},
 		},
 		header: {
