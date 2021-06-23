@@ -62,10 +62,15 @@ const useStyles = makeStyles((theme: Theme) =>
 			paddingRight: 10,
 
 			[theme.breakpoints.down("sm")]: {
-				maxHeight: "100vh",
+				maxHeight: "60vh",
 				overflowY: "scroll",
+				whiteSpace: "nowrap",
+				position: "relative",
+				display: "flex",
+				justifyContent: "space-between",
 				marginTop: 5,
 				paddingLeft: 0,
+				flexWrap: "unset",
 				paddingRight: 0,
 				"&::-webkit-scrollbar": {
 					display: "none",
@@ -97,21 +102,11 @@ const ListProductsSection: FC = () => {
 	}
 
 	const handlePageChange = (event: object, page: number) => {
-		// const productsSection = document.getElementById("productos")
-		// const productsContainer = document.getElementById("products-list")
-		// if (productsSection && productsContainer) {
-		// 	productsContainer.scrollTo({ top: 0, behavior: "smooth" })
-		// 	productsContainer.addEventListener(
-		// 		"scroll",
-		// 		() => {
-		// 			productsSection.scrollIntoView({
-		// 				behavior: "smooth",
-		// 				block: "start",
-		// 			})
-		// 		},
-		// 		false
-		// 	)
-		// }
+		const productsContainer = document.getElementById("products-list")
+
+		if (productsContainer) {
+			productsContainer.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+		}
 	}
 
 	return (
