@@ -13,8 +13,12 @@ import {
 } from "@material-ui/core"
 
 import { makeStyles, useTheme } from "@material-ui/core/styles"
+import { green } from "@material-ui/core/colors"
 
 import CancelPresentationIcon from "@material-ui/icons/CancelPresentation"
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
+
+import ShopTwoIcon from "@material-ui/icons/ShopTwo"
 
 import Image from "next/image"
 
@@ -61,6 +65,14 @@ const useStyles = makeStyles({
 		borderRadius: 25,
 		marginTop: 10,
 	},
+	mainImageContainer: {
+		paddingTop: 15,
+		textAlign: "center",
+		color: green[500],
+	},
+	buyBtn: {
+		borderRadius: 8,
+	},
 })
 
 const ShowProduct: FC<Props> = ({ product }) => {
@@ -104,7 +116,7 @@ const ShowProduct: FC<Props> = ({ product }) => {
 				<Grid item xs={12} sm={11}>
 					<Card className={classes.card}>
 						<CardContent>
-							<Grid container justify="space-between">
+							<Grid container justify="space-around">
 								<Grid item xs={12} md={4}>
 									<Grid
 										container
@@ -131,27 +143,36 @@ const ShowProduct: FC<Props> = ({ product }) => {
 												<Grid item xs={4}>
 													<ButtonBase className={classes.image}>
 														<Image
+															src={product.imgUrl as any}
+															title={product.title}
+															alt={product.title}
+															width={150}
+															height={150}
 															className={classes.img}
-															alt="complex"
-															src={require("../../public/images/galery_4.jpg")}
 														/>
 													</ButtonBase>
 												</Grid>
 												<Grid item xs={4}>
 													<ButtonBase className={classes.image}>
 														<Image
+															src={product.imgUrl as any}
+															title={product.title}
+															alt={product.title}
+															width={150}
+															height={150}
 															className={classes.img}
-															alt="complex"
-															src={require("../../public/images/galery_4.jpg")}
 														/>
 													</ButtonBase>
 												</Grid>
 												<Grid item xs={4}>
 													<ButtonBase className={classes.image}>
 														<Image
+															src={product.imgUrl as any}
+															title={product.title}
+															alt={product.title}
+															width={150}
+															height={150}
 															className={classes.img}
-															alt="complex"
-															src={require("../../public/images/galery_4.jpg")}
 														/>
 													</ButtonBase>
 												</Grid>
@@ -160,12 +181,7 @@ const ShowProduct: FC<Props> = ({ product }) => {
 									</Grid>
 								</Grid>
 
-								<Grid
-									item
-									xs={12}
-									md={4}
-									style={{ paddingTop: 15, paddingBottom: 10 }}
-								>
+								<Grid item xs={12} md={4} className={classes.mainImageContainer}>
 									<Image
 										src={product.imgUrl as any}
 										title={product.title}
@@ -175,6 +191,51 @@ const ShowProduct: FC<Props> = ({ product }) => {
 										layout="responsive"
 										className={classes.mainImg}
 									/>
+									<Typography variant="h5" style={{ paddingTop: 10 }}>
+										$ {product.price}
+									</Typography>
+								</Grid>
+
+								<Grid item xs={12} md={3}>
+									<Grid
+										container
+										justify="space-around"
+										style={{ height: "100%" }}
+									>
+										<Grid item xs={12} className={classes.textCenter}>
+											<Typography variant="subtitle1" color="primary">
+												Unidades en Stock: 5
+											</Typography>
+										</Grid>
+										<Grid item xs={12}>
+											<Button
+												className={classes.buyBtn}
+												size="large"
+												variant="contained"
+												color="secondary"
+												startIcon={<ShoppingCartIcon />}
+												endIcon={<ShoppingCartIcon />}
+												disableElevation
+												fullWidth
+											>
+												Agregar al carrito
+											</Button>
+										</Grid>
+										<Grid item xs={12}>
+											<Button
+												className={classes.buyBtn}
+												size="large"
+												variant="contained"
+												color="secondary"
+												disableElevation
+												startIcon={<ShopTwoIcon />}
+												endIcon={<ShopTwoIcon />}
+												fullWidth
+											>
+												Comprar ahora
+											</Button>
+										</Grid>
+									</Grid>
 								</Grid>
 							</Grid>
 						</CardContent>

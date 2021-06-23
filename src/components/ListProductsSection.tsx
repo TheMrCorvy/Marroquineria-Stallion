@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			top: 0,
 			left: "2.5%",
 			width: "95%",
-			height: "85vh",
+			height: "50vh", //85 o 90
 			background: "linear-gradient(35deg, #fb6340 0, #fbb140 100%)",
 			borderRadius: 35,
 			zIndex: -1,
@@ -140,9 +140,9 @@ const ListProductsSection: FC = () => {
 			<Container maxWidth="lg" className={classes.galeryContainer}>
 				<div className={classes.background} />
 
-				<Grid item xs={12} className={classes.showProduct}>
+				{/* <Grid item xs={12} className={classes.showProduct}>
 					<ShowProduct product={apiProducts[0]} />
-				</Grid>
+				</Grid> */}
 
 				<Grid container justify="center" spacing={4}>
 					<Grid item className={classes.bgRed}>
@@ -210,7 +210,10 @@ const ListProductsSection: FC = () => {
 											key={index}
 											className={classes.lowZIndex}
 										>
-											<ProductCard product={product} loading={loading} />
+											<ProductCard
+												productFromProps={product}
+												loading={loading}
+											/>
 										</Grid>
 									))}
 								</Grid>

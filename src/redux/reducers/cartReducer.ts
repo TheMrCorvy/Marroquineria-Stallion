@@ -7,7 +7,7 @@ let initialState: CartState = {
 	},
 }
 
-const cartReducer = (state = initialState, action: CartAction) => {
+const cartReducer = (state = initialState, action: CartAction): CartState => {
 	switch (action.type) {
 		case SET_CART_COUNT:
 			return {

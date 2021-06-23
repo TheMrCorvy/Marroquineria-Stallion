@@ -20,12 +20,16 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 import { green } from "@material-ui/core/colors"
 
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
-import FilterCenterFocusIcon from "@material-ui/icons/FilterCenterFocus"
+import ZoomOutMapIcon from "@material-ui/icons/ZoomOutMap"
 
 import { ProductCardProps } from "../misc/types"
 
+import { useSelector, useDispatch } from "react-redux"
+import { RootState } from "../redux/store"
+import { displayProduct } from "../redux/actions/productActions"
+
 type Props = {
-	product: ProductCardProps
+	productFromProps: ProductCardProps
 	loading: boolean
 }
 
@@ -75,10 +79,14 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
-const ProductCard: FC<Props> = ({ product, loading }) => {
+const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
+	const { product } = useSelector((state: RootState) => state.product)
+
+	const dispatch = useDispatch()
+
 	const classes = useStyles()
 
-	const { title, id, imgUrl, description, price } = product
+	const { title, id, imgUrl, description, price } = productFromProps
 
 	const [desc, setDesc] = useState(description)
 
@@ -89,6 +97,14 @@ const ProductCard: FC<Props> = ({ product, loading }) => {
 			setDesc(cutDesc + " (...)")
 		}
 	}, [description])
+
+	useEffect(() => {
+		console.log(product)
+	}, [product])
+
+	const showProduct = () => {
+		dispatch(displayProduct(productFromProps))
+	}
 
 	if (loading) {
 		return (
@@ -123,8 +139,8 @@ const ProductCard: FC<Props> = ({ product, loading }) => {
 				<CardHeader
 					avatar={
 						<Tooltip title="Ver Producto" placement="right">
-							<IconButton aria-label="settings" color="primary">
-								<FilterCenterFocusIcon />
+							<IconButton aria-label="settings" color="primary" onClick={showProduct}>
+								<ZoomOutMapIcon />
 							</IconButton>
 						</Tooltip>
 					}
