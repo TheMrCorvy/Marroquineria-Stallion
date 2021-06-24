@@ -110,7 +110,7 @@ const ShowProduct: FC = () => {
 	}
 
 	const dispatchAddToCart = () => {
-		if (product) {
+		if (product && units <= product.stock && units > 0) {
 			dispatch(addToCart(product, units))
 		}
 	}

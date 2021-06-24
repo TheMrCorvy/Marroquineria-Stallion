@@ -288,7 +288,7 @@ const apiProducts: ProductCardProps[] = [
 		stock: 5,
 	},
 	{
-		id: 1,
+		id: 2,
 		title: "producto 2",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
@@ -297,7 +297,7 @@ const apiProducts: ProductCardProps[] = [
 		stock: 7,
 	},
 	{
-		id: 1,
+		id: 3,
 		title: "producto 3",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
@@ -306,7 +306,7 @@ const apiProducts: ProductCardProps[] = [
 		stock: 2,
 	},
 	{
-		id: 1,
+		id: 4,
 		title: "producto 4",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",

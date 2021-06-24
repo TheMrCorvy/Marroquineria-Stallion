@@ -35,16 +35,22 @@ const cartReducer = (state = initialState, action: CartAction): CartState => {
 
 			const productsArr = [...state.cart.products]
 
-			productsArr.push({
-				product: action.payload.product,
-				units: action.payload.units,
-			})
+			const isInArr = productsArr.some(
+				(product) => product.product.id === action.payload.product.id
+			)
+
+			if (!isInArr) {
+				productsArr.push({
+					product: action.payload.product,
+					units: action.payload.units,
+				})
+			}
 
 			return {
 				...state,
 				cart: {
 					...state.cart,
-					count: newCount,
+					count: !isInArr ? newCount : state.cart.count,
 					products: productsArr,
 				},
 			}
