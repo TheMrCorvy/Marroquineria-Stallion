@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react"
+import { FC } from "react"
 
 import { Paper, Grid, ButtonBase, Typography, Button } from "@material-ui/core"
 
@@ -6,6 +6,9 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 import { green, red } from "@material-ui/core/colors"
 
 import Image from "next/image"
+
+import { useSelector, useDispatch } from "react-redux"
+import { RootState } from "../redux/store"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -60,82 +63,88 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const CartListItems: FC = () => {
+	const { cart } = useSelector((state: RootState) => state.cart)
+
 	const classes = useStyles()
 
 	return (
 		<Grid container justify="center" spacing={4}>
-			<Grid item xs={12}>
-				<Paper className={classes.paper}>
-					<Grid container spacing={2}>
-						<Grid item>
-							<Grid container justify="space-between">
-								<Grid item xs={12}>
-									<Typography variant="subtitle1" className={classes.textGreen}>
-										$19.00
-									</Typography>
-								</Grid>
-							</Grid>
-							<Grid item xs={12} className={classes.marginTop}>
-								<ButtonBase className={classes.image}>
-									<Image
-										className={classes.img}
-										alt="complex"
-										src={require("../../public/images/galery_4.jpg")}
-									/>
-								</ButtonBase>
-							</Grid>
-						</Grid>
-						<Grid item xs={12} sm container>
-							<Grid item xs container spacing={2}>
-								<Grid item xs={12}>
-									<Typography
-										gutterBottom
-										variant="subtitle1"
-										className={classes.productName}
-									>
-										Nombre del Producto
-									</Typography>
-									<Typography variant="body2" gutterBottom paragraph>
-										Lorem ipsum dolor sit amet consectetur adipisicing elit.
-										Autem, perferendis.
-									</Typography>
-									<Typography variant="body2" color="textSecondary">
-										Cantidad:{" "}
-										<Typography component="span" color="primary">
-											1
+			{cart.products.map((product, index) => (
+				<Grid item xs={12} key={index}>
+					<Paper className={classes.paper}>
+						<Grid container spacing={2}>
+							<Grid item>
+								<Grid container justify="space-between">
+									<Grid item xs={12}>
+										<Typography
+											variant="subtitle1"
+											className={classes.textGreen}
+										>
+											$ {product.product.price}
 										</Typography>
-									</Typography>
+									</Grid>
 								</Grid>
-								<Grid item xs={12} md={4} className={classes.textCenter}>
-									<Button size="small" variant="outlined" color="primary">
-										Agregar uno más
-									</Button>
+								<Grid item xs={12} className={classes.marginTop}>
+									<ButtonBase className={classes.image}>
+										<Image
+											className={classes.img}
+											alt="complex"
+											src={require("../../public/images/galery_4.jpg")}
+										/>
+									</ButtonBase>
 								</Grid>
-								<Grid item xs={12} md={4} className={classes.textCenter}>
-									<Button
-										size="small"
-										variant="outlined"
-										color="secondary"
-										className={classes.redBtn}
-									>
-										Remover uno
-									</Button>
-								</Grid>
-								<Grid item xs={12} md={4} className={classes.textCenter}>
-									<Button
-										size="small"
-										variant="contained"
-										disableElevation
-										color="secondary"
-									>
-										Quitar Producto
-									</Button>
+							</Grid>
+							<Grid item xs={12} sm container>
+								<Grid item xs container spacing={2}>
+									<Grid item xs={12}>
+										<Typography
+											gutterBottom
+											variant="subtitle1"
+											className={classes.productName}
+										>
+											{product.product.title}
+										</Typography>
+										<Typography variant="body2" gutterBottom paragraph>
+											{product.product.description}
+										</Typography>
+										<Typography variant="body2" color="textSecondary">
+											Cantidad:{" "}
+											<Typography component="span" color="primary">
+												{product.units}
+											</Typography>
+										</Typography>
+									</Grid>
+									<Grid item xs={12} md={4} className={classes.textCenter}>
+										<Button size="small" variant="outlined" color="primary">
+											Agregar uno más
+										</Button>
+									</Grid>
+									<Grid item xs={12} md={4} className={classes.textCenter}>
+										<Button
+											size="small"
+											variant="outlined"
+											color="secondary"
+											className={classes.redBtn}
+										>
+											Remover uno
+										</Button>
+									</Grid>
+									<Grid item xs={12} md={4} className={classes.textCenter}>
+										<Button
+											size="small"
+											variant="contained"
+											disableElevation
+											color="secondary"
+										>
+											Quitar Producto
+										</Button>
+									</Grid>
 								</Grid>
 							</Grid>
 						</Grid>
-					</Grid>
-				</Paper>
-			</Grid>
+					</Paper>
+				</Grid>
+			))}
 		</Grid>
 	)
 }

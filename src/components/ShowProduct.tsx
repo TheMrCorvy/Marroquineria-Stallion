@@ -29,6 +29,7 @@ import Image from "next/image"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 import { clearProduct } from "../redux/actions/productActions"
+import { addToCart } from "../redux/actions/cartActions"
 
 const useStyles = makeStyles({
 	container: {
@@ -75,6 +76,12 @@ const useStyles = makeStyles({
 	buyBtn: {
 		borderRadius: 8,
 	},
+	unities: {
+		color: green[500],
+		textAlign: "center",
+		fontWeight: "bold",
+		fontSize: "1.5rem",
+	},
 })
 
 const ShowProduct: FC = () => {
@@ -99,6 +106,12 @@ const ShowProduct: FC = () => {
 			setUnits(units + 1)
 		} else {
 			setUnits(units - 1)
+		}
+	}
+
+	const dispatchAddToCart = () => {
+		if (product) {
+			dispatch(addToCart(product, units))
 		}
 	}
 
@@ -258,7 +271,7 @@ const ShowProduct: FC = () => {
 														</IconButton>
 													),
 													classes: {
-														input: classes.textCenter,
+														input: classes.unities,
 													},
 												}}
 											/>
@@ -273,6 +286,7 @@ const ShowProduct: FC = () => {
 												endIcon={<ShoppingCartIcon />}
 												disableElevation
 												fullWidth
+												onClick={dispatchAddToCart}
 											>
 												Agregar al carrito
 											</Button>

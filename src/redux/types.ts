@@ -5,10 +5,18 @@ export const SET_CART_COUNT = "SET_CART_COUNT"
 
 export const TOGGLE_CART_MODAL = "TOGGLE_CART_MODAL"
 
+export const ADD_TO_CART = "ADD_TO_CART"
+
+type ProductsOnCart = {
+	product: ProductCardProps
+	units: number
+}
+
 export interface CartState {
 	cart: {
 		count: number
 		open: boolean
+		products: [] | ProductsOnCart[]
 	}
 }
 
@@ -22,7 +30,15 @@ export interface CartOpenAction {
 	payload: boolean
 }
 
-export type CartAction = CartCountItemsAction | CartOpenAction
+export interface AddToCartAction {
+	type: typeof ADD_TO_CART
+	payload: {
+		product: ProductCardProps
+		units: number
+	}
+}
+
+export type CartAction = CartCountItemsAction | CartOpenAction | AddToCartAction
 
 /*********************************************************************************** Products */
 
