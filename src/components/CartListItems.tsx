@@ -12,7 +12,7 @@ import Image from "next/image"
 
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
-import { addOrRemoveUnits } from "../redux/actions/cartActions"
+import { addOrRemoveUnits, removeItemFromCart } from "../redux/actions/cartActions"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -80,6 +80,10 @@ const CartListItems: FC = () => {
 		const productToModify = cart.products[index].product
 
 		dispatch(addOrRemoveUnits(productToModify, action))
+	}
+
+	const removeItem = (productId: number) => {
+		dispatch(removeItemFromCart(productId))
 	}
 
 	return (
@@ -161,6 +165,7 @@ const CartListItems: FC = () => {
 											variant="contained"
 											disableElevation
 											color="secondary"
+											onClick={() => removeItem(product.product.id)}
 										>
 											Quitar Producto
 										</Button>

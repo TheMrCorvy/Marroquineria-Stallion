@@ -9,6 +9,8 @@ export const ADD_TO_CART = "ADD_TO_CART"
 
 export const ADD_OR_SUBSTRACT_UNITS = "ADD_OR_SUBSTRACT_UNITS"
 
+export const REMOVE_ITEM_FROM_CART = "REMOVE_ITEM_FROM_CART"
+
 type ProductsOnCart = {
 	product: ProductCardProps
 	units: number
@@ -48,11 +50,17 @@ export interface AddOrSubstractUnitAction {
 	}
 }
 
+export interface RemoveFromCartAction {
+	type: typeof REMOVE_ITEM_FROM_CART
+	payload: number
+}
+
 export type CartAction =
 	| CartCountItemsAction
 	| CartOpenAction
 	| AddToCartAction
 	| AddOrSubstractUnitAction
+	| RemoveFromCartAction
 
 /*********************************************************************************** Products */
 

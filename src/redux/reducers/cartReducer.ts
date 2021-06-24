@@ -7,6 +7,8 @@ import {
 	TOGGLE_CART_MODAL,
 	ADD_TO_CART,
 	ADD_OR_SUBSTRACT_UNITS,
+	REMOVE_ITEM_FROM_CART,
+	RemoveFromCartAction,
 } from "../types"
 
 let initialState: CartState = {
@@ -42,6 +44,9 @@ const cartReducer = (state = initialState, action: CartAction): CartState => {
 
 		case ADD_OR_SUBSTRACT_UNITS:
 			return modifyUnits(state, action)
+
+		case REMOVE_ITEM_FROM_CART:
+			return removeFromCart(state, action)
 
 		default:
 			return state
@@ -115,5 +120,20 @@ const modifyUnits = (state: CartState, action: AddOrSubstractUnitAction) => {
 				products: newArr,
 			},
 		}
+	}
+}
+
+const removeFromCart = (state: CartState, action: RemoveFromCartAction) => {
+	const index = state.cart.products.findIndex((product) => product.product.id === action.payload)
+
+	return {
+		...state,
+		cart: {
+			...state.cart,
+			products: state.cart.products.filter(
+				(product) => product.product.id !== action.payload
+			),
+			count: state.cart.count - state.cart.products[index].units,
+		},
 	}
 }
