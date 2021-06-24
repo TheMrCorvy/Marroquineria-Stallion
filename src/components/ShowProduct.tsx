@@ -241,7 +241,7 @@ const ShowProduct: FC = () => {
 									>
 										<Grid item xs={12} className={classes.textCenter}>
 											<Typography variant="subtitle1" color="primary">
-												Unidades en Stock: 5
+												Unidades en Stock: {product.stock}
 											</Typography>
 										</Grid>
 										<Grid item xs={12} className={classes.textCenter}>
@@ -251,7 +251,7 @@ const ShowProduct: FC = () => {
 												onChange={() => {}}
 												variant="filled"
 												disabled
-												error={units < 1 || units > 5}
+												error={units < 1 || units > product.stock}
 												helperText="Las unidades no pueden ser mayores al stock, o menores a 1"
 												InputProps={{
 													startAdornment: (

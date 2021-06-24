@@ -285,6 +285,7 @@ const apiProducts: ProductCardProps[] = [
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
 		imgUrl: "/images/galery_1.jpg",
+		stock: 5,
 	},
 	{
 		id: 1,
@@ -293,6 +294,7 @@ const apiProducts: ProductCardProps[] = [
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
 		imgUrl: "/images/galery_1.jpg",
+		stock: 7,
 	},
 	{
 		id: 1,
@@ -301,6 +303,7 @@ const apiProducts: ProductCardProps[] = [
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
 		imgUrl: "/images/galery_1.jpg",
+		stock: 2,
 	},
 	{
 		id: 1,
@@ -309,5 +312,6 @@ const apiProducts: ProductCardProps[] = [
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
 		imgUrl: "/images/galery_1.jpg",
+		stock: 4,
 	},
 ]
