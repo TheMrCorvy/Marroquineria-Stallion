@@ -1,14 +1,18 @@
 import { FC } from "react"
 
-import { Paper, Grid, ButtonBase, Typography, Button } from "@material-ui/core"
+import { Paper, Grid, ButtonBase, Typography, Button, Fab, Tooltip } from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 import { green, red } from "@material-ui/core/colors"
+
+import PlusOneIcon from "@material-ui/icons/PlusOne"
+import ExposureNeg1Icon from "@material-ui/icons/ExposureNeg1"
 
 import Image from "next/image"
 
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
+import { addOrRemoveUnits } from "../redux/actions/cartActions"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -59,13 +63,27 @@ const useStyles = makeStyles((theme: Theme) =>
 				backgroundColor: red[100],
 			},
 		},
+		noShadow: {
+			boxShadow: "none",
+		},
 	})
 )
 
 const CartListItems: FC = () => {
 	const { cart } = useSelector((state: RootState) => state.cart)
 
+	const dispatch = useDispatch()
+
 	const classes = useStyles()
+
+	const addOrSubstract = (action: "+1" | "-1", index: number) => {
+		const productToModify = cart.products[index].product
+		// console.log({
+		// 	product: cart.products[index].product,
+		// 	action,
+		// })
+		dispatch(addOrRemoveUnits(productToModify, action))
+	}
 
 	return (
 		<Grid container justify="center" spacing={4}>
@@ -115,23 +133,33 @@ const CartListItems: FC = () => {
 										</Typography>
 									</Grid>
 									<Grid item xs={12} md={4} className={classes.textCenter}>
-										<Button size="small" variant="outlined" color="primary">
-											Agregar uno más
-										</Button>
+										<Tooltip title="Agregar uno más" placement="right">
+											<Fab
+												className={classes.noShadow}
+												size="small"
+												color="primary"
+												aria-label="agregar uno mas"
+												onClick={() => addOrSubstract("+1", index)}
+											>
+												<PlusOneIcon />
+											</Fab>
+										</Tooltip>
+									</Grid>
+									<Grid item xs={12} md={4} className={classes.textCenter}>
+										<Tooltip title="Remover uno" placement="left">
+											<Fab
+												className={classes.noShadow}
+												size="small"
+												color="secondary"
+												aria-label="remover uno"
+												onClick={() => addOrSubstract("-1", index)}
+											>
+												<ExposureNeg1Icon />
+											</Fab>
+										</Tooltip>
 									</Grid>
 									<Grid item xs={12} md={4} className={classes.textCenter}>
 										<Button
-											size="small"
-											variant="outlined"
-											color="secondary"
-											className={classes.redBtn}
-										>
-											Remover uno
-										</Button>
-									</Grid>
-									<Grid item xs={12} md={4} className={classes.textCenter}>
-										<Button
-											size="small"
 											variant="contained"
 											disableElevation
 											color="secondary"

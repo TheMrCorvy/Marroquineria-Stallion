@@ -7,6 +7,8 @@ export const TOGGLE_CART_MODAL = "TOGGLE_CART_MODAL"
 
 export const ADD_TO_CART = "ADD_TO_CART"
 
+export const ADD_OR_SUBSTRACT_UNITS = "ADD_OR_SUBSTRACT_UNITS"
+
 type ProductsOnCart = {
 	product: ProductCardProps
 	units: number
@@ -38,7 +40,19 @@ export interface AddToCartAction {
 	}
 }
 
-export type CartAction = CartCountItemsAction | CartOpenAction | AddToCartAction
+export interface AddOrSubstractUnitAction {
+	type: typeof ADD_OR_SUBSTRACT_UNITS
+	payload: {
+		action: "+1" | "-1"
+		product: ProductCardProps
+	}
+}
+
+export type CartAction =
+	| CartCountItemsAction
+	| CartOpenAction
+	| AddToCartAction
+	| AddOrSubstractUnitAction
 
 /*********************************************************************************** Products */
 

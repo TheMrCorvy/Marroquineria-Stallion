@@ -1,5 +1,11 @@
 import { ProductCardProps } from "../../misc/types"
-import { CartAction, SET_CART_COUNT, TOGGLE_CART_MODAL, ADD_TO_CART } from "../types"
+import {
+	CartAction,
+	SET_CART_COUNT,
+	TOGGLE_CART_MODAL,
+	ADD_TO_CART,
+	ADD_OR_SUBSTRACT_UNITS,
+} from "../types"
 
 export const setCartCount = (count: number): CartAction => {
 	return {
@@ -21,6 +27,16 @@ export const addToCart = (product: ProductCardProps, units: number) => {
 		payload: {
 			product,
 			units,
+		},
+	}
+}
+
+export const addOrRemoveUnits = (product: ProductCardProps, action: "+1" | "-1") => {
+	return {
+		type: ADD_OR_SUBSTRACT_UNITS,
+		payload: {
+			product,
+			action,
 		},
 	}
 }
