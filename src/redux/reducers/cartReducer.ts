@@ -81,29 +81,37 @@ const modifyUnits = (state: CartState, action: AddOrSubstractUnitAction) => {
 		(product) => product.product.id === action.payload.product.id
 	)
 
-	if (action.payload.action === "+1") {
-		let newArr = [...state.cart.products]
+	let newArr = [...state.cart.products]
 
-		newArr[index].units = newArr[index].units + 1
+	if (action.payload.action === "+1") {
+		const newUnits = newArr[index].units + 1
+
+		const stillInStock = newUnits <= newArr[index].product.stock
+
+		if (stillInStock) {
+			newArr[index].units = newUnits
+		}
 
 		return {
 			...state,
 			cart: {
 				...state.cart,
-				count: state.cart.count + 1,
+				count: stillInStock ? state.cart.count + 1 : state.cart.count,
 				products: newArr,
 			},
 		}
 	} else {
-		let newArr = [...state.cart.products]
+		const newUnits = newArr[index].units - 1
 
-		newArr[index].units = newArr[index].units - 1
+		if (newUnits >= 1) {
+			newArr[index].units = newUnits
+		}
 
 		return {
 			...state,
 			cart: {
 				...state.cart,
-				count: state.cart.count - 1,
+				count: newUnits >= 1 ? state.cart.count - 1 : state.cart.count,
 				products: newArr,
 			},
 		}

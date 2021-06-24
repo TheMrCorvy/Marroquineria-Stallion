@@ -78,10 +78,7 @@ const CartListItems: FC = () => {
 
 	const addOrSubstract = (action: "+1" | "-1", index: number) => {
 		const productToModify = cart.products[index].product
-		// console.log({
-		// 	product: cart.products[index].product,
-		// 	action,
-		// })
+
 		dispatch(addOrRemoveUnits(productToModify, action))
 	}
 
@@ -133,24 +130,11 @@ const CartListItems: FC = () => {
 										</Typography>
 									</Grid>
 									<Grid item xs={12} md={4} className={classes.textCenter}>
-										<Tooltip title="Agregar uno más" placement="right">
+										<Tooltip title="Remover uno" placement="right">
 											<Fab
 												className={classes.noShadow}
 												size="small"
 												color="primary"
-												aria-label="agregar uno mas"
-												onClick={() => addOrSubstract("+1", index)}
-											>
-												<PlusOneIcon />
-											</Fab>
-										</Tooltip>
-									</Grid>
-									<Grid item xs={12} md={4} className={classes.textCenter}>
-										<Tooltip title="Remover uno" placement="left">
-											<Fab
-												className={classes.noShadow}
-												size="small"
-												color="secondary"
 												aria-label="remover uno"
 												onClick={() => addOrSubstract("-1", index)}
 											>
@@ -158,6 +142,20 @@ const CartListItems: FC = () => {
 											</Fab>
 										</Tooltip>
 									</Grid>
+									<Grid item xs={12} md={4} className={classes.textCenter}>
+										<Tooltip title="Agregar uno más" placement="left">
+											<Fab
+												className={classes.noShadow}
+												size="small"
+												color="secondary"
+												aria-label="agregar uno mas"
+												onClick={() => addOrSubstract("+1", index)}
+											>
+												<PlusOneIcon />
+											</Fab>
+										</Tooltip>
+									</Grid>
+
 									<Grid item xs={12} md={4} className={classes.textCenter}>
 										<Button
 											variant="contained"
