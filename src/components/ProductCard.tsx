@@ -27,6 +27,7 @@ import { ProductCardProps } from "../misc/types"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 import { displayProduct } from "../redux/actions/productActions"
+import { addToCart } from "../redux/actions/cartActions"
 
 type Props = {
 	productFromProps: ProductCardProps
@@ -80,8 +81,6 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
-	const { product } = useSelector((state: RootState) => state.product)
-
 	const dispatch = useDispatch()
 
 	const classes = useStyles()
@@ -102,6 +101,10 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 		dispatch(displayProduct(productFromProps))
 
 		document.getElementById("productos")?.scrollIntoView({ behavior: "smooth", block: "start" })
+	}
+
+	const dispatchAddToCart = () => {
+		dispatch(addToCart(productFromProps, 1))
 	}
 
 	if (loading) {
@@ -137,14 +140,22 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 				<CardHeader
 					avatar={
 						<Tooltip title="Ver Producto" placement="right">
-							<IconButton aria-label="settings" color="primary" onClick={showProduct}>
+							<IconButton
+								aria-label="ver producto"
+								color="primary"
+								onClick={showProduct}
+							>
 								<ZoomOutMapIcon />
 							</IconButton>
 						</Tooltip>
 					}
 					action={
 						<Tooltip title="Agregar al Carrito" placement="left">
-							<IconButton aria-label="settings" color="secondary">
+							<IconButton
+								aria-label="agregar al carrito"
+								color="secondary"
+								onClick={dispatchAddToCart}
+							>
 								<ShoppingCartIcon />
 							</IconButton>
 						</Tooltip>
@@ -159,14 +170,14 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 					<Typography
 						gutterBottom
 						paragraph
-						variant="h5"
+						variant="h4"
 						component="h2"
 						className={classes.textCenter}
 					>
 						{title}
 					</Typography>
 					<Typography variant="subtitle1" className={classes.textGreen} gutterBottom>
-						${price}
+						$ {price}
 					</Typography>
 					<Typography variant="body2" color="textSecondary" component="p">
 						{desc}
