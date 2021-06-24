@@ -76,6 +76,10 @@ const CartListItems: FC = () => {
 
 	const classes = useStyles()
 
+	const cartIsEmpty = () => {
+		return <Typography variant="h5">Tu carrito de compras está vacío...</Typography>
+	}
+
 	const addOrSubstract = (action: "+1" | "-1", index: number) => {
 		const productToModify = cart.products[index].product
 
@@ -88,94 +92,111 @@ const CartListItems: FC = () => {
 
 	return (
 		<Grid container justify="center" spacing={4}>
-			{cart.products.map((product, index) => (
-				<Grid item xs={12} key={index}>
-					<Paper className={classes.paper}>
-						<Grid container spacing={2}>
-							<Grid item>
-								<Grid container justify="space-between">
-									<Grid item xs={12}>
-										<Typography
-											variant="subtitle1"
-											className={classes.textGreen}
-										>
-											$ {product.product.price}
-										</Typography>
+			{cart.products.length === 0
+				? cartIsEmpty()
+				: cart.products.map((product, index) => (
+						<Grid item xs={12} key={index}>
+							<Paper className={classes.paper}>
+								<Grid container spacing={2}>
+									<Grid item>
+										<Grid container justify="space-between">
+											<Grid item xs={12}>
+												<Typography
+													variant="subtitle1"
+													className={classes.textGreen}
+												>
+													$ {product.product.price}
+												</Typography>
+											</Grid>
+										</Grid>
+										<Grid item xs={12} className={classes.marginTop}>
+											<ButtonBase className={classes.image}>
+												<Image
+													className={classes.img}
+													alt="complex"
+													src={require("../../public/images/galery_4.jpg")}
+												/>
+											</ButtonBase>
+										</Grid>
 									</Grid>
-								</Grid>
-								<Grid item xs={12} className={classes.marginTop}>
-									<ButtonBase className={classes.image}>
-										<Image
-											className={classes.img}
-											alt="complex"
-											src={require("../../public/images/galery_4.jpg")}
-										/>
-									</ButtonBase>
-								</Grid>
-							</Grid>
-							<Grid item xs={12} sm container>
-								<Grid item xs container spacing={2}>
-									<Grid item xs={12}>
-										<Typography
-											gutterBottom
-											variant="subtitle1"
-											className={classes.productName}
-										>
-											{product.product.title}
-										</Typography>
-										<Typography variant="body2" gutterBottom paragraph>
-											{product.product.description}
-										</Typography>
-										<Typography variant="body2" color="textSecondary">
-											Cantidad:{" "}
-											<Typography component="span" color="primary">
-												{product.units}
-											</Typography>
-										</Typography>
-									</Grid>
-									<Grid item xs={12} md={4} className={classes.textCenter}>
-										<Tooltip title="Remover uno" placement="right">
-											<Fab
-												className={classes.noShadow}
-												size="small"
-												color="primary"
-												aria-label="remover uno"
-												onClick={() => addOrSubstract("-1", index)}
+									<Grid item xs={12} sm container>
+										<Grid item xs container spacing={2}>
+											<Grid item xs={12}>
+												<Typography
+													gutterBottom
+													variant="subtitle1"
+													className={classes.productName}
+												>
+													{product.product.title}
+												</Typography>
+												<Typography variant="body2" gutterBottom paragraph>
+													{product.product.description}
+												</Typography>
+												<Typography variant="body2" color="textSecondary">
+													Cantidad:{" "}
+													<Typography component="span" color="primary">
+														{product.units}
+													</Typography>
+												</Typography>
+											</Grid>
+											<Grid
+												item
+												xs={12}
+												md={4}
+												className={classes.textCenter}
 											>
-												<ExposureNeg1Icon />
-											</Fab>
-										</Tooltip>
-									</Grid>
-									<Grid item xs={12} md={4} className={classes.textCenter}>
-										<Tooltip title="Agregar uno más" placement="left">
-											<Fab
-												className={classes.noShadow}
-												size="small"
-												color="secondary"
-												aria-label="agregar uno mas"
-												onClick={() => addOrSubstract("+1", index)}
+												<Tooltip title="Remover uno" placement="right">
+													<Fab
+														className={classes.noShadow}
+														size="small"
+														color="primary"
+														aria-label="remover uno"
+														onClick={() => addOrSubstract("-1", index)}
+													>
+														<ExposureNeg1Icon />
+													</Fab>
+												</Tooltip>
+											</Grid>
+											<Grid
+												item
+												xs={12}
+												md={4}
+												className={classes.textCenter}
 											>
-												<PlusOneIcon />
-											</Fab>
-										</Tooltip>
-									</Grid>
+												<Tooltip title="Agregar uno más" placement="left">
+													<Fab
+														className={classes.noShadow}
+														size="small"
+														color="secondary"
+														aria-label="agregar uno mas"
+														onClick={() => addOrSubstract("+1", index)}
+													>
+														<PlusOneIcon />
+													</Fab>
+												</Tooltip>
+											</Grid>
 
-									<Grid item xs={12} md={4} className={classes.textCenter}>
-										<Button
-											variant="contained"
-											disableElevation
-											color="secondary"
-											onClick={() => removeItem(product.product.id)}
-										>
-											Quitar Producto
-										</Button>
+											<Grid
+												item
+												xs={12}
+												md={4}
+												className={classes.textCenter}
+											>
+												<Button
+													variant="contained"
+													disableElevation
+													color="secondary"
+													onClick={() => removeItem(product.product.id)}
+												>
+													Quitar Producto
+												</Button>
+											</Grid>
+										</Grid>
 									</Grid>
 								</Grid>
-							</Grid>
+							</Paper>
 						</Grid>
-					</Paper>
-				</Grid>
-			))}
+				  ))}
 		</Grid>
 	)
 }
