@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		textCenter: {
 			textAlign: "center",
 			marginBottom: 0,
+			textTransform: "capitalize",
 		},
 		textGreen: {
 			color: green[600],
@@ -169,7 +170,7 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 					<Typography
 						gutterBottom
 						paragraph
-						variant="h4"
+						variant={title.length >= 20 ? "subtitle1" : "h4"}
 						component="h2"
 						className={classes.textCenter}
 					>

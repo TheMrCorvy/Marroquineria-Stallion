@@ -289,7 +289,7 @@ export default ListProductsSection
 const apiProducts: ProductCardProps[] = [
 	{
 		id: 1,
-		title: "producto 1",
+		title: "producto 1 con un nombre muy largo para saber como se ve",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
