@@ -32,6 +32,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 import { toggleCartModal } from "../redux/actions/cartActions"
+import FormModal from "./FormModal"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -160,9 +161,7 @@ const Navbar: FC = () => {
 		if (option === "desktop") {
 			return (
 				<div className={classes.sectionDesktop}>
-					<Button color="inherit" className={classes.navbarBtn}>
-						Pedir Cotización
-					</Button>
+					<FormModal layoutOption={1} />
 					<Button
 						color="inherit"
 						className={classes.navbarBtn}
@@ -196,7 +195,7 @@ const Navbar: FC = () => {
 					open={isMobileMenuOpen}
 					onClose={handleMobileMenuClose}
 				>
-					<MenuItem>Pedir cotización</MenuItem>
+					<FormModal layoutOption={2} />
 
 					<Divider className={classes.divider} />
 
@@ -237,9 +236,7 @@ const Navbar: FC = () => {
 
 					<Divider className={classes.divider} />
 
-					<ListItem button>
-						<ListItemText primary="Pedir Cotización" />
-					</ListItem>
+					<FormModal layoutOption={3} />
 
 					<Divider className={classes.divider} />
 

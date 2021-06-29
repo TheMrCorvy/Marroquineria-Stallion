@@ -85,6 +85,9 @@ const useStyles = makeStyles({
 	shareBtn: {
 		marginBottom: "2rem",
 	},
+	brand: {
+		textTransform: "capitalize",
+	},
 })
 
 const ShowProduct: FC = () => {
@@ -225,6 +228,7 @@ const ShowProduct: FC = () => {
 													color="secondary"
 													paragraph
 													gutterBottom
+													className={classes.brand}
 												>
 													Marca: {product.brand}
 												</Typography>
