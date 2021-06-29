@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			paddingRight: 10,
 
 			[theme.breakpoints.down("sm")]: {
-				height: "67vh",
+				height: "auto",
 				overflowX: "scroll",
 				display: "flex",
 				marginTop: 5,
@@ -155,9 +155,10 @@ const ListProductsSection: FC = () => {
 
 	const scrollProducts = () => {
 		const productsContainer = document.getElementById("products-list")
+		const elWidth = document.getElementById("producto-0")
 
-		if (productsContainer) {
-			productsContainer.scrollBy({ top: 0, left: +200, behavior: "smooth" })
+		if (productsContainer && elWidth) {
+			productsContainer.scrollBy({ top: 0, left: +elWidth.offsetWidth, behavior: "smooth" })
 		}
 	}
 
@@ -235,7 +236,15 @@ const ListProductsSection: FC = () => {
 									id="products-list"
 								>
 									{products.map((product, index) => (
-										<Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+										<Grid
+											item
+											xs={12}
+											sm={6}
+											md={4}
+											lg={3}
+											key={index}
+											id={"producto-" + index}
+										>
 											<ProductCard
 												productFromProps={product}
 												loading={loading}
@@ -308,6 +317,42 @@ const apiProducts: ProductCardProps[] = [
 	{
 		id: 4,
 		title: "producto 4",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
+		price: "19.00",
+		imgUrl: "/images/galery_1.jpg",
+		stock: 4,
+	},
+	{
+		id: 5,
+		title: "producto 5",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
+		price: "19.00",
+		imgUrl: "/images/galery_1.jpg",
+		stock: 5,
+	},
+	{
+		id: 6,
+		title: "producto 6",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
+		price: "19.00",
+		imgUrl: "/images/galery_1.jpg",
+		stock: 7,
+	},
+	{
+		id: 7,
+		title: "producto 7",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
+		price: "19.00",
+		imgUrl: "/images/galery_1.jpg",
+		stock: 2,
+	},
+	{
+		id: 8,
+		title: "producto 8",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
