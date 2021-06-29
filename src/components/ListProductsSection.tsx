@@ -63,14 +63,14 @@ const useStyles = makeStyles((theme: Theme) =>
 			top: 0,
 			left: "2.5%",
 			width: "95%",
-			height: "90vh",
+			height: "35%",
 			transition: "1s",
 			background: "linear-gradient(35deg, #fb6340 0, #fbb140 100%)",
 			borderRadius: 35,
 			zIndex: -1,
 
 			[theme.breakpoints.down("sm")]: {
-				height: "155vh",
+				height: "75%",
 			},
 		},
 		textCenter: {
@@ -353,6 +353,24 @@ const apiProducts: ProductCardProps[] = [
 	{
 		id: 8,
 		title: "producto 8",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
+		price: "19.00",
+		imgUrl: "/images/galery_1.jpg",
+		stock: 4,
+	},
+	{
+		id: 9,
+		title: "producto 9",
+		description:
+			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
+		price: "19.00",
+		imgUrl: "/images/galery_1.jpg",
+		stock: 2,
+	},
+	{
+		id: 10,
+		title: "producto 10",
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
