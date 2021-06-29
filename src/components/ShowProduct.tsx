@@ -146,7 +146,9 @@ const ShowProduct: FC = () => {
 	}
 
 	const copyToClipboard = () => {
-		navigator.clipboard.writeText(window.location.href + `producto/${product?.id}`)
+		const path = window.location.href.split("#")
+
+		navigator.clipboard.writeText(path[0] + `producto/${product?.id}`)
 
 		setCopied(true)
 	}
