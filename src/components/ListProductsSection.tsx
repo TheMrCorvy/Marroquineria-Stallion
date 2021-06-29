@@ -511,9 +511,6 @@ const apiProducts: ProductCardProps[] = [
 			{
 				imgUrl: "/images/galery_3.jpg",
 			},
-			{
-				imgUrl: "/images/galery_4.jpg",
-			},
 		],
 		brand: "Samsonite",
 	},

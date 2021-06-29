@@ -21,6 +21,7 @@ import CancelPresentationIcon from "@material-ui/icons/CancelPresentation"
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import PlusOneIcon from "@material-ui/icons/PlusOne"
 import ExposureNeg1Icon from "@material-ui/icons/ExposureNeg1"
+import ShareIcon from "@material-ui/icons/Share"
 
 import ShopTwoIcon from "@material-ui/icons/ShopTwo"
 
@@ -81,6 +82,9 @@ const useStyles = makeStyles({
 		fontWeight: "bold",
 		fontSize: "1.5rem",
 	},
+	shareBtn: {
+		marginBottom: "2rem",
+	},
 })
 
 const ShowProduct: FC = () => {
@@ -128,6 +132,16 @@ const ShowProduct: FC = () => {
 		}
 	}
 
+	const buyNow = () => {
+		if (product && units <= product.stock && units > 0) {
+			dispatch(addToCart(product, units))
+		}
+	}
+
+	const copyToClipboard = () => {
+		navigator.clipboard.writeText(window.location.href + `producto/${product?.id}`)
+	}
+
 	if (!product) {
 		return null
 	} else {
@@ -171,7 +185,7 @@ const ShowProduct: FC = () => {
 										container
 										direction="column"
 										justify="space-between"
-										spacing={smallScreen ? 0 : 5}
+										spacing={0}
 									>
 										<Grid item xs={12}>
 											<Typography
@@ -194,6 +208,18 @@ const ShowProduct: FC = () => {
 											>
 												Marca: {product.brand}
 											</Typography>
+										</Grid>
+										<Grid item xs={12} className={classes.textCenter}>
+											<Tooltip title="Compartir" placement="right">
+												<IconButton
+													color="secondary"
+													size="medium"
+													className={classes.shareBtn}
+													onClick={copyToClipboard}
+												>
+													<ShareIcon />
+												</IconButton>
+											</Tooltip>
 										</Grid>
 										<Grid item xs={12}>
 											<Grid
@@ -309,6 +335,7 @@ const ShowProduct: FC = () => {
 												startIcon={<ShopTwoIcon />}
 												endIcon={<ShopTwoIcon />}
 												fullWidth
+												onClick={buyNow}
 											>
 												Comprar ahora
 											</Button>

@@ -107,6 +107,10 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 		dispatch(addToCart(productFromProps, 1))
 	}
 
+	const buyNow = () => {
+		dispatch(addToCart(productFromProps, 1))
+	}
+
 	if (loading) {
 		return (
 			<Card elevation={2} className={classes.card}>
@@ -163,7 +167,7 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 					className={classes.header}
 				/>
 				<CardContent>
-					<CardActionArea className={classes.cardaction}>
+					<CardActionArea className={classes.cardaction} onClick={showProduct}>
 						<CardMedia
 							className={classes.media}
 							image={images[0].imgUrl}
@@ -194,6 +198,7 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 						size="small"
 						color="secondary"
 						className={classes.buyNow}
+						onClick={buyNow}
 					>
 						Comprar Ahora
 					</Button>
