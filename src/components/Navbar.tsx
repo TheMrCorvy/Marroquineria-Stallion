@@ -195,7 +195,9 @@ const Navbar: FC = () => {
 					open={isMobileMenuOpen}
 					onClose={handleMobileMenuClose}
 				>
-					<FormModal layoutOption={2} />
+					<MenuItem>
+						<FormModal layoutOption={2} />
+					</MenuItem>
 
 					<Divider className={classes.divider} />
 

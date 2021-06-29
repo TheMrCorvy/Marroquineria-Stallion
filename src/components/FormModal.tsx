@@ -10,7 +10,14 @@ import {
 	MenuItem,
 	ListItem,
 	ListItemText,
+	FormControl,
+	OutlinedInput,
+	InputLabel,
+	Grid,
+	Typography,
 } from "@material-ui/core"
+
+import { useForm } from "react-hook-form"
 
 // 1 = desktop
 // 2 = mobile
@@ -19,7 +26,13 @@ type Props = {
 	layoutOption: 1 | 2 | 3
 }
 
+const requiredMessage = "Este campo es obligatorio."
+const minCharMessage = "Este campo debe tener al menos 5 caractéres."
+const maxCharMessage = "Este campo no puede contener más de 190 caractéres."
+
 const FormModal: FC<Props> = ({ layoutOption }) => {
+	const { register, errors, handleSubmit, getValues } = useForm()
+
 	const [open, setOpen] = useState(false)
 
 	const handleClickOpen = () => {
@@ -28,6 +41,11 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 
 	const handleClose = () => {
 		setOpen(false)
+	}
+
+	const onSubmit = (data: any) => {
+		console.log("production api call")
+		console.log(data)
 	}
 
 	const selectButton = () => {
@@ -40,7 +58,7 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 		}
 
 		if (layoutOption === 2) {
-			return <MenuItem onClick={handleClickOpen}>Pedir cotización</MenuItem>
+			return <div onClick={handleClickOpen}>Pedir cotización</div>
 		}
 
 		return (
@@ -53,27 +71,56 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 	return (
 		<>
 			{selectButton()}
-			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-				<DialogTitle id="form-dialog-title">Pedir una cotización</DialogTitle>
-				<DialogContent>
-					<TextField
-						autoFocus
-						margin="dense"
-						id="name"
-						label="Email Address"
-						type="email"
-						fullWidth
-					/>
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={handleClose} color="primary">
-						Cancel
-					</Button>
-					<Button onClick={handleClose} color="primary">
-						Subscribe
-					</Button>
-				</DialogActions>
-			</Dialog>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+					<DialogTitle id="form-dialog-title">Pedir una cotización</DialogTitle>
+					<DialogContent>
+						<Grid container justify="space-around">
+							<Grid item xs={12}>
+								<FormControl variant="outlined" fullWidth>
+									<InputLabel>Nombre</InputLabel>
+									<OutlinedInput
+										label="nombre"
+										name="name"
+										required
+										type="text"
+										inputProps={{
+											ref: register({
+												required: {
+													value: true,
+													message: requiredMessage,
+												},
+												maxLength: {
+													value: 50,
+													message: maxCharMessage,
+												},
+												minLength: {
+													value: 5,
+													message: minCharMessage,
+												},
+											}),
+										}}
+										error={errors?.name ? true : false}
+									/>
+									{errors.name && (
+										<Typography variant="body2">
+											{errors.name.message}
+										</Typography>
+									)}
+								</FormControl>
+							</Grid>
+						</Grid>
+					</DialogContent>
+					<DialogActions>
+						<Button onClick={handleClose} color="primary">
+							Cancel
+						</Button>
+						<Button onClick={handleSubmit(onSubmit)} color="primary">
+							Subscribe
+						</Button>
+					</DialogActions>
+				</Dialog>
+			</form>
 		</>
 	)
 }
