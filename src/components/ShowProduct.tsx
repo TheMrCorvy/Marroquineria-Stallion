@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState } from "react"
+import { FC, useEffect, useState } from "react"
 
 import {
 	Button,
@@ -91,11 +91,19 @@ const ShowProduct: FC = () => {
 
 	const [units, setUnits] = useState<number>(1)
 
+	const [activeImg, setActiveImg] = useState<string>("")
+
 	const classes = useStyles()
 
 	const theme = useTheme()
 
 	const smallScreen = useMediaQuery(theme.breakpoints.down("md"))
+
+	useEffect(() => {
+		if (product) {
+			setActiveImg(product.images[0].imgUrl)
+		}
+	}, [product])
 
 	const removeProduct = () => {
 		dispatch(clearProduct())
@@ -112,6 +120,12 @@ const ShowProduct: FC = () => {
 	const dispatchAddToCart = () => {
 		if (product && units <= product.stock && units > 0) {
 			dispatch(addToCart(product, units))
+		}
+	}
+
+	const updateActiveImg = (index: number) => {
+		if (product) {
+			setActiveImg(product.images[index].imgUrl)
 		}
 	}
 
@@ -178,7 +192,10 @@ const ShowProduct: FC = () => {
 											<Grid container justify="space-between" spacing={4}>
 												{product.images.map((image, index) => (
 													<Grid item xs={4} key={index}>
-														<ButtonBase className={classes.image}>
+														<ButtonBase
+															className={classes.image}
+															onClick={() => updateActiveImg(index)}
+														>
 															<Image
 																src={image.imgUrl}
 																title={product.title}
@@ -196,15 +213,17 @@ const ShowProduct: FC = () => {
 								</Grid>
 
 								<Grid item xs={12} md={4} className={classes.mainImageContainer}>
-									<Image
-										src={product.images[0].imgUrl}
-										title={product.title}
-										alt={product.title}
-										width="auto"
-										height="auto"
-										layout="responsive"
-										className={classes.mainImg}
-									/>
+									{activeImg && (
+										<Image
+											src={activeImg}
+											title={product.title}
+											alt={product.title}
+											width="auto"
+											height="auto"
+											layout="responsive"
+											className={classes.mainImg}
+										/>
+									)}
 									<Typography variant="h5" style={{ paddingTop: 10 }}>
 										$ {product.price}
 									</Typography>
