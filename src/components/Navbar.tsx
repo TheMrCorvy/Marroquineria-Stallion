@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 import { FC, MouseEvent, useState } from "react"
 
@@ -115,6 +116,8 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const Navbar: FC = () => {
+	const router = useRouter()
+
 	const { cart } = useSelector((state: RootState) => state.cart)
 
 	const dispatch = useDispatch()
@@ -148,6 +151,8 @@ const Navbar: FC = () => {
 
 		if (element) {
 			element.scrollIntoView({ behavior: "smooth", block: "start" })
+		} else {
+			router.push("/#" + id)
 		}
 	}
 
