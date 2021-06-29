@@ -57,12 +57,11 @@ const useStyles = makeStyles({
 		maxHeight: "100%",
 		borderRadius: 7,
 	},
-	image: {
-		maxWidth: 150,
-		maxHeight: 150,
-	},
 	media: {
 		borderRadius: 20,
+	},
+	images: {
+		marginBottom: "3rem",
 	},
 	mainImg: {
 		borderRadius: 25,
@@ -187,13 +186,25 @@ const ShowProduct: FC = () => {
 											<Typography variant="body2" paragraph gutterBottom>
 												{product.description}
 											</Typography>
+											<Typography
+												variant="subtitle2"
+												color="secondary"
+												paragraph
+												gutterBottom
+											>
+												Marca: {product.brand}
+											</Typography>
 										</Grid>
 										<Grid item xs={12}>
-											<Grid container justify="space-between" spacing={4}>
+											<Grid
+												container
+												justify="space-around"
+												spacing={4}
+												className={classes.images}
+											>
 												{product.images.map((image, index) => (
-													<Grid item xs={4} key={index}>
+													<Grid item xs={6} md={4} key={index}>
 														<ButtonBase
-															className={classes.image}
 															onClick={() => updateActiveImg(index)}
 														>
 															<Image

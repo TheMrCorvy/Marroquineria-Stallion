@@ -9,4 +9,5 @@ export interface ProductCardProps {
 	price: string | number
 	stock: number
 	images: Images[]
+	brand: string
 }

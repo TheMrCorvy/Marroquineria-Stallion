@@ -216,9 +216,9 @@ const ListProductsSection: FC = () => {
 									open={Boolean(anchorEl)}
 									onClose={handleClose}
 								>
-									<MenuItem onClick={handleClose}>Profile</MenuItem>
-									<MenuItem onClick={handleClose}>My account</MenuItem>
-									<MenuItem onClick={handleClose}>Logout</MenuItem>
+									<MenuItem onClick={handleClose}>Valijas</MenuItem>
+									<MenuItem onClick={handleClose}>Cuero</MenuItem>
+									<MenuItem onClick={handleClose}>Bolsos</MenuItem>
 								</Menu>
 							</Grid>
 							<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
@@ -308,6 +308,7 @@ const apiProducts: ProductCardProps[] = [
 				imgUrl: "/images/galery_4.jpg",
 			},
 		],
+		brand: "Samsonite",
 	},
 	{
 		id: 2,
@@ -330,6 +331,7 @@ const apiProducts: ProductCardProps[] = [
 				imgUrl: "/images/galery_4.jpg",
 			},
 		],
+		brand: "Samsonite",
 	},
 	{
 		id: 3,
@@ -352,6 +354,7 @@ const apiProducts: ProductCardProps[] = [
 				imgUrl: "/images/galery_4.jpg",
 			},
 		],
+		brand: "Samsonite",
 	},
 	{
 		id: 4,
@@ -374,6 +377,7 @@ const apiProducts: ProductCardProps[] = [
 				imgUrl: "/images/galery_4.jpg",
 			},
 		],
+		brand: "Samsonite",
 	},
 	{
 		id: 5,
@@ -396,6 +400,7 @@ const apiProducts: ProductCardProps[] = [
 				imgUrl: "/images/galery_4.jpg",
 			},
 		],
+		brand: "Samsonite",
 	},
 	{
 		id: 6,
@@ -418,6 +423,7 @@ const apiProducts: ProductCardProps[] = [
 				imgUrl: "/images/galery_4.jpg",
 			},
 		],
+		brand: "Samsonite",
 	},
 	{
 		id: 7,
@@ -440,6 +446,7 @@ const apiProducts: ProductCardProps[] = [
 				imgUrl: "/images/galery_4.jpg",
 			},
 		],
+		brand: "Samsonite",
 	},
 	{
 		id: 8,
@@ -462,6 +469,7 @@ const apiProducts: ProductCardProps[] = [
 				imgUrl: "/images/galery_4.jpg",
 			},
 		],
+		brand: "Samsonite",
 	},
 	{
 		id: 9,
@@ -484,6 +492,7 @@ const apiProducts: ProductCardProps[] = [
 				imgUrl: "/images/galery_4.jpg",
 			},
 		],
+		brand: "Samsonite",
 	},
 	{
 		id: 10,
@@ -506,5 +515,6 @@ const apiProducts: ProductCardProps[] = [
 				imgUrl: "/images/galery_4.jpg",
 			},
 		],
+		brand: "Samsonite",
 	},
 ]
