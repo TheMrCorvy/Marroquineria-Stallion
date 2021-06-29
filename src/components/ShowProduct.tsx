@@ -176,42 +176,20 @@ const ShowProduct: FC = () => {
 										</Grid>
 										<Grid item xs={12}>
 											<Grid container justify="space-between" spacing={4}>
-												<Grid item xs={4}>
-													<ButtonBase className={classes.image}>
-														<Image
-															src={product.imgUrl as any}
-															title={product.title}
-															alt={product.title}
-															width={150}
-															height={150}
-															className={classes.img}
-														/>
-													</ButtonBase>
-												</Grid>
-												<Grid item xs={4}>
-													<ButtonBase className={classes.image}>
-														<Image
-															src={product.imgUrl as any}
-															title={product.title}
-															alt={product.title}
-															width={150}
-															height={150}
-															className={classes.img}
-														/>
-													</ButtonBase>
-												</Grid>
-												<Grid item xs={4}>
-													<ButtonBase className={classes.image}>
-														<Image
-															src={product.imgUrl as any}
-															title={product.title}
-															alt={product.title}
-															width={150}
-															height={150}
-															className={classes.img}
-														/>
-													</ButtonBase>
-												</Grid>
+												{product.images.map((image, index) => (
+													<Grid item xs={4} key={index}>
+														<ButtonBase className={classes.image}>
+															<Image
+																src={image.imgUrl}
+																title={product.title}
+																alt={product.title}
+																width={150}
+																height={150}
+																className={classes.img}
+															/>
+														</ButtonBase>
+													</Grid>
+												))}
 											</Grid>
 										</Grid>
 									</Grid>
@@ -219,7 +197,7 @@ const ShowProduct: FC = () => {
 
 								<Grid item xs={12} md={4} className={classes.mainImageContainer}>
 									<Image
-										src={product.imgUrl as any}
+										src={product.images[0].imgUrl}
 										title={product.title}
 										alt={product.title}
 										width="auto"

@@ -85,7 +85,7 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 
 	const classes = useStyles()
 
-	const { title, id, imgUrl, description, price } = productFromProps
+	const { title, id, images, description, price } = productFromProps
 
 	const [desc, setDesc] = useState(description)
 
@@ -164,7 +164,11 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 				/>
 				<CardContent>
 					<CardActionArea className={classes.cardaction}>
-						<CardMedia className={classes.media} image={imgUrl} title={title} />
+						<CardMedia
+							className={classes.media}
+							image={images[0].imgUrl}
+							title={title}
+						/>
 					</CardActionArea>
 
 					<Typography

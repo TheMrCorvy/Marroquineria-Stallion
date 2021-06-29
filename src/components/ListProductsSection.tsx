@@ -293,8 +293,21 @@ const apiProducts: ProductCardProps[] = [
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
-		imgUrl: "/images/galery_1.jpg",
 		stock: 5,
+		images: [
+			{
+				imgUrl: "/images/galery_1.jpg",
+			},
+			{
+				imgUrl: "/images/galery_2.jpg",
+			},
+			{
+				imgUrl: "/images/galery_3.jpg",
+			},
+			{
+				imgUrl: "/images/galery_4.jpg",
+			},
+		],
 	},
 	{
 		id: 2,
@@ -302,8 +315,21 @@ const apiProducts: ProductCardProps[] = [
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
-		imgUrl: "/images/galery_1.jpg",
 		stock: 7,
+		images: [
+			{
+				imgUrl: "/images/galery_1.jpg",
+			},
+			{
+				imgUrl: "/images/galery_2.jpg",
+			},
+			{
+				imgUrl: "/images/galery_3.jpg",
+			},
+			{
+				imgUrl: "/images/galery_4.jpg",
+			},
+		],
 	},
 	{
 		id: 3,
@@ -311,8 +337,21 @@ const apiProducts: ProductCardProps[] = [
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
-		imgUrl: "/images/galery_1.jpg",
 		stock: 2,
+		images: [
+			{
+				imgUrl: "/images/galery_1.jpg",
+			},
+			{
+				imgUrl: "/images/galery_2.jpg",
+			},
+			{
+				imgUrl: "/images/galery_3.jpg",
+			},
+			{
+				imgUrl: "/images/galery_4.jpg",
+			},
+		],
 	},
 	{
 		id: 4,
@@ -320,8 +359,21 @@ const apiProducts: ProductCardProps[] = [
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
-		imgUrl: "/images/galery_1.jpg",
 		stock: 4,
+		images: [
+			{
+				imgUrl: "/images/galery_1.jpg",
+			},
+			{
+				imgUrl: "/images/galery_2.jpg",
+			},
+			{
+				imgUrl: "/images/galery_3.jpg",
+			},
+			{
+				imgUrl: "/images/galery_4.jpg",
+			},
+		],
 	},
 	{
 		id: 5,
@@ -329,8 +381,21 @@ const apiProducts: ProductCardProps[] = [
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
-		imgUrl: "/images/galery_1.jpg",
 		stock: 5,
+		images: [
+			{
+				imgUrl: "/images/galery_1.jpg",
+			},
+			{
+				imgUrl: "/images/galery_2.jpg",
+			},
+			{
+				imgUrl: "/images/galery_3.jpg",
+			},
+			{
+				imgUrl: "/images/galery_4.jpg",
+			},
+		],
 	},
 	{
 		id: 6,
@@ -338,8 +403,21 @@ const apiProducts: ProductCardProps[] = [
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
-		imgUrl: "/images/galery_1.jpg",
 		stock: 7,
+		images: [
+			{
+				imgUrl: "/images/galery_1.jpg",
+			},
+			{
+				imgUrl: "/images/galery_2.jpg",
+			},
+			{
+				imgUrl: "/images/galery_3.jpg",
+			},
+			{
+				imgUrl: "/images/galery_4.jpg",
+			},
+		],
 	},
 	{
 		id: 7,
@@ -347,8 +425,21 @@ const apiProducts: ProductCardProps[] = [
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
-		imgUrl: "/images/galery_1.jpg",
 		stock: 2,
+		images: [
+			{
+				imgUrl: "/images/galery_1.jpg",
+			},
+			{
+				imgUrl: "/images/galery_2.jpg",
+			},
+			{
+				imgUrl: "/images/galery_3.jpg",
+			},
+			{
+				imgUrl: "/images/galery_4.jpg",
+			},
+		],
 	},
 	{
 		id: 8,
@@ -356,8 +447,21 @@ const apiProducts: ProductCardProps[] = [
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
-		imgUrl: "/images/galery_1.jpg",
 		stock: 4,
+		images: [
+			{
+				imgUrl: "/images/galery_1.jpg",
+			},
+			{
+				imgUrl: "/images/galery_2.jpg",
+			},
+			{
+				imgUrl: "/images/galery_3.jpg",
+			},
+			{
+				imgUrl: "/images/galery_4.jpg",
+			},
+		],
 	},
 	{
 		id: 9,
@@ -365,8 +469,21 @@ const apiProducts: ProductCardProps[] = [
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
-		imgUrl: "/images/galery_1.jpg",
 		stock: 2,
+		images: [
+			{
+				imgUrl: "/images/galery_1.jpg",
+			},
+			{
+				imgUrl: "/images/galery_2.jpg",
+			},
+			{
+				imgUrl: "/images/galery_3.jpg",
+			},
+			{
+				imgUrl: "/images/galery_4.jpg",
+			},
+		],
 	},
 	{
 		id: 10,
@@ -374,7 +491,20 @@ const apiProducts: ProductCardProps[] = [
 		description:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
 		price: "19.00",
-		imgUrl: "/images/galery_1.jpg",
 		stock: 4,
+		images: [
+			{
+				imgUrl: "/images/galery_1.jpg",
+			},
+			{
+				imgUrl: "/images/galery_2.jpg",
+			},
+			{
+				imgUrl: "/images/galery_3.jpg",
+			},
+			{
+				imgUrl: "/images/galery_4.jpg",
+			},
+		],
 	},
 ]

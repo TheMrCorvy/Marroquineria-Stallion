@@ -118,7 +118,9 @@ const CartListItems: FC = () => {
 												<Image
 													className={classes.img}
 													alt="complex"
-													src={require("../../public/images/galery_4.jpg")}
+													height={150}
+													width={150}
+													src={product.product.images[0].imgUrl}
 												/>
 											</ButtonBase>
 										</Grid>
