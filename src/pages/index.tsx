@@ -34,6 +34,9 @@ const useStyles = makeStyles({
 	title: {
 		marginTop: "3rem",
 	},
+	subtitle: {
+		textDecoration: "underline",
+	},
 	contactContainer: {
 		marginTop: "3rem",
 		marginBottom: "3rem",
@@ -60,15 +63,20 @@ export default function Home() {
 	return (
 		<>
 			<Container maxWidth="lg" className={classes.container}>
-				<Grid container justify="center" spacing={4}>
-					<Grid item xs={12} className={classes.textCenter}>
+				<Grid container justify="center" spacing={4} className={classes.textCenter}>
+					<Grid item xs={12}>
 						<Typography variant="h3" className={classes.title}>
 							Stallion Marroquinería
 						</Typography>
 					</Grid>
-					<Grid item xs={12} className={classes.textCenter}>
+					<Grid item xs={12}>
 						<Typography variant="body1">
 							Tienda de Equipaje en Ciudad Autónoma de Buenos Aires
+						</Typography>
+					</Grid>
+					<Grid item xs={12}>
+						<Typography variant="h5" className={classes.subtitle}>
+							Somos Fabricantes
 						</Typography>
 					</Grid>
 				</Grid>
@@ -197,19 +205,6 @@ export default function Home() {
 											Viernes: 8:30 - 18:00 hs
 										</Typography>
 									</Grid>
-									{/* <Grid item xs={12}>
-										<Typography variant="body1">
-											Sábado: 10:00 - 13:00 hs
-										</Typography>
-									</Grid>
-									<Grid item xs={12}>
-										<Typography variant="body1">
-											Domingo:{" "}
-											<Typography color="secondary" component="span">
-												Cerrado
-											</Typography>
-										</Typography>
-									</Grid> */}
 								</Grid>
 							</Grid>
 						</Grid>
