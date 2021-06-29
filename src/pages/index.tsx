@@ -82,10 +82,10 @@ export default function Home() {
 				</Grid>
 			</Container>
 			<Container maxWidth="lg" className={classes.galeryContainer}>
-				<Grid container>
-					<Grid item xs={12} className={classes.imgContainer}>
+				<Grid container justify="center">
+					<Grid item xs={6} md={4} lg={3} className={classes.imgContainer}>
 						<Image
-							src={require("../../public/images/main_home.jpg")}
+							src={require("../../public/images/logo.png")}
 							alt="Tienda online de Marroquinería Stallion"
 							className={classes.image}
 						/>

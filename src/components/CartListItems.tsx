@@ -77,7 +77,11 @@ const CartListItems: FC = () => {
 	const classes = useStyles()
 
 	const cartIsEmpty = () => {
-		return <Typography variant="h5">Tu carrito de compras está vacío...</Typography>
+		return (
+			<Typography variant="h5" paragraph gutterBottom>
+				Tu carrito de compras está vacío...
+			</Typography>
+		)
 	}
 
 	const addOrSubstract = (action: "+1" | "-1", index: number) => {
