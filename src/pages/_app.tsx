@@ -33,7 +33,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 					name="viewport"
 					content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
 				/>
-				<meta name="description" content="Tienda virtual Marroquinería Stallion" />
+				<meta
+					name="description"
+					content="Visita la Tienda Online de Stallion Marroquinería"
+				/>
 				<meta name="keywords" content="Marroquineria Stallion" />
 				<title>Marroquinería Stallion</title>
 			</Head>

@@ -17,6 +17,18 @@ class MyDocument extends Document {
 						rel="stylesheet"
 						href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 					/>
+					<meta charSet="utf-8" />
+					<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+					<meta
+						name="viewport"
+						content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+					/>
+					<meta
+						name="description"
+						content="Visita la Tienda Online de Stallion Marroquinería"
+					/>
+					<meta name="keywords" content="Marroquineria Stallion" />
+					<title>Marroquinería Stallion</title>
 				</Head>
 				<body>
 					<Main />
