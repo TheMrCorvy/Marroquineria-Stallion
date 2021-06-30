@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		mainContainer: {
 			minHeight: "100vh",
 			paddingTop: "5rem",
+			paddingBottom: "5rem",
 			background: "#f3f3f3",
 		},
 		card: {
@@ -103,7 +104,7 @@ const Checkout = () => {
 
 	const [expanded, setExpanded] = useState(false)
 
-	const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3 | 4>(1)
+	const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3 | 4>(2)
 
 	useEffect(() => {
 		if (!cart.products[0]) {
