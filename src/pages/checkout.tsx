@@ -1,4 +1,8 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+
+import { useRouter } from "next/router"
+
+import Link from "next/link"
 
 import {
 	Container,
@@ -11,16 +15,20 @@ import {
 	CardActions,
 	Collapse,
 	IconButton,
+	Tooltip,
+	Divider,
 } from "@material-ui/core"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import { green } from "@material-ui/core/colors"
 
 import clsx from "clsx"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
+import { CardActionArea } from "@material-ui/core"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -36,6 +44,11 @@ const useStyles = makeStyles((theme: Theme) =>
 			height: 0,
 			paddingTop: "56.25%", // 16:9
 		},
+		listMedia: {
+			height: 0,
+			paddingTop: "56.25%", // 16:9
+			borderRadius: 8,
+		},
 		expand: {
 			transform: "rotate(0deg)",
 			marginLeft: "auto",
@@ -46,18 +59,52 @@ const useStyles = makeStyles((theme: Theme) =>
 		expandOpen: {
 			transform: "rotate(180deg)",
 		},
+		textCapitalize: {
+			textTransform: "capitalize",
+		},
+		smallMarginTop: {
+			marginTop: 15,
+		},
+		title: {
+			textTransform: "capitalize",
+			paddingTop: 15,
+		},
+		textGreen: {
+			color: green[500],
+		},
+		content: {
+			padingBottom: 0,
+		},
 	})
 )
 
 const Checkout = () => {
 	const { cart } = useSelector((state: RootState) => state.cart)
 
+	const router = useRouter()
+
 	const classes = useStyles()
 
 	const [expanded, setExpanded] = useState(false)
 
+	useEffect(() => {
+		if (!cart.products[0]) {
+			router.push("/")
+		}
+	}, [cart])
+
 	const handleExpandClick = () => {
 		setExpanded(!expanded)
+	}
+
+	const calcTotalPrice = () => {
+		let totalPrice: number = 0
+
+		cart.products.forEach((product) => {
+			totalPrice += product.units * Number(product.product.price)
+		})
+
+		return totalPrice
 	}
 
 	if (!cart.products[0]) {
@@ -75,57 +122,88 @@ const Checkout = () => {
 									image={cart.products[0].product.images[0].img_url}
 									title={cart.products[0].product.title}
 								/>
-								<CardContent>
-									<Typography variant="body2" color="textSecondary" component="p">
-										{cart.products[0].product.description}
+								<CardContent style={{ paddingBottom: 0 }}>
+									<Typography variant="body1">
+										<Typography
+											variant="subtitle2"
+											component="span"
+											color="secondary"
+											className={classes.textCapitalize}
+										>
+											{cart.products[0].product.title}
+										</Typography>
+										{cart.count > 2 && <>, y otros {cart.count - 1} más</>}
 									</Typography>
 								</CardContent>
-								<CardActions disableSpacing>
-									<IconButton
-										className={clsx(classes.expand, {
-											[classes.expandOpen]: expanded,
-										})}
-										onClick={handleExpandClick}
-										aria-expanded={expanded}
-										aria-label="show more"
+								<CardActions disableSpacing style={{ paddingTop: 0 }}>
+									<Typography
+										variant="subtitle2"
+										className={classes.textGreen}
+										style={{ marginLeft: 9 }}
 									>
-										<ExpandMoreIcon />
-									</IconButton>
+										Precio Total: $ {calcTotalPrice()}
+									</Typography>
+									<Tooltip
+										title="Ver toda la lista de Productos"
+										placement="left"
+									>
+										<IconButton
+											className={clsx(classes.expand, {
+												[classes.expandOpen]: expanded,
+											})}
+											onClick={handleExpandClick}
+											aria-expanded={expanded}
+											aria-label="show more"
+										>
+											<ExpandMoreIcon />
+										</IconButton>
+									</Tooltip>
 								</CardActions>
 								<Collapse in={expanded} unmountOnExit>
 									<CardContent>
-										<Typography paragraph>Method:</Typography>
-										<CardMedia
-											className={classes.media}
-											image="/images/galery_1.jpg"
-											title="Paella dish"
-										/>
-										<Typography paragraph>
-											Heat oil in a (14- to 16-inch) paella pan or a large,
-											deep skillet over medium-high heat. Add chicken, shrimp
-											and chorizo, and cook, stirring occasionally until
-											lightly browned, 6 to 8 minutes. Transfer shrimp to a
-											large plate and set aside, leaving chicken and chorizo
-											in the pan. Add pimentón, bay leaves, garlic, tomatoes,
-											onion, salt and pepper, and cook, stirring often until
-											thickened and fragrant, about 10 minutes. Add saffron
-											broth and remaining 4 1/2 cups chicken broth; bring to a
-											boil.
-										</Typography>
-										<Typography paragraph>
-											Add rice and stir very gently to distribute. Top with
-											artichokes and peppers, and cook without stirring, until
-											most of the liquid is absorbed, 15 to 18 minutes. Reduce
-											heat to medium-low, add reserved shrimp and mussels,
-											tucking them down into the rice, and cook again without
-											stirring, until mussels have opened and rice is just
-											tender, 5 to 7 minutes more. (Discard any mussels that
-											don’t open.)
-										</Typography>
-										<Typography>
-											Set aside off of the heat to let rest for 10 minutes,
-											and then serve.
-										</Typography>
+										{cart.products.map((product, index) => (
+											<>
+												<Divider />
+												<Typography
+													variant="body1"
+													className={classes.title}
+													paragraph
+													gutterBottom
+												>
+													{product.product.title}
+												</Typography>
+												<Link href={"/producto/" + product.product.id}>
+													<CardActionArea
+														href={"/producto/" + product.product.id}
+													>
+														<CardMedia
+															className={classes.listMedia}
+															image={
+																product.product.images[0].img_url
+															}
+															title={product.product.title}
+														/>
+													</CardActionArea>
+												</Link>
+												<Typography
+													variant="subtitle2"
+													color="primary"
+													className={classes.smallMarginTop}
+													paragraph
+													gutterBottom
+												>
+													{product.units} Unidad/es
+												</Typography>
+												<Typography
+													variant="subtitle2"
+													gutterBottom
+													paragraph
+													className={classes.textGreen}
+												>
+													$ {product.product.price} (por unidad)
+												</Typography>
+											</>
+										))}
 									</CardContent>
 								</Collapse>
 							</Card>
