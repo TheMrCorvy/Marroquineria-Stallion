@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useState } from "react"
+import { FC, MouseEvent, useState, useEffect } from "react"
 
 import {
 	Container,
@@ -133,9 +133,32 @@ const ListProductsSection: FC = () => {
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(true)
 
-	const [products, setProducts] = useState<ProductCardProps[] | []>(apiProducts)
+	const [products, setProducts] = useState<ProductCardProps[]>([
+		{
+			id: 0,
+			title: "",
+			description: "",
+			price: "",
+			stock: 0,
+			images: [],
+			brand: "",
+		},
+	])
+
+	useEffect(() => {
+		getProductsFromApi()
+	}, [])
+
+	const getProductsFromApi = async () => {
+		const res = await fetch("https://api.jsonbin.io/b/60dc60a59328b059d7b3595e")
+		const data = await res.json()
+
+		setProducts(data.products)
+
+		setLoading(false)
+	}
 
 	const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(event.currentTarget)
@@ -285,233 +308,3 @@ const ListProductsSection: FC = () => {
 }
 
 export default ListProductsSection
-
-const apiProducts: ProductCardProps[] = [
-	{
-		id: 1,
-		title: "producto 1 con un nombre muy largo para saber como se ve",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
-		price: "19.00",
-		stock: 5,
-		images: [
-			{
-				imgUrl: "/images/galery_1.jpg",
-			},
-			{
-				imgUrl: "/images/galery_2.jpg",
-			},
-			{
-				imgUrl: "/images/galery_3.jpg",
-			},
-			{
-				imgUrl: "/images/galery_4.jpg",
-			},
-		],
-		brand: "Samsonite",
-	},
-	{
-		id: 2,
-		title: "producto 2",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
-		price: "19.00",
-		stock: 7,
-		images: [
-			{
-				imgUrl: "/images/galery_1.jpg",
-			},
-			{
-				imgUrl: "/images/galery_2.jpg",
-			},
-			{
-				imgUrl: "/images/galery_3.jpg",
-			},
-			{
-				imgUrl: "/images/galery_4.jpg",
-			},
-		],
-		brand: "Samsonite",
-	},
-	{
-		id: 3,
-		title: "producto 3",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
-		price: "19.00",
-		stock: 2,
-		images: [
-			{
-				imgUrl: "/images/galery_1.jpg",
-			},
-			{
-				imgUrl: "/images/galery_2.jpg",
-			},
-			{
-				imgUrl: "/images/galery_3.jpg",
-			},
-			{
-				imgUrl: "/images/galery_4.jpg",
-			},
-		],
-		brand: "Samsonite",
-	},
-	{
-		id: 4,
-		title: "producto 4",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
-		price: "19.00",
-		stock: 4,
-		images: [
-			{
-				imgUrl: "/images/galery_1.jpg",
-			},
-			{
-				imgUrl: "/images/galery_2.jpg",
-			},
-			{
-				imgUrl: "/images/galery_3.jpg",
-			},
-			{
-				imgUrl: "/images/galery_4.jpg",
-			},
-		],
-		brand: "Samsonite",
-	},
-	{
-		id: 5,
-		title: "producto 5",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
-		price: "19.00",
-		stock: 5,
-		images: [
-			{
-				imgUrl: "/images/galery_1.jpg",
-			},
-			{
-				imgUrl: "/images/galery_2.jpg",
-			},
-			{
-				imgUrl: "/images/galery_3.jpg",
-			},
-			{
-				imgUrl: "/images/galery_4.jpg",
-			},
-		],
-		brand: "Samsonite",
-	},
-	{
-		id: 6,
-		title: "producto 6",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
-		price: "19.00",
-		stock: 7,
-		images: [
-			{
-				imgUrl: "/images/galery_1.jpg",
-			},
-			{
-				imgUrl: "/images/galery_2.jpg",
-			},
-			{
-				imgUrl: "/images/galery_3.jpg",
-			},
-			{
-				imgUrl: "/images/galery_4.jpg",
-			},
-		],
-		brand: "Samsonite",
-	},
-	{
-		id: 7,
-		title: "producto 7",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
-		price: "19.00",
-		stock: 2,
-		images: [
-			{
-				imgUrl: "/images/galery_1.jpg",
-			},
-			{
-				imgUrl: "/images/galery_2.jpg",
-			},
-			{
-				imgUrl: "/images/galery_3.jpg",
-			},
-			{
-				imgUrl: "/images/galery_4.jpg",
-			},
-		],
-		brand: "Samsonite",
-	},
-	{
-		id: 8,
-		title: "producto 8",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
-		price: "19.00",
-		stock: 4,
-		images: [
-			{
-				imgUrl: "/images/galery_1.jpg",
-			},
-			{
-				imgUrl: "/images/galery_2.jpg",
-			},
-			{
-				imgUrl: "/images/galery_3.jpg",
-			},
-			{
-				imgUrl: "/images/galery_4.jpg",
-			},
-		],
-		brand: "Samsonite",
-	},
-	{
-		id: 9,
-		title: "producto 9",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
-		price: "19.00",
-		stock: 2,
-		images: [
-			{
-				imgUrl: "/images/galery_1.jpg",
-			},
-			{
-				imgUrl: "/images/galery_2.jpg",
-			},
-			{
-				imgUrl: "/images/galery_3.jpg",
-			},
-			{
-				imgUrl: "/images/galery_4.jpg",
-			},
-		],
-		brand: "Samsonite",
-	},
-	{
-		id: 10,
-		title: "producto 10",
-		description:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, enim! Quas earum a in saepe distinctio blanditiis dolorem voluptates sed ex sunt. Magni doloribus deserunt iste natus harum consequatur amet?",
-		price: "19.00",
-		stock: 4,
-		images: [
-			{
-				imgUrl: "/images/galery_1.jpg",
-			},
-			{
-				imgUrl: "/images/galery_2.jpg",
-			},
-			{
-				imgUrl: "/images/galery_3.jpg",
-			},
-		],
-		brand: "Samsonite",
-	},
-]

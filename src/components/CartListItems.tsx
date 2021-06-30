@@ -120,7 +120,7 @@ const CartListItems: FC = () => {
 													alt="complex"
 													height={150}
 													width={150}
-													src={product.product.images[0].imgUrl}
+													src={product.product.images[0].img_url}
 												/>
 											</ButtonBase>
 										</Grid>

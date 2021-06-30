@@ -1,5 +1,5 @@
 type Images = {
-	imgUrl: string
+	img_url: string
 }
 
 export interface ProductCardProps {

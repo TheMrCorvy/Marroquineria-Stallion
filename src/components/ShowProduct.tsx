@@ -106,7 +106,7 @@ const ShowProduct: FC = () => {
 
 	useEffect(() => {
 		if (product) {
-			setActiveImg(product.images[0].imgUrl)
+			setActiveImg(product.images[0].img_url)
 		}
 
 		if (copied) {
@@ -139,7 +139,7 @@ const ShowProduct: FC = () => {
 
 	const updateActiveImg = (index: number) => {
 		if (product) {
-			setActiveImg(product.images[index].imgUrl)
+			setActiveImg(product.images[index].img_url)
 		}
 	}
 
@@ -261,7 +261,7 @@ const ShowProduct: FC = () => {
 																}
 															>
 																<Image
-																	src={image.imgUrl}
+																	src={image.img_url}
 																	title={product.title}
 																	alt={product.title}
 																	width={150}

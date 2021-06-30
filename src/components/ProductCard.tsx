@@ -169,7 +169,7 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 					<CardActionArea className={classes.cardaction} onClick={showProduct}>
 						<CardMedia
 							className={classes.media}
-							image={images[0].imgUrl}
+							image={images[0].img_url}
 							title={title}
 						/>
 					</CardActionArea>
