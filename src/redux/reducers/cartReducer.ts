@@ -9,6 +9,7 @@ import {
 	ADD_OR_SUBSTRACT_UNITS,
 	REMOVE_ITEM_FROM_CART,
 	RemoveFromCartAction,
+	INITIALIZE_CART,
 } from "../types"
 
 let initialState: CartState = {
@@ -21,23 +22,26 @@ let initialState: CartState = {
 
 const cartReducer = (state = initialState, action: CartAction): CartState => {
 	switch (action.type) {
+		case INITIALIZE_CART:
+			return action.payload
+
 		case SET_CART_COUNT:
-			return {
+			return storeState({
 				...state,
 				cart: {
 					...state.cart,
 					count: action.payload,
 				},
-			}
+			})
 
 		case TOGGLE_CART_MODAL:
-			return {
+			return storeState({
 				...state,
 				cart: {
 					...state.cart,
 					open: action.payload,
 				},
-			}
+			})
 
 		case ADD_TO_CART:
 			return addToCart(state, action)
@@ -71,14 +75,14 @@ const addToCart = (state: CartState, action: AddToCartAction) => {
 		})
 	}
 
-	return {
+	return storeState({
 		...state,
 		cart: {
 			...state.cart,
 			count: !isInArr ? newCount : state.cart.count,
 			products: productsArr,
 		},
-	}
+	})
 }
 
 const modifyUnits = (state: CartState, action: AddOrSubstractUnitAction) => {
@@ -97,14 +101,14 @@ const modifyUnits = (state: CartState, action: AddOrSubstractUnitAction) => {
 			newArr[index].units = newUnits
 		}
 
-		return {
+		return storeState({
 			...state,
 			cart: {
 				...state.cart,
 				count: stillInStock ? state.cart.count + 1 : state.cart.count,
 				products: newArr,
 			},
-		}
+		})
 	} else {
 		const newUnits = newArr[index].units - 1
 
@@ -112,21 +116,21 @@ const modifyUnits = (state: CartState, action: AddOrSubstractUnitAction) => {
 			newArr[index].units = newUnits
 		}
 
-		return {
+		return storeState({
 			...state,
 			cart: {
 				...state.cart,
 				count: newUnits >= 1 ? state.cart.count - 1 : state.cart.count,
 				products: newArr,
 			},
-		}
+		})
 	}
 }
 
 const removeFromCart = (state: CartState, action: RemoveFromCartAction) => {
 	const index = state.cart.products.findIndex((product) => product.product.id === action.payload)
 
-	return {
+	return storeState({
 		...state,
 		cart: {
 			...state.cart,
@@ -135,5 +139,17 @@ const removeFromCart = (state: CartState, action: RemoveFromCartAction) => {
 			),
 			count: state.cart.count - state.cart.products[index].units,
 		},
+	})
+}
+
+const storeState = (cart: CartState): CartState => {
+	try {
+		localStorage.setItem("shopping-cart", JSON.stringify(cart))
+
+		return cart
+	} catch (error) {
+		console.log(error)
+
+		return cart
 	}
 }

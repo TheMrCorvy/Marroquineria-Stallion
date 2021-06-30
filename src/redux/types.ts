@@ -1,6 +1,8 @@
 import { ProductCardProps } from "../misc/types"
 
 /*********************************************************************************** carrito */
+export const INITIALIZE_CART = "INITIALIZE_CART"
+
 export const SET_CART_COUNT = "SET_CART_COUNT"
 
 export const TOGGLE_CART_MODAL = "TOGGLE_CART_MODAL"
@@ -55,12 +57,18 @@ export interface RemoveFromCartAction {
 	payload: number
 }
 
+export interface InitializeCartAction {
+	type: typeof INITIALIZE_CART
+	payload: CartState
+}
+
 export type CartAction =
 	| CartCountItemsAction
 	| CartOpenAction
 	| AddToCartAction
 	| AddOrSubstractUnitAction
 	| RemoveFromCartAction
+	| InitializeCartAction
 
 /*********************************************************************************** Products */
 

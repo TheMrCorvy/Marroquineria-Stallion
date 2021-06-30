@@ -10,7 +10,17 @@ import {
 	ADD_TO_CART,
 	ADD_OR_SUBSTRACT_UNITS,
 	REMOVE_ITEM_FROM_CART,
+	INITIALIZE_CART,
+	CartState,
+	InitializeCartAction,
 } from "../types"
+
+export const initializeCart = (cart: CartState): InitializeCartAction => {
+	return {
+		type: INITIALIZE_CART,
+		payload: cart,
+	}
+}
 
 export const setCartCount = (count: number): CartCountItemsAction => {
 	return {

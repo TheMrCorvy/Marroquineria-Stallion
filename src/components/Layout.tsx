@@ -1,6 +1,9 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 
 import { makeStyles } from "@material-ui/core/styles"
+
+import { useDispatch } from "react-redux"
+import { initializeCart } from "../redux/actions/cartActions"
 
 import Navbar from "./Navbar"
 import ShoppingCartModal from "./ShoppingCartModal"
@@ -13,6 +16,22 @@ const useStyles = makeStyles({
 
 const Layout: FC = ({ children }) => {
 	const classes = useStyles()
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		setcartState()
+	}, [])
+
+	const setcartState = async () => {
+		const localCart = localStorage.getItem("shopping-cart")
+
+		if (localCart) {
+			const cart = await JSON.parse(localCart)
+
+			dispatch(initializeCart(cart))
+		}
+	}
 
 	return (
 		<>
