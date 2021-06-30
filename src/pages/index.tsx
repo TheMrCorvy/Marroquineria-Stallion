@@ -141,7 +141,7 @@ export default function Home() {
 			</Container>
 			<Container maxWidth="lg" className={classes.contactContainer} id="contacto">
 				<Grid container justify="space-around">
-					<Grid item xs={12} className={classes.textCenter} id="galeria">
+					<Grid item xs={12} className={classes.textCenter}>
 						<Typography variant="h3">Comunícate con Nosotros</Typography>
 						<Divider />
 					</Grid>
