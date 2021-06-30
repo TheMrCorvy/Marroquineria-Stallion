@@ -24,8 +24,7 @@ import ZoomOutMapIcon from "@material-ui/icons/ZoomOutMap"
 
 import { ProductCardProps } from "../misc/types"
 
-import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "../redux/store"
+import { useDispatch } from "react-redux"
 import { displayProduct } from "../redux/actions/productActions"
 import { addToCart } from "../redux/actions/cartActions"
 
