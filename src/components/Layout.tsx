@@ -20,10 +20,10 @@ const Layout: FC = ({ children }) => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		setcartState()
+		setCartState()
 	}, [])
 
-	const setcartState = async () => {
+	const setCartState = async () => {
 		const localCart = localStorage.getItem("shopping-cart")
 
 		if (localCart) {
