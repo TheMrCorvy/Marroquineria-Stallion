@@ -63,6 +63,26 @@ const ShoppingCartModal: FC = () => {
 		dispatch(toggleCartModal(false))
 	}
 
+	const showBtn = (color: "inherit" | "primary") => {
+		if (!cart.products[0]) {
+			return null
+		} else {
+			return (
+				<Link href="/checkout">
+					<Button
+						href="/checkout"
+						autoFocus
+						variant="outlined"
+						color={color}
+						onClick={handleClose}
+					>
+						Comprar Ahora
+					</Button>
+				</Link>
+			)
+		}
+	}
+
 	if (smallScreen) {
 		return (
 			<Dialog
@@ -84,17 +104,7 @@ const ShoppingCartModal: FC = () => {
 
 						<div className={classes.grow} />
 
-						<Link href="/checkout">
-							<Button
-								href="/checkout"
-								autoFocus
-								variant="outlined"
-								color="inherit"
-								onClick={handleClose}
-							>
-								Comprar Ahora
-							</Button>
-						</Link>
+						{showBtn("inherit")}
 					</Toolbar>
 				</AppBar>
 
@@ -124,18 +134,7 @@ const ShoppingCartModal: FC = () => {
 					<Button onClick={handleClose} color="secondary">
 						Volver
 					</Button>
-					<Link href="/checkout">
-						<Button
-							onClick={handleClose}
-							color="primary"
-							autoFocus
-							variant="outlined"
-							size="large"
-							href="/checkout"
-						>
-							Comprar Ahora
-						</Button>
-					</Link>
+					{showBtn("primary")}
 				</DialogActions>
 			</Dialog>
 		)
