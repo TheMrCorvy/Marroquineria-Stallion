@@ -131,7 +131,7 @@ const Checkout = () => {
 		}
 
 		if (prevStep === 0) {
-			console.log("volver atras")
+			router.back()
 		}
 	}
 

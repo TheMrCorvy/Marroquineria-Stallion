@@ -44,7 +44,7 @@ const placeholder =
 	"Quisiera obtener información acerca de la disponibilidad y las tarifas. Necesito ayuda con lo siguiente:"
 
 const FormModal: FC<Props> = ({ layoutOption }) => {
-	const { register, errors, handleSubmit, getValues } = useForm()
+	const { register, errors, handleSubmit } = useForm()
 
 	const [open, setOpen] = useState(false)
 
