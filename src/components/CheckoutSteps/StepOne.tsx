@@ -95,7 +95,10 @@ const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
 										value: 5,
 										message: minCharMessage,
 									},
-									pattern: emailPattern,
+									pattern: {
+										message: "El email ingresado debe ser válido.",
+										value: emailPattern,
+									},
 								}),
 							}}
 							error={errors?.email ? true : false}
