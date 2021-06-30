@@ -126,6 +126,18 @@ const useStyles = makeStyles((theme: Theme) =>
 	})
 )
 
+const placeholder = [
+	{
+		id: 0,
+		title: "",
+		description: "",
+		price: "",
+		stock: 0,
+		images: [],
+		brand: "",
+	},
+]
+
 const ListProductsSection: FC = () => {
 	const { product } = useSelector((state: RootState) => state.product)
 
@@ -135,23 +147,13 @@ const ListProductsSection: FC = () => {
 
 	const [loading, setLoading] = useState(true)
 
-	const [products, setProducts] = useState<ProductCardProps[]>([
-		{
-			id: 0,
-			title: "",
-			description: "",
-			price: "",
-			stock: 0,
-			images: [],
-			brand: "",
-		},
-	])
+	const [products, setProducts] = useState<ProductCardProps[]>(placeholder)
 
 	useEffect(() => {
 		getProductsFromApi()
 	}, [])
 
-	const getProductsFromApi = async () => {
+	const getProductsFromApi = async (urlParams?: string) => {
 		const res = await fetch("https://api.jsonbin.io/b/60dc60a59328b059d7b3595e")
 		const data = await res.json()
 
@@ -168,12 +170,19 @@ const ListProductsSection: FC = () => {
 		setAnchorEl(null)
 	}
 
-	const handlePageChange = (event: object, page: number) => {
+	const handlePageChange = async (event: object, page: number) => {
 		const productsContainer = document.getElementById("products-list")
 
 		if (productsContainer) {
 			productsContainer.scrollTo({ top: 0, left: 0, behavior: "smooth" })
 		}
+
+		setTimeout(() => {
+			setLoading(true)
+			setProducts(placeholder)
+
+			getProductsFromApi("page=" + page)
+		}, 1000)
 	}
 
 	const scrollProducts = () => {
