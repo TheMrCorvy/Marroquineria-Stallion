@@ -1,10 +1,11 @@
-import { Container, Grid, Typography, Paper, Divider } from "@material-ui/core"
+import { useRouter } from "next/router"
+
+import { Container, Grid, Typography, Divider } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
-import Image from "next/image"
-
 import ListProductsSection from "../../components/ListProductsSection"
+import { ProductCardProps } from "../../misc/types"
 
 const useStyles = makeStyles({
 	textCenter: {
@@ -30,8 +31,18 @@ const useStyles = makeStyles({
 	},
 })
 
-export default function Home() {
+export default function ProductView() {
 	const classes = useStyles()
+
+	const router = useRouter()
+	console.log(router.query)
+
+	// const callApi = async () => {
+	// 	const res = await fetch("https://api.jsonbin.io/b/60dc60a59328b059d7b3595e")
+	// 	const data = await res.json()
+
+	// 	console.log(data)
+	// }
 
 	return (
 		<>
