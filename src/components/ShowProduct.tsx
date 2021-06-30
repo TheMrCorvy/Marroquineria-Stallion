@@ -31,6 +31,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 import { clearProduct } from "../redux/actions/productActions"
 import { addToCart } from "../redux/actions/cartActions"
+import DialogTransition from "./DialogTransition"
 
 const useStyles = makeStyles({
 	container: {
@@ -388,6 +389,7 @@ const ShowProduct: FC = () => {
 						autoHideDuration={20000}
 						message="Enlace copiado, puedes pegarlo y compartirlo en cualquier red social."
 						onClose={hideSnackbar}
+						TransitionComponent={DialogTransition}
 					/>
 				)}
 			</>
