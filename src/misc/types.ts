@@ -28,7 +28,7 @@ type Price = {
 	price: string | number
 }
 
-type ShippingOption = {
+export interface ShippingOption {
 	method: string
 	prices: Price[]
 }
