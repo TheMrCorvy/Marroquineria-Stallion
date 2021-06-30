@@ -17,6 +17,10 @@ import {
 	IconButton,
 	Tooltip,
 	Divider,
+	Stepper,
+	Step,
+	StepLabel,
+	CardActionArea,
 } from "@material-ui/core"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
@@ -28,7 +32,10 @@ import clsx from "clsx"
 
 import { useSelector } from "react-redux"
 import { RootState } from "../redux/store"
-import { CardActionArea } from "@material-ui/core"
+
+import StepOne from "../components/CheckoutSteps/StepOne"
+import StepTwo from "../components/CheckoutSteps/StepTwo"
+import StepThree from "../components/CheckoutSteps/StepThree"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -75,8 +82,17 @@ const useStyles = makeStyles((theme: Theme) =>
 		content: {
 			padingBottom: 0,
 		},
+		backButton: {
+			marginRight: theme.spacing(1),
+		},
+		instructions: {
+			marginTop: theme.spacing(1),
+			marginBottom: theme.spacing(1),
+		},
 	})
 )
+
+const steps = ["Datos y Domicilio de Facturación", "Datos para el envío", "Pago Final"]
 
 const Checkout = () => {
 	const { cart } = useSelector((state: RootState) => state.cart)
@@ -87,11 +103,50 @@ const Checkout = () => {
 
 	const [expanded, setExpanded] = useState(false)
 
+	const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3 | 4>(1)
+
 	useEffect(() => {
 		if (!cart.products[0]) {
 			router.push("/")
 		}
 	}, [cart])
+
+	useEffect(() => {
+		console.log(activeStep)
+	}, [activeStep])
+
+	const handleNext = (nextStep: 0 | 1 | 2 | 3 | 4) => {
+		if (nextStep === 2 || nextStep === 3) {
+			setActiveStep(nextStep)
+		}
+
+		if (nextStep === 4) {
+			console.log("proceso finalizado")
+		}
+	}
+
+	const handleBack = (prevStep: 0 | 1 | 2 | 3 | 4) => {
+		if (prevStep === 1 || prevStep === 2) {
+			setActiveStep(prevStep)
+		}
+
+		if (prevStep === 0) {
+			console.log("volver atras")
+		}
+	}
+
+	const getStepContent = () => {
+		switch (activeStep) {
+			case 1:
+				return <StepOne handleNext={handleNext} handleBack={handleBack} />
+			case 2:
+				return <StepTwo handleNext={handleNext} handleBack={handleBack} />
+			case 3:
+				return <StepThree handleNext={handleNext} handleBack={handleBack} />
+			default:
+				return <StepOne handleNext={handleNext} handleBack={handleBack} />
+		}
+	}
 
 	const handleExpandClick = () => {
 		setExpanded(!expanded)
@@ -162,7 +217,7 @@ const Checkout = () => {
 								<Collapse in={expanded} unmountOnExit>
 									<CardContent>
 										{cart.products.map((product, index) => (
-											<>
+											<div key={index}>
 												<Divider />
 												<Typography
 													variant="body1"
@@ -202,10 +257,24 @@ const Checkout = () => {
 												>
 													$ {product.product.price} (por unidad)
 												</Typography>
-											</>
+											</div>
 										))}
 									</CardContent>
 								</Collapse>
+							</Card>
+						</Grid>
+						<Grid item xs={12} md={8} lg={9}>
+							<Card className={classes.card}>
+								<CardContent>
+									<Stepper activeStep={activeStep - 1} alternativeLabel>
+										{steps.map((label) => (
+											<Step key={label}>
+												<StepLabel>{label}</StepLabel>
+											</Step>
+										))}
+									</Stepper>
+									{getStepContent()}
+								</CardContent>
 							</Card>
 						</Grid>
 					</Grid>
