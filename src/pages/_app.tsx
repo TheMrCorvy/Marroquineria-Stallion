@@ -59,5 +59,3 @@ MyApp.propTypes = {
 }
 
 export default MyApp
-
-//testing
