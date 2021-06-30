@@ -229,7 +229,7 @@ const ListProductsSection: FC = () => {
 							<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
 								<Typography variant="h6">Nuestros Productos</Typography>
 								<Divider />
-								<Button
+								{/* <Button
 									aria-controls="simple-menu"
 									aria-haspopup="true"
 									onClick={handleClick}
@@ -251,7 +251,7 @@ const ListProductsSection: FC = () => {
 									<MenuItem onClick={handleClose}>Valijas</MenuItem>
 									<MenuItem onClick={handleClose}>Cuero</MenuItem>
 									<MenuItem onClick={handleClose}>Bolsos</MenuItem>
-								</Menu>
+								</Menu> */}
 							</Grid>
 							<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
 								<Typography variant="subtitle2">
