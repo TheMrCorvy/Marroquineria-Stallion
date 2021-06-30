@@ -58,9 +58,13 @@ export default function ProductView() {
 		const res = await fetch("https://api.jsonbin.io/b/60dc68bc9328b059d7b35eb0/1")
 		const data = await res.json()
 
-		setLoading(false)
+		if (data.product) {
+			setLoading(false)
 
-		dispatch(displayProduct(data.product))
+			dispatch(displayProduct(data.product))
+		} else {
+			router.push("/producto-no-encontrado")
+		}
 	}
 
 	return (
