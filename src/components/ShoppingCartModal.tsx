@@ -1,5 +1,7 @@
 import { FC } from "react"
 
+import Link from "next/link"
+
 import {
 	Button,
 	Dialog,
@@ -82,9 +84,17 @@ const ShoppingCartModal: FC = () => {
 
 						<div className={classes.grow} />
 
-						<Button autoFocus variant="outlined" color="inherit" onClick={handleClose}>
-							Comprar Ahora
-						</Button>
+						<Link href="/checkout">
+							<Button
+								href="/checkout"
+								autoFocus
+								variant="outlined"
+								color="inherit"
+								onClick={handleClose}
+							>
+								Comprar Ahora
+							</Button>
+						</Link>
 					</Toolbar>
 				</AppBar>
 
@@ -114,15 +124,18 @@ const ShoppingCartModal: FC = () => {
 					<Button onClick={handleClose} color="secondary">
 						Volver
 					</Button>
-					<Button
-						onClick={handleClose}
-						color="primary"
-						autoFocus
-						variant="outlined"
-						size="large"
-					>
-						Comprar Ahora
-					</Button>
+					<Link href="/checkout">
+						<Button
+							onClick={handleClose}
+							color="primary"
+							autoFocus
+							variant="outlined"
+							size="large"
+							href="/checkout"
+						>
+							Comprar Ahora
+						</Button>
+					</Link>
 				</DialogActions>
 			</Dialog>
 		)
