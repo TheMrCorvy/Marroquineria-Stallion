@@ -84,7 +84,7 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 
 	const classes = useStyles()
 
-	const { title, id, images, description, price } = productFromProps
+	const { title, images, description, price } = productFromProps
 
 	const [desc, setDesc] = useState(description)
 

@@ -1,51 +1,75 @@
+import { useEffect, useState } from "react"
+
 import { useRouter } from "next/router"
 
-import { Container, Grid, Typography, Divider } from "@material-ui/core"
+import { Container, Grid, Typography, Divider, Backdrop, CircularProgress } from "@material-ui/core"
 
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
 
 import ListProductsSection from "../../components/ListProductsSection"
-import { ProductCardProps } from "../../misc/types"
 
-const useStyles = makeStyles({
-	textCenter: {
-		textAlign: "center",
-	},
-	contactContainer: {
-		marginTop: "3rem",
-		marginBottom: "3rem",
-		borderRadius: 15,
-		backgroundColor: "#f5f5f5",
-		padding: 50,
-	},
-	map: {
-		border: 0,
-		borderRadius: 15,
-		width: "100%",
-		paddingTop: "3rem",
-		paddingBottom: "3rem",
-	},
-	contactInfo: {
-		textAlign: "center",
-		marginTop: 50,
-	},
-})
+import { useDispatch } from "react-redux"
+import { displayProduct } from "../../redux/actions/productActions"
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		textCenter: {
+			textAlign: "center",
+		},
+		contactContainer: {
+			marginTop: "3rem",
+			marginBottom: "3rem",
+			borderRadius: 15,
+			backgroundColor: "#f5f5f5",
+			padding: 50,
+		},
+		map: {
+			border: 0,
+			borderRadius: 15,
+			width: "100%",
+			paddingTop: "3rem",
+			paddingBottom: "3rem",
+		},
+		contactInfo: {
+			textAlign: "center",
+			marginTop: 50,
+		},
+		backdrop: {
+			zIndex: theme.zIndex.drawer + 1,
+			color: "#fff",
+		},
+	})
+)
 
 export default function ProductView() {
+	const [loading, setLoading] = useState(true)
+
 	const classes = useStyles()
 
+	const dispatch = useDispatch()
+
 	const router = useRouter()
-	console.log(router.query)
 
-	// const callApi = async () => {
-	// 	const res = await fetch("https://api.jsonbin.io/b/60dc60a59328b059d7b3595e")
-	// 	const data = await res.json()
+	useEffect(() => {
+		getProductFromApi(Number(router.query))
+	}, [])
 
-	// 	console.log(data)
-	// }
+	const getProductFromApi = async (id: number) => {
+		const res = await fetch("https://api.jsonbin.io/b/60dc68bc9328b059d7b35eb0/1")
+		const data = await res.json()
+
+		setLoading(false)
+
+		dispatch(displayProduct(data.product))
+	}
 
 	return (
 		<>
+			{loading && (
+				<Backdrop className={classes.backdrop} open={loading}>
+					<CircularProgress color="secondary" />
+				</Backdrop>
+			)}
 			<ListProductsSection />
 
 			<Container maxWidth="lg" className={classes.contactContainer} id="contacto">
