@@ -104,7 +104,7 @@ const Checkout = () => {
 
 	const [expanded, setExpanded] = useState(false)
 
-	const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3 | 4>(2)
+	const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3 | 4>(3)
 
 	useEffect(() => {
 		if (!cart.products[0]) {
