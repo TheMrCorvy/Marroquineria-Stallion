@@ -150,9 +150,7 @@ const ShowProduct: FC = () => {
 	}
 
 	const copyToClipboard = () => {
-		navigator.clipboard.writeText(
-			`https://marroquineria-stallion.vercel.app/producto/${product?.id}`
-		)
+		navigator.clipboard.writeText(`https://stallionmarroquineria.com/producto/${product?.id}`)
 
 		setCopied(true)
 	}
