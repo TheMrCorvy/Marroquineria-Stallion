@@ -38,13 +38,13 @@ const MercadoPagoCheckout: FC = () => {
 			<Grid container justify="space-around" spacing={4}>
 				<Grid item xs={12} md={6} lg={6}>
 					<FormControl variant="outlined" fullWidth>
-						<InputLabel>Nombre Completo</InputLabel>
-						<OutlinedInput
-							label="Nombre Completo"
+						<Typography>Nombre Completo</Typography>
+						<TextField
 							name="name"
 							required
 							placeholder="Obligatorio"
 							type="text"
+							variant="filled"
 							inputProps={{
 								ref: register({
 									required: {
@@ -70,9 +70,9 @@ const MercadoPagoCheckout: FC = () => {
 				</Grid>
 				<Grid item xs={12} md={6} lg={6}>
 					<FormControl variant="outlined" fullWidth>
-						<InputLabel>Email</InputLabel>
-						<OutlinedInput
-							label="Email"
+						<Typography>Email</Typography>
+						<TextField
+							variant="filled"
 							name="email"
 							required
 							placeholder="Obligatorio"
@@ -100,15 +100,10 @@ const MercadoPagoCheckout: FC = () => {
 						)}
 					</FormControl>
 				</Grid>
-				<Grid item xs={12} md={3} lg={2}>
+				<Grid item xs={12} md={4} lg={3}>
 					<FormControl variant="outlined" fullWidth>
-						<InputLabel id="demo-simple-select-label">Tipo de Documento</InputLabel>
-						<Select
-							labelId="demo-simple-select-label"
-							id="demo-simple-select"
-							value={age}
-							onChange={handleChange}
-						>
+						<Typography>Tipo de Documento</Typography>
+						<Select variant="filled" value={age} onChange={handleChange}>
 							<MenuItem value={10}>Ten</MenuItem>
 							<MenuItem value={20}>Twenty</MenuItem>
 							<MenuItem value={30}>Thirty</MenuItem>
@@ -117,9 +112,9 @@ const MercadoPagoCheckout: FC = () => {
 				</Grid>
 				<Grid item xs={12} md={5} lg={4}>
 					<FormControl variant="outlined" fullWidth>
-						<InputLabel>Número de Documento</InputLabel>
-						<OutlinedInput
-							label="Número de Documento"
+						<Typography>Número de Documento</Typography>
+						<TextField
+							variant="filled"
 							name="dni"
 							required
 							placeholder="Obligatorio"
@@ -147,11 +142,11 @@ const MercadoPagoCheckout: FC = () => {
 						)}
 					</FormControl>
 				</Grid>
-				<Grid item xs={12} md={4} lg={6}>
+				<Grid item xs={12} md={5}>
 					<FormControl variant="outlined" fullWidth>
-						<InputLabel>Número de la Tarjeta</InputLabel>
-						<OutlinedInput
-							label="Número de la Tarjeta"
+						<Typography>Número de la Tarjeta</Typography>
+						<TextField
+							variant="filled"
 							name="card"
 							required
 							placeholder="Obligatorio"
@@ -181,9 +176,9 @@ const MercadoPagoCheckout: FC = () => {
 				</Grid>
 				<Grid item xs={12} md={5}>
 					<FormControl variant="outlined" fullWidth>
-						<InputLabel>Nombre escrito en la Tarjeta</InputLabel>
-						<OutlinedInput
-							label="Nombre escrito en la Tarjeta"
+						<Typography>Nombre escrito en la Tarjeta</Typography>
+						<TextField
+							variant="filled"
 							name="cardName"
 							required
 							placeholder="Obligatorio"
@@ -217,17 +212,30 @@ const MercadoPagoCheckout: FC = () => {
 						<TextField
 							id="date"
 							variant="filled"
+							name="cardExpiresOn"
 							type="month"
-							defaultValue="2017-05-24"
+							inputProps={{
+								ref: register({
+									required: {
+										value: true,
+										message: requiredMessage,
+									},
+								}),
+							}}
+							error={errors?.cardExpiresOn ? true : false}
 							fullWidth
 						/>
+
+						{errors.cardExpiresOn && (
+							<Typography variant="body2">{errors.cardExpiresOn.message}</Typography>
+						)}
 					</FormControl>
 				</Grid>
 				<Grid item xs={12} md={3}>
 					<FormControl variant="outlined" fullWidth>
-						<InputLabel>CVC (Código de Seguridad)</InputLabel>
-						<OutlinedInput
-							label="CVC (Código de Seguridad)"
+						<Typography>CVC (Código de Seguridad)</Typography>
+						<TextField
+							variant="filled"
 							name="cardExpiresOn"
 							required
 							placeholder="Obligatorio"
