@@ -1,4 +1,4 @@
-import { ProductCardProps, User } from "../misc/types"
+import { ProductCardProps, User, Address, ShippingOption } from "../misc/types"
 
 /*********************************************************************************** carrito */
 export const INITIALIZE_CART = "INITIALIZE_CART"
@@ -94,5 +94,28 @@ export type ProductActions = DisplayProductAction | ClearProductAction
 /*********************************************************************************** User Checkout */
 
 export const LOAD_USERS_BILLING_INFO = "LOAD_USERS_BILLING_INFO"
+export const LOAD_USERS_SHIPPING_INFO = "LOAD_USERS_SHIPPING_INFO"
+
+export interface LoadUsersBillingInfoAction {
+	type: typeof LOAD_USERS_BILLING_INFO
+	payload: {
+		name: string
+		email: string
+		phoneNumber: string
+		dniOrCuil: string
+		billingAddress: Address
+	}
+}
+
+export interface LoadUsersShippingAction {
+	type: typeof LOAD_USERS_SHIPPING_INFO
+	payload: {
+		send: boolean
+		shippingAddress: Address | null
+		shippingOption: ShippingOption | null
+	}
+}
 
 export type UserState = User
+
+export type UserAction = LoadUsersBillingInfoAction | LoadUsersShippingAction

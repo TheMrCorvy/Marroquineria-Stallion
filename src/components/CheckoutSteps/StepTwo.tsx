@@ -21,11 +21,19 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 import { useForm } from "react-hook-form"
 
-import { ShippingOption } from "../../misc/types"
+import { Address, Price } from "../../misc/types"
+
+import { useDispatch } from "react-redux"
+import { loadUsersShippingInfo } from "../../redux/actions/userActions"
 
 type Props = {
 	handleNext: (nextStep: 1 | 2 | 3) => void
 	handleBack: (prevStep: 1 | 2 | 3) => void
+}
+
+interface ShippingOption {
+	method: string
+	prices: Price[]
 }
 
 const requiredMessage = "Este campo es obligatorio."
@@ -67,21 +75,60 @@ const useStyles = makeStyles({
 })
 
 const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
+	const dispatch = useDispatch()
+
 	const classes = useStyles()
 
 	const { register, errors, handleSubmit } = useForm()
 
 	const [radioValue, setRadioValue] = useState(shippingOptions[0].prices[0].region)
 
+	const [method, setMethod] = useState({
+		price: shippingOptions[0].prices[0],
+		method: shippingOptions[0].method,
+	})
+
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setRadioValue((event.target as HTMLInputElement).value)
+		const target = event.target as HTMLInputElement
+
+		const inputMethod = target.getAttribute("name")
+
+		setRadioValue(target.value)
+
+		if (inputMethod) {
+			const shippingInfo = shippingOptions[Number(inputMethod)].prices.filter((price) => {
+				return price.region === target.value
+			})
+
+			setMethod({
+				price: shippingInfo[0],
+				method: shippingOptions[Number(inputMethod)].method,
+			})
+		}
 	}
 
-	const onSubmit = (data: any) => {
-		console.log(data)
+	const onSubmit = (data: Address) => {
+		dispatch(
+			loadUsersShippingInfo({
+				send: true,
+				shippingAddress: {
+					...data,
+				},
+				shippingOption: method,
+			})
+		)
 
-		console.log("La zona de envio es: " + radioValue)
+		handleNext(3)
+	}
 
+	const nextStep = () => {
+		dispatch(
+			loadUsersShippingInfo({
+				send: false,
+				shippingAddress: null,
+				shippingOption: null,
+			})
+		)
 		handleNext(3)
 	}
 
@@ -92,9 +139,9 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 			</Grid>
 			<Grid item xs={12} md={6} lg={4}>
 				<FormControl variant="outlined" fullWidth>
-					<InputLabel>Calle 1</InputLabel>
+					<InputLabel>Calle Principal</InputLabel>
 					<OutlinedInput
-						label="Calle 1"
+						label="Calle Principal"
 						name="streetOne"
 						required
 						placeholder="Obligatorio"
@@ -114,6 +161,9 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 									message: minCharMessage,
 								},
 							}),
+							style: {
+								textTransform: "capitalize",
+							},
 						}}
 						error={errors?.streetOne ? true : false}
 					/>
@@ -127,9 +177,9 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 			</Grid>
 			<Grid item xs={12} md={6} lg={4}>
 				<FormControl variant="outlined" fullWidth>
-					<InputLabel>Calle 2</InputLabel>
+					<InputLabel>Calle Secundaria</InputLabel>
 					<OutlinedInput
-						label="Calle 2"
+						label="Calle Secundaria"
 						name="streetTwo"
 						placeholder="Opcional"
 						type="text"
@@ -148,6 +198,9 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 									message: minCharMessage,
 								},
 							}),
+							style: {
+								textTransform: "capitalize",
+							},
 						}}
 						error={errors?.streetTwo ? true : false}
 					/>
@@ -244,6 +297,9 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 									message: minCharMessage,
 								},
 							}),
+							style: {
+								textTransform: "capitalize",
+							},
 						}}
 						error={errors?.state ? true : false}
 					/>
@@ -276,6 +332,9 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 									message: minCharMessage,
 								},
 							}),
+							style: {
+								textTransform: "capitalize",
+							},
 						}}
 						error={errors?.city ? true : false}
 					/>
@@ -305,6 +364,9 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 									message: minCharMessage,
 								},
 							}),
+							style: {
+								textTransform: "capitalize",
+							},
 						}}
 						error={errors?.town ? true : false}
 					/>
@@ -373,6 +435,7 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 																checked={
 																	price.region === radioValue
 																}
+																name={"" + index}
 															/>
 														}
 														label={price.region}
@@ -405,7 +468,7 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 													variant="contained"
 													color="primary"
 													disableElevation
-													onClick={() => handleNext(3)}
+													onClick={nextStep}
 												>
 													Continuar
 												</Button>

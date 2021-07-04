@@ -98,6 +98,7 @@ const steps = ["Datos y Domicilio de Facturación", "Datos para el envío", "Pag
 
 const Checkout = () => {
 	const { cart } = useSelector((state: RootState) => state.cart)
+	const user = useSelector((state: RootState) => state.user)
 
 	const router = useRouter()
 
@@ -120,6 +121,10 @@ const Checkout = () => {
 			router.push("/")
 		}
 	}, [cart])
+
+	useEffect(() => {
+		console.log(user)
+	}, [user])
 
 	const handleNext = (nextStep: 0 | 1 | 2 | 3) => {
 		if (nextStep === 2 || nextStep === 3) {

@@ -14,7 +14,7 @@ export interface ProductCardProps {
 
 /*********************************************************************************** User */
 
-type Address = {
+export type Address = {
 	streetOne: string
 	streetTwo: string
 	number: number
@@ -24,7 +24,7 @@ type Address = {
 	town: string
 }
 
-type Price = {
+export type Price = {
 	region: string
 	delay: string
 	price: string | number
@@ -32,7 +32,7 @@ type Price = {
 
 export interface ShippingOption {
 	method: string
-	prices: Price[]
+	price: Price
 }
 
 export interface User {
@@ -43,7 +43,7 @@ export interface User {
 	billingAddress: Address
 	shipping: {
 		send: boolean
-		shippingAddress: Address
-		shippingOption: ShippingOption
+		shippingAddress: Address | null
+		shippingOption: ShippingOption | null
 	}
 }

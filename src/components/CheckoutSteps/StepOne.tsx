@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
 
 import { Button, Grid, FormControl, InputLabel, OutlinedInput, Typography } from "@material-ui/core"
 
@@ -6,9 +6,21 @@ import { makeStyles } from "@material-ui/core/styles"
 
 import { useForm } from "react-hook-form"
 
+import { useDispatch } from "react-redux"
+import { loadUsersBillingInfo } from "../../redux/actions/userActions"
+
+import { Address } from "../../misc/types"
+
 type Props = {
 	handleNext: (nextStep: 1 | 2 | 3) => void
 	handleBack: (prevStep: 0 | 1 | 2 | 3) => void
+}
+
+interface FormData extends Address {
+	name: string
+	email: string
+	dniOrCuil: string
+	phoneNumber: string
 }
 
 const requiredMessage = "Este campo es obligatorio."
@@ -26,12 +38,42 @@ const useStyles = makeStyles({
 })
 
 const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
+	const dispatch = useDispatch()
+
 	const classes = useStyles()
 
 	const { register, errors, handleSubmit } = useForm()
 
-	const onSubmit = (data: any) => {
-		console.log(data)
+	const onSubmit = ({
+		email,
+		name,
+		phoneNumber,
+		dniOrCuil,
+		streetOne,
+		streetTwo,
+		number,
+		postalCode,
+		state,
+		town,
+		city,
+	}: FormData) => {
+		dispatch(
+			loadUsersBillingInfo({
+				name,
+				email,
+				phoneNumber,
+				dniOrCuil,
+				billingAddress: {
+					streetOne,
+					streetTwo,
+					number,
+					postalCode,
+					state,
+					town,
+					city,
+				},
+			})
+		)
 
 		handleNext(2)
 	}
