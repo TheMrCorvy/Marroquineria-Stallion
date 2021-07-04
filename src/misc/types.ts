@@ -12,14 +12,16 @@ export interface ProductCardProps {
 	brand: string
 }
 
+/*********************************************************************************** User */
+
 type Address = {
 	streetOne: string
-	streetTwo?: string
+	streetTwo: string
 	number: number
 	postalCode: number
 	state: string
 	city: string
-	town?: string
+	town: string
 }
 
 type Price = {
@@ -36,12 +38,12 @@ export interface ShippingOption {
 export interface User {
 	name: string
 	email: string
-	phoneNumber?: string
+	phoneNumber: string
 	dniOrCuil: string
 	billingAddress: Address
-	shippingAddress: Address
 	shipping: {
 		send: boolean
+		shippingAddress: Address
 		shippingOption: ShippingOption
 	}
 }

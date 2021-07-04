@@ -20,6 +20,9 @@ const useStyles = makeStyles({
 	textCenter: {
 		textAlign: "center",
 	},
+	textCapitalize: {
+		textTransform: "capitalize",
+	},
 })
 
 const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
@@ -63,6 +66,9 @@ const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
 										message: minCharMessage,
 									},
 								}),
+								style: {
+									textTransform: "capitalize",
+								},
 							}}
 							error={errors?.name ? true : false}
 						/>
@@ -175,9 +181,9 @@ const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
 				</Grid>
 				<Grid item xs={12} md={6} lg={4}>
 					<FormControl variant="outlined" fullWidth>
-						<InputLabel>Calle 1</InputLabel>
+						<InputLabel>Calle Principal</InputLabel>
 						<OutlinedInput
-							label="Calle 1"
+							label="Calle Principal"
 							name="streetOne"
 							required
 							placeholder="Obligatorio"
@@ -197,6 +203,9 @@ const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
 										message: minCharMessage,
 									},
 								}),
+								style: {
+									textTransform: "capitalize",
+								},
 							}}
 							error={errors?.streetOne ? true : false}
 						/>
@@ -210,9 +219,9 @@ const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
 				</Grid>
 				<Grid item xs={12} md={6} lg={4}>
 					<FormControl variant="outlined" fullWidth>
-						<InputLabel>Calle 2</InputLabel>
+						<InputLabel>Calle Secundaria</InputLabel>
 						<OutlinedInput
-							label="Calle 2"
+							label="Calle Secundaria"
 							name="streetTwo"
 							placeholder="Opcional"
 							type="text"
@@ -231,6 +240,9 @@ const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
 										message: minCharMessage,
 									},
 								}),
+								style: {
+									textTransform: "capitalize",
+								},
 							}}
 							error={errors?.streetTwo ? true : false}
 						/>
@@ -327,6 +339,9 @@ const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
 										message: minCharMessage,
 									},
 								}),
+								style: {
+									textTransform: "capitalize",
+								},
 							}}
 							error={errors?.state ? true : false}
 						/>
@@ -359,6 +374,9 @@ const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
 										message: minCharMessage,
 									},
 								}),
+								style: {
+									textTransform: "capitalize",
+								},
 							}}
 							error={errors?.city ? true : false}
 						/>
@@ -390,6 +408,9 @@ const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
 										message: minCharMessage,
 									},
 								}),
+								style: {
+									textTransform: "capitalize",
+								},
 							}}
 							error={errors?.town ? true : false}
 						/>

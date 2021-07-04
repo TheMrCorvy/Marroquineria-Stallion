@@ -1,4 +1,4 @@
-import { ProductCardProps } from "../misc/types"
+import { ProductCardProps, User } from "../misc/types"
 
 /*********************************************************************************** carrito */
 export const INITIALIZE_CART = "INITIALIZE_CART"
@@ -90,3 +90,9 @@ export interface ClearProductAction {
 }
 
 export type ProductActions = DisplayProductAction | ClearProductAction
+
+/*********************************************************************************** User Checkout */
+
+export const LOAD_USERS_BILLING_INFO = "LOAD_USERS_BILLING_INFO"
+
+export type UserState = User
