@@ -9,15 +9,8 @@ import {
 	Typography,
 	Select,
 	MenuItem,
+	Button,
 } from "@material-ui/core"
-
-// import DateFnsUtils from "@date-io/date-fns"
-
-// import {
-// 	MuiPickersUtilsProvider,
-// 	KeyboardTimePicker,
-// 	KeyboardDatePicker,
-// } from "@material-ui/pickers"
 
 import { useForm } from "react-hook-form"
 
@@ -29,15 +22,7 @@ const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 const MercadoPagoCheckout: FC = () => {
 	const [age, setAge] = useState("")
 
-	const [selectedDate, setSelectedDate] = useState<Date | null>(new Date("2014-08-18T21:11:54"))
-
-	// const [showDate, setShowDate] = useState(false)
-
 	const { register, errors, handleSubmit } = useForm()
-
-	// useEffect(() => {
-	// 	setShowDate(true)
-	// }, [])
 
 	const onSubmit = (data: any) => {
 		console.log("production api call")
@@ -46,10 +31,6 @@ const MercadoPagoCheckout: FC = () => {
 
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
 		setAge(event.target.value as string)
-	}
-
-	const handleDateChange = (date: Date | null) => {
-		setSelectedDate(date)
 	}
 
 	return (
@@ -273,6 +254,17 @@ const MercadoPagoCheckout: FC = () => {
 							<Typography variant="body2">{errors.cardExpiresOn.message}</Typography>
 						)}
 					</FormControl>
+				</Grid>
+				<Grid item xs={12} style={{ textAlign: "center", marginTop: "3rem" }}>
+					<Button
+						variant="contained"
+						color="secondary"
+						disableElevation
+						size="large"
+						onClick={handleSubmit(onSubmit)}
+					>
+						Finalizar
+					</Button>
 				</Grid>
 			</Grid>
 		</form>
