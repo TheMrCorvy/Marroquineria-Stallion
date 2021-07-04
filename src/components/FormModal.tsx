@@ -184,7 +184,10 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 													value: 5,
 													message: minCharMessage,
 												},
-												pattern: emailPattern,
+												pattern: {
+													message: "El email ingresado debe ser válido.",
+													value: emailPattern,
+												},
 											}),
 										}}
 										error={errors?.email ? true : false}

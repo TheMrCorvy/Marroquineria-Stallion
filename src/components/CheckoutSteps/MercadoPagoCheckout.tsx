@@ -91,6 +91,10 @@ const MercadoPagoCheckout: FC = () => {
 										value: 5,
 										message: minCharMessage,
 									},
+									pattern: {
+										message: "El email ingresado debe ser válido.",
+										value: emailPattern,
+									},
 								}),
 							}}
 							error={errors?.email ? true : false}
