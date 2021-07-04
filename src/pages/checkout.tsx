@@ -21,11 +21,12 @@ import {
 	Step,
 	StepLabel,
 	CardActionArea,
+	useMediaQuery,
 } from "@material-ui/core"
 
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import { makeStyles, createStyles, Theme, useTheme } from "@material-ui/core/styles"
 import { green } from "@material-ui/core/colors"
 
 import clsx from "clsx"
@@ -102,6 +103,10 @@ const Checkout = () => {
 
 	const classes = useStyles()
 
+	const theme = useTheme()
+
+	const smallScreen = useMediaQuery(theme.breakpoints.down("sm"))
+
 	const [expanded, setExpanded] = useState(false)
 
 	/**
@@ -115,10 +120,6 @@ const Checkout = () => {
 			router.push("/")
 		}
 	}, [cart])
-
-	useEffect(() => {
-		console.log(activeStep)
-	}, [activeStep])
 
 	const handleNext = (nextStep: 0 | 1 | 2 | 3) => {
 		if (nextStep === 2 || nextStep === 3) {
@@ -267,7 +268,10 @@ const Checkout = () => {
 						<Grid item xs={12} md={8} lg={9}>
 							<Card className={classes.card}>
 								<CardContent>
-									<Stepper activeStep={activeStep - 1} alternativeLabel>
+									<Stepper
+										activeStep={activeStep - 1}
+										orientation={smallScreen ? "vertical" : "horizontal"}
+									>
 										{steps.map((label) => (
 											<Step key={label}>
 												<StepLabel>{label}</StepLabel>

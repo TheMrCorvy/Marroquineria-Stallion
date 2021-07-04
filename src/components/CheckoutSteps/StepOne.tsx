@@ -28,7 +28,6 @@ const StepOne: FC<Props> = ({ handleNext, handleBack }) => {
 	const { register, errors, handleSubmit } = useForm()
 
 	const onSubmit = (data: any) => {
-		console.log("production api call")
 		console.log(data)
 
 		handleNext(2)

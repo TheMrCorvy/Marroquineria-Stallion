@@ -250,10 +250,6 @@ const MercadoPagoCheckout: FC = () => {
 										value: 190,
 										message: maxCharMessage,
 									},
-									minLength: {
-										value: 5,
-										message: minCharMessage,
-									},
 								}),
 							}}
 							error={errors?.cardExpiresOn ? true : false}

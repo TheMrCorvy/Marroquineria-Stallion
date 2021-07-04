@@ -78,10 +78,9 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 	}
 
 	const onSubmit = (data: any) => {
-		console.log("production api call")
 		console.log(data)
 
-		console.log(radioValue)
+		console.log("La zona de envio es: " + radioValue)
 
 		handleNext(3)
 	}
