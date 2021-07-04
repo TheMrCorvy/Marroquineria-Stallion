@@ -104,7 +104,11 @@ const Checkout = () => {
 
 	const [expanded, setExpanded] = useState(false)
 
-	const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3 | 4>(3)
+	/**
+	 * 0 = go back to the page
+	 * 1, 2, 3, = form steps
+	 */
+	const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3>(1)
 
 	useEffect(() => {
 		if (!cart.products[0]) {
@@ -116,17 +120,13 @@ const Checkout = () => {
 		console.log(activeStep)
 	}, [activeStep])
 
-	const handleNext = (nextStep: 0 | 1 | 2 | 3 | 4) => {
+	const handleNext = (nextStep: 0 | 1 | 2 | 3) => {
 		if (nextStep === 2 || nextStep === 3) {
 			setActiveStep(nextStep)
 		}
-
-		if (nextStep === 4) {
-			console.log("proceso finalizado")
-		}
 	}
 
-	const handleBack = (prevStep: 0 | 1 | 2 | 3 | 4) => {
+	const handleBack = (prevStep: 0 | 1 | 2 | 3) => {
 		if (prevStep === 1 || prevStep === 2) {
 			setActiveStep(prevStep)
 		}

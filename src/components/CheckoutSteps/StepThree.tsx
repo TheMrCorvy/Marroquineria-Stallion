@@ -7,8 +7,8 @@ import { makeStyles } from "@material-ui/core/styles"
 import MercadoPagoCheckout from "./MercadoPagoCheckout"
 
 type Props = {
-	handleNext: (nextStep: 0 | 1 | 2 | 3 | 4) => void
-	handleBack: (prevStep: 0 | 1 | 2 | 3 | 4) => void
+	handleNext: (nextStep: 1 | 2 | 3) => void
+	handleBack: (prevStep: 1 | 2 | 3) => void
 }
 
 const useStyles = makeStyles({
