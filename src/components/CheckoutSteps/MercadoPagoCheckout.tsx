@@ -18,6 +18,16 @@ declare global {
 	}
 }
 
+interface FormData {
+	name: string
+	email: string
+	dni: string
+	cardNumber: string
+	cardName: string
+	cardExpiresOn: string
+	securityCode: string
+}
+
 const requiredMessage = "Este campo es obligatorio."
 const minCharMessage = "Este campo debe tener al menos 5 caractéres."
 const maxCharMessage = "Este campo no puede contener más de 190 caractéres."
@@ -26,23 +36,65 @@ const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 const MercadoPagoCheckout: FC = () => {
 	const [age, setAge] = useState("")
 
+	const [cardToken, setCardToken] = useState("")
+
+	const [mercadoPago, setMercadoPago] = useState<any>(null)
+
 	const { register, errors, handleSubmit } = useForm()
 
 	useEffect(() => {
-		console.log(window.Mercadopago)
+		setMercadoPago(window.Mercadopago)
 	}, [])
 
-	const onSubmit = (data: any) => {
+	const onSubmit = (data: FormData) => {
 		console.log("production api call")
 		console.log(data)
+
+		mercadoPago.setPublishableKey(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY)
+
+		mercadoPago.getIdentificationTypes()
+
+		const cardNetwork = getCardNetwork(data.cardNumber)
+
+		const cardToken = getCardToken()
 	}
 
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
 		setAge(event.target.value as string)
 	}
 
+	const getCardNetwork = async (bin: string) => {
+		if (mercadoPago) {
+			return await mercadoPago.getPaymentMethod(
+				{
+					bin: bin.substring(0, 6),
+				},
+				(status: unknown, response: any) => {
+					console.log(response[0].id)
+					console.log(status)
+
+					setCardToken(response[0].id)
+				}
+			)
+		}
+	}
+
+	const getCardToken = () => {
+		const mercadoPagoForm = document.getElementById("paymentForm")
+
+		if (mercadoPagoForm) {
+			mercadoPago.createToken(mercadoPagoForm, (status: number, response: any) => {
+				if (status != 200 && status != 201) {
+					// response.cause[0].description descripcion del error
+				} else {
+					// el token de la tarjeta es response.id
+				}
+			})
+		}
+	}
+
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit(onSubmit)} id="paymentForm">
 			<Grid container justify="space-around" spacing={4}>
 				<Grid item xs={12} md={6} lg={6}>
 					<FormControl variant="outlined" fullWidth>
@@ -112,7 +164,7 @@ const MercadoPagoCheckout: FC = () => {
 						)}
 					</FormControl>
 				</Grid>
-				<Grid item xs={12} md={4} lg={3}>
+				<Grid item xs={12} md={6} lg={3}>
 					<FormControl variant="outlined" fullWidth>
 						<Typography>Tipo de Documento</Typography>
 						<Select variant="filled" value={age} onChange={handleChange}>
@@ -122,7 +174,7 @@ const MercadoPagoCheckout: FC = () => {
 						</Select>
 					</FormControl>
 				</Grid>
-				<Grid item xs={12} md={5} lg={4}>
+				<Grid item xs={12} md={6} lg={4}>
 					<FormControl variant="outlined" fullWidth>
 						<Typography>Número de Documento</Typography>
 						<TextField
@@ -154,12 +206,12 @@ const MercadoPagoCheckout: FC = () => {
 						)}
 					</FormControl>
 				</Grid>
-				<Grid item xs={12} md={5}>
+				<Grid item xs={12} md={6} lg={5}>
 					<FormControl variant="outlined" fullWidth>
 						<Typography>Número de la Tarjeta</Typography>
 						<TextField
 							variant="filled"
-							name="card"
+							name="cardNumber"
 							required
 							placeholder="Obligatorio"
 							type="text"
@@ -179,14 +231,14 @@ const MercadoPagoCheckout: FC = () => {
 									},
 								}),
 							}}
-							error={errors?.card ? true : false}
+							error={errors?.cardNumber ? true : false}
 						/>
-						{errors.card && (
-							<Typography variant="body2">{errors.card.message}</Typography>
+						{errors.cardNumber && (
+							<Typography variant="body2">{errors.cardNumber.message}</Typography>
 						)}
 					</FormControl>
 				</Grid>
-				<Grid item xs={12} md={5}>
+				<Grid item xs={12} md={6} lg={5}>
 					<FormControl variant="outlined" fullWidth>
 						<Typography>Nombre escrito en la Tarjeta</Typography>
 						<TextField
@@ -218,7 +270,7 @@ const MercadoPagoCheckout: FC = () => {
 						)}
 					</FormControl>
 				</Grid>
-				<Grid item xs={12} md={4}>
+				<Grid item xs={12} md={6} lg={4}>
 					<FormControl variant="outlined" fullWidth>
 						<Typography>Fecha de Vencimiento de la Tarjeta</Typography>
 						<TextField
@@ -243,12 +295,12 @@ const MercadoPagoCheckout: FC = () => {
 						)}
 					</FormControl>
 				</Grid>
-				<Grid item xs={12} md={3}>
+				<Grid item xs={12} md={6} lg={3}>
 					<FormControl variant="outlined" fullWidth>
 						<Typography>CVC (Código de Seguridad)</Typography>
 						<TextField
 							variant="filled"
-							name="cardExpiresOn"
+							name="securityCode"
 							required
 							placeholder="Obligatorio"
 							type="text"
@@ -264,10 +316,10 @@ const MercadoPagoCheckout: FC = () => {
 									},
 								}),
 							}}
-							error={errors?.cardExpiresOn ? true : false}
+							error={errors?.securityCode ? true : false}
 						/>
-						{errors.cardExpiresOn && (
-							<Typography variant="body2">{errors.cardExpiresOn.message}</Typography>
+						{errors.securityCode && (
+							<Typography variant="body2">{errors.securityCode.message}</Typography>
 						)}
 					</FormControl>
 				</Grid>
