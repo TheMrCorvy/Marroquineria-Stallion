@@ -38,21 +38,21 @@ const MercadoPagoCheckout: FC = () => {
 
 	const [cardToken, setCardToken] = useState("")
 
-	const [mercadoPago, setMercadoPago] = useState<any>(null)
-
 	const { register, errors, handleSubmit } = useForm()
 
 	useEffect(() => {
-		setMercadoPago(window.Mercadopago)
+		window.Mercadopago.setPublishableKey(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY)
+
+		window.Mercadopago.getIdentificationTypes()
 	}, [])
 
 	const onSubmit = (data: FormData) => {
 		console.log("production api call")
 		console.log(data)
 
-		mercadoPago.setPublishableKey(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY)
+		// mercadoPago.setPublishableKey(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY)
 
-		mercadoPago.getIdentificationTypes()
+		// mercadoPago.getIdentificationTypes()
 
 		const cardNetwork = getCardNetwork(data.cardNumber)
 
@@ -64,26 +64,24 @@ const MercadoPagoCheckout: FC = () => {
 	}
 
 	const getCardNetwork = async (bin: string) => {
-		if (mercadoPago) {
-			return await mercadoPago.getPaymentMethod(
-				{
-					bin: bin.substring(0, 6),
-				},
-				(status: unknown, response: any) => {
-					console.log(response[0].id)
-					console.log(status)
+		return await window.Mercadopago.getPaymentMethod(
+			{
+				bin: bin.substring(0, 6),
+			},
+			(status: unknown, response: any) => {
+				console.log(response[0].id)
+				console.log(status)
 
-					setCardToken(response[0].id)
-				}
-			)
-		}
+				setCardToken(response[0].id)
+			}
+		)
 	}
 
 	const getCardToken = () => {
 		const mercadoPagoForm = document.getElementById("paymentForm")
 
 		if (mercadoPagoForm) {
-			mercadoPago.createToken(mercadoPagoForm, (status: number, response: any) => {
+			window.Mercadopago.createToken(mercadoPagoForm, (status: number, response: any) => {
 				if (status != 200 && status != 201) {
 					// response.cause[0].description descripcion del error
 				} else {
@@ -156,6 +154,7 @@ const MercadoPagoCheckout: FC = () => {
 										value: emailPattern,
 									},
 								}),
+								"data-checkout": "cardholderEmail",
 							}}
 							error={errors?.email ? true : false}
 						/>
@@ -167,11 +166,19 @@ const MercadoPagoCheckout: FC = () => {
 				<Grid item xs={12} md={6} lg={3}>
 					<FormControl variant="outlined" fullWidth>
 						<Typography>Tipo de Documento</Typography>
-						<Select variant="filled" value={age} onChange={handleChange}>
-							<MenuItem value={10}>Ten</MenuItem>
-							<MenuItem value={20}>Twenty</MenuItem>
-							<MenuItem value={30}>Thirty</MenuItem>
-						</Select>
+						<select
+							id="docType"
+							name="docType"
+							data-checkout="docType"
+							style={{
+								paddingRight: 32,
+								borderRadius: 4,
+								cursor: "pointer",
+								padding: "18.5px 14px",
+								background: "rgba(0, 0, 0, 0.09)",
+								border: "none",
+							}}
+						></select>
 					</FormControl>
 				</Grid>
 				<Grid item xs={12} md={6} lg={4}>
@@ -198,6 +205,7 @@ const MercadoPagoCheckout: FC = () => {
 										message: minCharMessage,
 									},
 								}),
+								"data-checkout": "docNumber",
 							}}
 							error={errors?.dni ? true : false}
 						/>
@@ -230,6 +238,7 @@ const MercadoPagoCheckout: FC = () => {
 										message: minCharMessage,
 									},
 								}),
+								"data-checkout": "cardNumber",
 							}}
 							error={errors?.cardNumber ? true : false}
 						/>
@@ -262,6 +271,7 @@ const MercadoPagoCheckout: FC = () => {
 										message: minCharMessage,
 									},
 								}),
+								"data-checkout": "cardholderName",
 							}}
 							error={errors?.cardName ? true : false}
 						/>
@@ -315,6 +325,7 @@ const MercadoPagoCheckout: FC = () => {
 										message: maxCharMessage,
 									},
 								}),
+								"data-checkout": "securityCode",
 							}}
 							error={errors?.securityCode ? true : false}
 						/>
