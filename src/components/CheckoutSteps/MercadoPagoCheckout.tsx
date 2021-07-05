@@ -34,9 +34,11 @@ const maxCharMessage = "Este campo no puede contener más de 190 caractéres."
 const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 
 const MercadoPagoCheckout: FC = () => {
-	const [age, setAge] = useState("")
+	const [docType, setDocType] = useState("DNI")
 
 	const [cardToken, setCardToken] = useState("")
+
+	const [cardNetwork, setCardNetwork] = useState("")
 
 	const { register, errors, handleSubmit } = useForm()
 
@@ -46,49 +48,58 @@ const MercadoPagoCheckout: FC = () => {
 		window.Mercadopago.getIdentificationTypes()
 	}, [])
 
+	useEffect(() => {
+		console.log({
+			network: cardNetwork,
+			token: cardToken,
+		})
+	}, [cardNetwork, cardToken])
+
 	const onSubmit = (data: FormData) => {
 		console.log("production api call")
 		console.log(data)
 
-		// mercadoPago.setPublishableKey(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY)
+		getCardNetwork(data.cardNumber)
 
-		// mercadoPago.getIdentificationTypes()
-
-		const cardNetwork = getCardNetwork(data.cardNumber)
-
-		const cardToken = getCardToken()
+		getCardToken()
 	}
 
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-		setAge(event.target.value as string)
+		setDocType(event.target.value as string)
 	}
 
 	const getCardNetwork = async (bin: string) => {
-		return await window.Mercadopago.getPaymentMethod(
+		await window.Mercadopago.getPaymentMethod(
 			{
-				bin: bin.substring(0, 6),
+				bin,
 			},
-			(status: unknown, response: any) => {
-				console.log(response[0].id)
-				console.log(status)
+			(status: number, response: any) => {
+				if (status !== 200 && status !== 201) {
+					console.log("hubo un error")
+					console.log(response)
+				} else {
+					setCardNetwork(response[0].id)
+				}
 
-				setCardToken(response[0].id)
+				console.log(response)
 			}
 		)
 	}
 
-	const getCardToken = () => {
+	const getCardToken = async () => {
 		const mercadoPagoForm = document.getElementById("paymentForm")
 
-		if (mercadoPagoForm) {
-			window.Mercadopago.createToken(mercadoPagoForm, (status: number, response: any) => {
+		return await window.Mercadopago.createToken(
+			mercadoPagoForm,
+			(status: number, response: any) => {
 				if (status != 200 && status != 201) {
-					// response.cause[0].description descripcion del error
+					console.log(response.cause[0].description)
 				} else {
-					// el token de la tarjeta es response.id
+					setCardToken(response.id)
 				}
-			})
-		}
+				console.log(response)
+			}
+		)
 	}
 
 	return (
@@ -178,6 +189,7 @@ const MercadoPagoCheckout: FC = () => {
 								background: "rgba(0, 0, 0, 0.09)",
 								border: "none",
 							}}
+							onChange={handleChange}
 						></select>
 					</FormControl>
 				</Grid>
@@ -283,26 +295,66 @@ const MercadoPagoCheckout: FC = () => {
 				<Grid item xs={12} md={6} lg={4}>
 					<FormControl variant="outlined" fullWidth>
 						<Typography>Fecha de Vencimiento de la Tarjeta</Typography>
-						<TextField
-							id="date"
-							variant="filled"
-							name="cardExpiresOn"
-							type="month"
-							inputProps={{
-								ref: register({
-									required: {
-										value: true,
-										message: requiredMessage,
-									},
-								}),
-							}}
-							error={errors?.cardExpiresOn ? true : false}
-							fullWidth
-						/>
-
-						{errors.cardExpiresOn && (
-							<Typography variant="body2">{errors.cardExpiresOn.message}</Typography>
-						)}
+						<Grid container justify="space-between" spacing={4}>
+							<Grid item xs={6}>
+								<TextField
+									variant="filled"
+									name="cardExpirationMonth"
+									label="Mes (MM)"
+									required
+									placeholder="Obligatorio"
+									type="text"
+									inputProps={{
+										ref: register({
+											required: {
+												value: true,
+												message: requiredMessage,
+											},
+											maxLength: {
+												value: 190,
+												message: maxCharMessage,
+											},
+										}),
+										"data-checkout": "cardExpirationMonth",
+									}}
+									error={errors?.cardExpirationMonth ? true : false}
+								/>
+								{errors.cardExpirationMonth && (
+									<Typography variant="body2">
+										{errors.cardExpirationMonth.message}
+									</Typography>
+								)}
+							</Grid>
+							<Grid item xs={6}>
+								<TextField
+									variant="filled"
+									name="cardExpirationYear"
+									label="Año (YY)"
+									required
+									placeholder="Obligatorio"
+									type="text"
+									inputProps={{
+										ref: register({
+											required: {
+												value: true,
+												message: requiredMessage,
+											},
+											maxLength: {
+												value: 190,
+												message: maxCharMessage,
+											},
+										}),
+										"data-checkout": "cardExpirationYear",
+									}}
+									error={errors?.cardExpirationYear ? true : false}
+								/>
+								{errors.cardExpirationYear && (
+									<Typography variant="body2">
+										{errors.cardExpirationYear.message}
+									</Typography>
+								)}
+							</Grid>
+						</Grid>
 					</FormControl>
 				</Grid>
 				<Grid item xs={12} md={6} lg={3}>
