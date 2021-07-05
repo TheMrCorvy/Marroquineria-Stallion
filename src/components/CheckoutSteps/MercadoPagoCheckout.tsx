@@ -4,8 +4,6 @@ import {
 	TextField,
 	Grid,
 	FormControl,
-	InputLabel,
-	OutlinedInput,
 	Typography,
 	Select,
 	MenuItem,
@@ -13,6 +11,12 @@ import {
 } from "@material-ui/core"
 
 import { useForm } from "react-hook-form"
+
+declare global {
+	interface Window {
+		Mercadopago: any
+	}
+}
 
 const requiredMessage = "Este campo es obligatorio."
 const minCharMessage = "Este campo debe tener al menos 5 caractéres."
@@ -23,6 +27,10 @@ const MercadoPagoCheckout: FC = () => {
 	const [age, setAge] = useState("")
 
 	const { register, errors, handleSubmit } = useForm()
+
+	useEffect(() => {
+		console.log(window.Mercadopago)
+	}, [])
 
 	const onSubmit = (data: any) => {
 		console.log("production api call")
