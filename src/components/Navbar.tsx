@@ -33,6 +33,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 import { toggleCartModal } from "../redux/actions/cartActions"
 import FormModal from "./FormModal"
+import ShippingDialog from "./ShippingDialog"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -145,6 +146,8 @@ const Navbar: FC = () => {
 
 	const openCartModal = () => {
 		dispatch(toggleCartModal(true))
+
+		setMobileMoreAnchorEl(null)
 	}
 
 	const scrollToElement = async (id: string) => {
@@ -162,6 +165,7 @@ const Navbar: FC = () => {
 			return (
 				<div className={classes.sectionDesktop}>
 					<FormModal layoutOption={1} />
+					<ShippingDialog className={classes.navbarBtn} layout={1} />
 					<Button
 						color="inherit"
 						className={classes.navbarBtn}
@@ -195,13 +199,19 @@ const Navbar: FC = () => {
 					open={isMobileMenuOpen}
 					onClose={handleMobileMenuClose}
 				>
-					<MenuItem>
+					<MenuItem onClick={handleMobileMenuClose}>
 						<FormModal layoutOption={2} />
 					</MenuItem>
 
 					<Divider className={classes.divider} />
 
 					<MenuItem onClick={() => scrollToElement("productos")}>Productos</MenuItem>
+
+					<Divider className={classes.divider} />
+
+					<MenuItem onClick={() => handleMobileMenuClose()}>
+						<ShippingDialog layout={2} />
+					</MenuItem>
 
 					<Divider className={classes.divider} />
 
@@ -234,6 +244,12 @@ const Navbar: FC = () => {
 
 					<ListItem button onClick={() => scrollToElement("contacto")}>
 						<ListItemText primary="Contacto / Cómo llegar" />
+					</ListItem>
+
+					<Divider className={classes.divider} />
+
+					<ListItem button>
+						<ShippingDialog layout={3} />
 					</ListItem>
 
 					<Divider className={classes.divider} />
