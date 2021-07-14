@@ -68,7 +68,7 @@ const ShippingDialog: FC<Props> = ({ layout, className }) => {
 	const renderBtn = () => {
 		if (layout === 1) {
 			return (
-				<Button color="inherit" className={className} onClick={toggleDialog}>
+				<Button color="inherit" size="small" className={className} onClick={toggleDialog}>
 					Envíos
 				</Button>
 			)

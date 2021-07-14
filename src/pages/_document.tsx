@@ -25,6 +25,14 @@ class MyDocument extends Document {
 						content="Visita la Tienda Online de Stallion Marroquinería"
 					/>
 					<meta name="keywords" content="Marroquineria Stallion" />
+
+					{/* Google Fonts */}
+					<link rel="preconnect" href="https://fonts.googleapis.com"></link>
+					<link rel="preconnect" href="https://fonts.gstatic.com"></link>
+					<link
+						href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap"
+						rel="stylesheet"
+					></link>
 				</Head>
 				<body>
 					<Main />

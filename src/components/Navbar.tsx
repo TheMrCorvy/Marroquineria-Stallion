@@ -170,6 +170,7 @@ const Navbar: FC = () => {
 						color="inherit"
 						className={classes.navbarBtn}
 						onClick={() => scrollToElement("productos")}
+						size="small"
 					>
 						Productos
 					</Button>
@@ -293,8 +294,12 @@ const Navbar: FC = () => {
 						</IconButton>
 						<Link href="/">
 							<Button color="inherit" component="a" className={classes.title}>
-								<Typography variant="h6" noWrap>
-									Marroquinería Stallion
+								<Typography
+									variant="h6"
+									noWrap
+									style={{ fontFamily: "Roboto Slab, serif" }}
+								>
+									Stallion Marroquinería
 								</Typography>
 							</Button>
 						</Link>

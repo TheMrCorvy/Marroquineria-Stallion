@@ -1,4 +1,4 @@
-import { Container, Grid, Typography, Paper, Divider } from "@material-ui/core"
+import { Container, Grid, Typography, Paper, Divider, Hidden } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
@@ -33,6 +33,7 @@ const useStyles = makeStyles({
 	},
 	title: {
 		marginTop: "3rem",
+		fontFamily: "Roboto Slab, serif",
 	},
 	subtitle: {
 		textDecoration: "underline",
@@ -65,9 +66,16 @@ export default function Home() {
 			<Container maxWidth="lg" className={classes.container}>
 				<Grid container justify="center" spacing={4} className={classes.textCenter}>
 					<Grid item xs={12}>
-						<Typography variant="h3" className={classes.title}>
-							Stallion Marroquinería
-						</Typography>
+						<Hidden xsDown>
+							<Typography variant="h3" className={classes.title}>
+								STALLION MARROQUINERÍA
+							</Typography>
+						</Hidden>
+						<Hidden smUp>
+							<Typography variant="h5" className={classes.title}>
+								STALLION MARROQUINERÍA
+							</Typography>
+						</Hidden>
 					</Grid>
 					<Grid item xs={12}>
 						<Typography variant="body1">

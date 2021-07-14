@@ -64,7 +64,12 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 	const selectButton = () => {
 		if (layoutOption === 1) {
 			return (
-				<Button color="inherit" onClick={handleClickOpen} style={{ marginLeft: 20 }}>
+				<Button
+					color="inherit"
+					size="small"
+					onClick={handleClickOpen}
+					style={{ marginLeft: 20 }}
+				>
 					Pedir Cotización
 				</Button>
 			)
