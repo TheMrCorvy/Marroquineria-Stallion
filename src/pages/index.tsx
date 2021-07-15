@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 import {
 	Container,
 	Grid,
@@ -13,7 +15,10 @@ import {
 
 import { useTheme, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
-import Image from "next/image"
+import MonetizationOnIcon from "@material-ui/icons/MonetizationOn"
+import LocalShippingIcon from "@material-ui/icons/LocalShipping"
+import WhatsAppIcon from "@material-ui/icons/WhatsApp"
+import PaymentIcon from "@material-ui/icons/Payment"
 
 import ListProductsSection from "../components/ListProductsSection"
 
@@ -95,6 +100,33 @@ const useStyles = makeStyles((theme: Theme) =>
 		bigImg: {
 			height: "25rem",
 			width: "100%",
+		},
+		infoContainer: {
+			background: "#f5f5f5",
+			marginTop: "3rem",
+			paddingTop: "2rem",
+			paddingBottom: "2rem",
+		},
+		infoCard: {
+			borderTop: "6px solid #0556f3",
+			borderRadius: 15,
+			position: "relative",
+		},
+		infoIcon: {
+			borderTopLeftRadius: 15,
+			borderBottomRightRadius: 15,
+			height: "40px",
+			width: "40px",
+			position: "absolute",
+			bottom: 0,
+			right: 0,
+			background: "#0556f3",
+			textAlign: "center",
+			display: "flex",
+			justifyContent: "center",
+			color: "white",
+			verticalAlign: "center",
+			alignItems: "center",
 		},
 	})
 )
@@ -193,157 +225,69 @@ export default function Home() {
 					</Hidden>
 				</Grid>
 			</Container>
-			<Container
-				maxWidth="xl"
-				style={{
-					background: "#f5f5f5",
-					marginTop: "3rem",
-					paddingTop: "2rem",
-					paddingBottom: "2rem",
-				}}
-			>
+			<Container maxWidth="xl" className={classes.infoContainer}>
 				<Grid container justify="space-around" spacing={4}>
 					<Grid item xs={12} md={6} lg={3} xl={2}>
-						<Card
-							style={{
-								borderTop: "6px solid #0556f3",
-								borderRadius: 15,
-								position: "relative",
-							}}
-						>
+						<Card className={classes.infoCard}>
 							<CardContent>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
-								quaerat, reiciendis totam corporis rerum inventore fuga velit, quo
-								autem eveniet, mollitia officiis nisi accusamus! Exercitationem
-								reprehenderit similique possimus facere nulla.
+								<Typography variant="h6" paragraph gutterBottom>
+									Precios
+								</Typography>
+								<Typography variant="body2" paragraph gutterBottom>
+									Temenos los mejores precios disponibles, de las mejores marcas
+									en el mercado
+								</Typography>
 							</CardContent>
-							<div
-								style={{
-									borderTopLeftRadius: 15,
-									borderBottomRightRadius: 15,
-									height: "40px",
-									width: "40px",
-									position: "absolute",
-									bottom: 0,
-									right: 0,
-									background: "#0556f3",
-									textAlign: "center",
-									display: "flex",
-									justifyContent: "center",
-									color: "white",
-									verticalAlign: "center",
-									alignItems: "center",
-								}}
-							>
-								<p className="mb-0 h2">で</p>
+							<div className={classes.infoIcon}>
+								<MonetizationOnIcon />
 							</div>
 						</Card>
 					</Grid>
 					<Grid item xs={12} md={6} lg={3} xl={2}>
-						<Card
-							style={{
-								borderTop: "6px solid #0556f3",
-								borderRadius: 15,
-								position: "relative",
-							}}
-						>
+						<Card className={classes.infoCard}>
 							<CardContent>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
-								quaerat, reiciendis totam corporis rerum inventore fuga velit, quo
-								autem eveniet, mollitia officiis nisi accusamus! Exercitationem
-								reprehenderit similique possimus facere nulla.
+								<Typography variant="h6" paragraph gutterBottom>
+									Envíos
+								</Typography>
+								<Typography variant="body2" paragraph gutterBottom>
+									Envíos a todo el país mediante Correo Argentino, o moto
+									mensajera solo para CABA y GBA
+								</Typography>
 							</CardContent>
-							<div
-								style={{
-									borderTopLeftRadius: 15,
-									borderBottomRightRadius: 15,
-									height: "40px",
-									width: "40px",
-									position: "absolute",
-									bottom: 0,
-									right: 0,
-									background: "#0556f3",
-									textAlign: "center",
-									display: "flex",
-									justifyContent: "center",
-									color: "white",
-									verticalAlign: "center",
-									alignItems: "center",
-								}}
-							>
-								<p className="mb-0 h2">で</p>
+							<div className={classes.infoIcon}>
+								<LocalShippingIcon />
 							</div>
 						</Card>
 					</Grid>
 					<Grid item xs={12} md={6} lg={3} xl={2}>
-						<Card
-							style={{
-								borderTop: "6px solid #0556f3",
-								borderRadius: 15,
-								position: "relative",
-							}}
-						>
+						<Card className={classes.infoCard}>
 							<CardContent>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
-								quaerat, reiciendis totam corporis rerum inventore fuga velit, quo
-								autem eveniet, mollitia officiis nisi accusamus! Exercitationem
-								reprehenderit similique possimus facere nulla.
+								<Typography variant="h6" paragraph gutterBottom>
+									Contacto
+								</Typography>
+								<Typography variant="body2" paragraph gutterBottom>
+									Sientete libre de contactarnos para consultar sobre precios de
+									cotización o acerca de nuestros productos
+								</Typography>
 							</CardContent>
-							<div
-								style={{
-									borderTopLeftRadius: 15,
-									borderBottomRightRadius: 15,
-									height: "40px",
-									width: "40px",
-									position: "absolute",
-									bottom: 0,
-									right: 0,
-									background: "#0556f3",
-									textAlign: "center",
-									display: "flex",
-									justifyContent: "center",
-									color: "white",
-									verticalAlign: "center",
-									alignItems: "center",
-								}}
-							>
-								<p className="mb-0 h2">で</p>
+							<div className={classes.infoIcon}>
+								<WhatsAppIcon />
 							</div>
 						</Card>
 					</Grid>
 					<Grid item xs={12} md={6} lg={3} xl={2}>
-						<Card
-							style={{
-								borderTop: "6px solid #0556f3",
-								borderRadius: 15,
-								position: "relative",
-							}}
-						>
+						<Card className={classes.infoCard}>
 							<CardContent>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
-								quaerat, reiciendis totam corporis rerum inventore fuga velit, quo
-								autem eveniet, mollitia officiis nisi accusamus! Exercitationem
-								reprehenderit similique possimus facere nulla.
+								<Typography variant="h6" paragraph gutterBottom>
+									Pagos
+								</Typography>
+								<Typography variant="body2" paragraph gutterBottom>
+									Aceptamos pagos mediante cualquier tarjeta de débito o crédito,
+									o en efectivo en el local
+								</Typography>
 							</CardContent>
-							<div
-								style={{
-									borderTopLeftRadius: 15,
-									borderBottomRightRadius: 15,
-									height: "40px",
-									width: "40px",
-									position: "absolute",
-									bottom: 0,
-									right: 0,
-									background: "#0556f3",
-									textAlign: "center",
-									display: "flex",
-									justifyContent: "center",
-									color: "white",
-									verticalAlign: "center",
-									alignItems: "center",
-								}}
-							>
-								<p className="mb-0 h2">で</p>
+							<div className={classes.infoIcon}>
+								<PaymentIcon />
 							</div>
 						</Card>
 					</Grid>
