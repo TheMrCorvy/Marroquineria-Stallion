@@ -1,102 +1,142 @@
-import { Container, Grid, Typography, Paper, Divider, Hidden } from "@material-ui/core"
+import {
+	Container,
+	Grid,
+	Typography,
+	Paper,
+	Divider,
+	Hidden,
+	Card,
+	CardMedia,
+	useMediaQuery,
+} from "@material-ui/core"
 
-import { makeStyles } from "@material-ui/core/styles"
+import { useTheme, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import Image from "next/image"
 
 import ListProductsSection from "../components/ListProductsSection"
 
-const useStyles = makeStyles({
-	container: {
-		backgroundColor: "#f5f5f5",
-		borderBottomLeftRadius: 15,
-		borderBottomRightRadius: 15,
-		paddingBottom: 50,
-	},
-	textCenter: {
-		textAlign: "center",
-	},
-	image: {
-		maxHeight: "100%",
-		maxWidth: "100%",
-		borderRadius: 15,
-	},
-	imgContainer: {
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center",
-		borderRadius: 15,
-		padding: 10,
-	},
-	galeryContainer: {
-		marginTop: "3rem",
-	},
-	title: {
-		marginTop: "3rem",
-		fontFamily: "Roboto Slab, serif",
-	},
-	subtitle: {
-		textDecoration: "underline",
-	},
-	contactContainer: {
-		marginTop: "3rem",
-		marginBottom: "3rem",
-		borderRadius: 15,
-		backgroundColor: "#f5f5f5",
-		padding: 50,
-	},
-	map: {
-		border: 0,
-		borderRadius: 15,
-		width: "100%",
-		paddingTop: "3rem",
-		paddingBottom: "3rem",
-	},
-	contactInfo: {
-		textAlign: "center",
-		marginTop: 50,
-	},
-})
+const r = (option: 1 | 2): number => {
+	// Option 1: corners option 2: middle point
+	if (option === 1) {
+		// A random number between 40 & 30
+		return Math.floor(Math.random() * (40 - 30 + 1)) + 30
+	} else {
+		// A random number between 52 & 48
+		return Math.floor(Math.random() * (52 - 48 + 1)) + 45
+	}
+}
+
+const useStyles = makeStyles((theme: Theme) =>
+	createStyles({
+		textCenter: {
+			textAlign: "center",
+		},
+		image: {
+			maxHeight: "100%",
+			maxWidth: "100%",
+			borderRadius: 15,
+		},
+		imgContainer: {
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			borderRadius: 15,
+			padding: 10,
+		},
+		galeryContainer: {
+			marginTop: "3rem",
+			[theme.breakpoints.down("sm")]: {
+				marginTop: "-3rem",
+			},
+		},
+		title: {
+			marginTop: "3rem",
+			fontFamily: "Roboto Slab, serif",
+		},
+		subtitle: {
+			textDecoration: "underline",
+		},
+		contactContainer: {
+			marginTop: "3rem",
+			marginBottom: "3rem",
+			borderRadius: 15,
+			backgroundColor: "#f5f5f5",
+			padding: 50,
+		},
+		map: {
+			border: 0,
+			borderRadius: 15,
+			width: "100%",
+			paddingTop: "3rem",
+			paddingBottom: "3rem",
+		},
+		contactInfo: {
+			textAlign: "center",
+			marginTop: 50,
+		},
+		randomRadius: {
+			width: "100%",
+			height: 250,
+			borderRadius: `${r(2)}% ${r(1)}% ${r(1)}% ${r(2)}% / ${r(1)}% ${r(2)}% ${r(1)}% ${r(
+				2
+			)}%`,
+		},
+		smallScreenImg: {
+			width: "100%",
+			height: 250,
+		},
+	})
+)
 
 export default function Home() {
 	const classes = useStyles()
 
+	const theme = useTheme()
+
+	const smallScreen = useMediaQuery(theme.breakpoints.down("sm"))
+
+	const fluidCard = () => {
+		if (smallScreen) {
+			return classes.smallScreenImg
+		} else {
+			return classes.randomRadius
+		}
+	}
+
 	return (
 		<>
-			<Container maxWidth="lg" className={classes.container}>
-				<Grid container justify="center" spacing={4} className={classes.textCenter}>
-					<Grid item xs={12}>
-						<Hidden xsDown>
-							<Typography variant="h3" className={classes.title}>
-								STALLION MARROQUINERÍA
-							</Typography>
-						</Hidden>
-						<Hidden smUp>
-							<Typography variant="h5" className={classes.title}>
-								STALLION MARROQUINERÍA
-							</Typography>
-						</Hidden>
-					</Grid>
-					<Grid item xs={12}>
-						<Typography variant="body1">
-							Tienda de Equipaje en Ciudad Autónoma de Buenos Aires
-						</Typography>
-					</Grid>
-					<Grid item xs={12}>
-						<Typography variant="h5" className={classes.subtitle}>
-							Somos Fabricantes
-						</Typography>
-					</Grid>
-				</Grid>
-			</Container>
 			<Container maxWidth="lg" className={classes.galeryContainer}>
-				<Grid container justify="center">
-					<Grid item xs={6} md={4} lg={3} className={classes.imgContainer}>
-						<Image
-							src={require("../../public/images/logo.png")}
-							alt="Tienda online de Marroquinería Stallion"
-							className={classes.image}
-						/>
+				<Grid container justify="space-around">
+					<Grid item xs={12} md={4} lg={3} className={classes.imgContainer}>
+						<Grid container spacing={4}>
+							<Grid item xs={12}>
+								<Hidden xsDown>
+									<Typography variant="h2" className={classes.title}>
+										STALLION MARROQUINERÍA
+									</Typography>
+								</Hidden>
+								<Hidden smUp>
+									<Typography variant="h5" className={classes.title}>
+										STALLION MARROQUINERÍA
+									</Typography>
+								</Hidden>
+							</Grid>
+							<Grid item xs={12}>
+								<Typography variant="body1">
+									Tienda de Equipaje en Ciudad Autónoma de Buenos Aires
+								</Typography>
+							</Grid>
+						</Grid>
+					</Grid>
+					<Grid item xs={12} md={4} lg={3} className={classes.imgContainer}>
+						<Card className={fluidCard()}>
+							<CardMedia
+								style={{ height: "100%", width: "100%" }}
+								image="https://cdn.dribbble.com/users/1049434/screenshots/2779152/luggage_dribbble.png?compress=1&resize=800x600"
+								title="logo"
+							/>
+						</Card>
 					</Grid>
 				</Grid>
 			</Container>
