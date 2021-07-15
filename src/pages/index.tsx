@@ -111,6 +111,7 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderTop: "6px solid #0556f3",
 			borderRadius: 15,
 			position: "relative",
+			minHeight: "10rem",
 		},
 		infoIcon: {
 			borderTopLeftRadius: 15,
@@ -127,6 +128,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			color: "white",
 			verticalAlign: "center",
 			alignItems: "center",
+		},
+		marginTop: {
+			marginTop: "3rem",
 		},
 	})
 )
@@ -175,7 +179,7 @@ export default function Home() {
 						<Card className={fluidCard()} elevation={5}>
 							<CardMedia
 								className={classes.maxWidthHeight}
-								image="https://cdn.dribbble.com/users/1049434/screenshots/2779152/luggage_dribbble.png?compress=1&resize=800x600"
+								image="https://t3.ftcdn.net/jpg/00/76/16/06/240_F_76160632_yXDNvyf4zbDuoSjxT4zrmMxUJ8wsJSF8.jpg"
 							/>
 						</Card>
 					</Grid>
@@ -206,13 +210,9 @@ export default function Home() {
 									</Typography>
 								</Hidden>
 							</Grid>
-							<Grid item xs={12}>
-								<Typography variant="subtitle1">
-									Fabricamos todo tipo de Artículos de Cuero
-								</Typography>
-							</Grid>
 						</Grid>
 					</Grid>
+
 					<Hidden smUp>
 						<Grid item xs={12} md={4} className={classes.imgContainer}>
 							<Card className={fluidCard()} elevation={5}>
@@ -250,7 +250,7 @@ export default function Home() {
 									Envíos
 								</Typography>
 								<Typography variant="body2" paragraph gutterBottom>
-									Envíos a todo el país mediante Correo Argentino, o moto
+									Envíos a todo el país mediante Correo Argentino, o también moto
 									mensajera solo para CABA y GBA
 								</Typography>
 							</CardContent>
@@ -266,8 +266,8 @@ export default function Home() {
 									Contacto
 								</Typography>
 								<Typography variant="body2" paragraph gutterBottom>
-									Sientete libre de contactarnos para consultar sobre precios de
-									cotización o acerca de nuestros productos
+									Siéntete libre de contactarnos para consultar sobre precios de
+									cotización o acerca cualquiera de nuestros productos
 								</Typography>
 							</CardContent>
 							<div className={classes.infoIcon}>
@@ -293,6 +293,15 @@ export default function Home() {
 					</Grid>
 				</Grid>
 			</Container>
+			<Grid container justify="center" className={classes.marginTop}>
+				<Grid item xs={6} md={3} lg={2} className={classes.imgContainer}>
+					<Image
+						src={require("../../public/images/logo.png")}
+						alt="Tienda online de Marroquinería Stallion"
+						className={classes.image}
+					/>
+				</Grid>
+			</Grid>
 			<ListProductsSection />
 			<Container maxWidth="lg" id="galeria">
 				<Grid container justify="center" spacing={4}>
