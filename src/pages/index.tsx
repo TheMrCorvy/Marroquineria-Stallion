@@ -8,6 +8,7 @@ import {
 	Card,
 	CardMedia,
 	useMediaQuery,
+	CardContent,
 } from "@material-ui/core"
 
 import { useTheme, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
@@ -23,7 +24,7 @@ const r = (option: 1 | 2): number => {
 		return Math.floor(Math.random() * (40 - 30 + 1)) + 30
 	} else {
 		// A random number between 52 & 48
-		return Math.floor(Math.random() * (52 - 48 + 1)) + 45
+		return Math.floor(Math.random() * (52 - 48 + 1)) + 48
 	}
 }
 
@@ -85,6 +86,15 @@ const useStyles = makeStyles((theme: Theme) =>
 		smallScreenImg: {
 			width: "100%",
 			height: 250,
+			borderRadius: 13,
+		},
+		maxWidthHeight: {
+			width: "100%",
+			height: "100%",
+		},
+		bigImg: {
+			height: "25rem",
+			width: "100%",
 		},
 	})
 )
@@ -109,7 +119,7 @@ export default function Home() {
 			<Container maxWidth="lg" className={classes.galeryContainer}>
 				<Grid container justify="space-around">
 					<Grid item xs={12} md={4} lg={3} className={classes.imgContainer}>
-						<Grid container spacing={4}>
+						<Grid container spacing={1}>
 							<Grid item xs={12}>
 								<Hidden xsDown>
 									<Typography variant="h2" className={classes.title}>
@@ -123,19 +133,218 @@ export default function Home() {
 								</Hidden>
 							</Grid>
 							<Grid item xs={12}>
-								<Typography variant="body1">
+								<Typography variant="subtitle1">
 									Tienda de Equipaje en Ciudad Autónoma de Buenos Aires
 								</Typography>
 							</Grid>
 						</Grid>
 					</Grid>
-					<Grid item xs={12} md={4} lg={3} className={classes.imgContainer}>
-						<Card className={fluidCard()}>
+					<Grid item xs={12} md={4} className={classes.imgContainer}>
+						<Card className={fluidCard()} elevation={5}>
 							<CardMedia
-								style={{ height: "100%", width: "100%" }}
+								className={classes.maxWidthHeight}
 								image="https://cdn.dribbble.com/users/1049434/screenshots/2779152/luggage_dribbble.png?compress=1&resize=800x600"
-								title="logo"
 							/>
+						</Card>
+					</Grid>
+				</Grid>
+				<Grid container justify="space-around" className={classes.galeryContainer}>
+					<Hidden xsDown>
+						<Grid item xs={12} md={6} className={classes.imgContainer}>
+							<Card className={classes.bigImg} elevation={5}>
+								<CardMedia
+									className={classes.maxWidthHeight}
+									image="/images/main_home.jpg"
+								/>
+							</Card>
+						</Grid>
+					</Hidden>
+
+					<Grid item xs={12} md={4} lg={3} className={classes.imgContainer}>
+						<Grid container spacing={1}>
+							<Grid item xs={12}>
+								<Hidden xsDown>
+									<Typography variant="h2" className={classes.title}>
+										Somos Fabricantes
+									</Typography>
+								</Hidden>
+								<Hidden smUp>
+									<Typography variant="h5" className={classes.title}>
+										Somos Fabricantes
+									</Typography>
+								</Hidden>
+							</Grid>
+							<Grid item xs={12}>
+								<Typography variant="subtitle1">
+									Fabricamos todo tipo de Artículos de Cuero
+								</Typography>
+							</Grid>
+						</Grid>
+					</Grid>
+					<Hidden smUp>
+						<Grid item xs={12} md={4} className={classes.imgContainer}>
+							<Card className={fluidCard()} elevation={5}>
+								<CardMedia
+									className={classes.maxWidthHeight}
+									image="/images/main_home.jpg"
+								/>
+							</Card>
+						</Grid>
+					</Hidden>
+				</Grid>
+			</Container>
+			<Container
+				maxWidth="xl"
+				style={{
+					background: "#f5f5f5",
+					marginTop: "3rem",
+					paddingTop: "2rem",
+					paddingBottom: "2rem",
+				}}
+			>
+				<Grid container justify="space-around" spacing={4}>
+					<Grid item xs={12} md={6} lg={3} xl={2}>
+						<Card
+							style={{
+								borderTop: "6px solid #0556f3",
+								borderRadius: 15,
+								position: "relative",
+							}}
+						>
+							<CardContent>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
+								quaerat, reiciendis totam corporis rerum inventore fuga velit, quo
+								autem eveniet, mollitia officiis nisi accusamus! Exercitationem
+								reprehenderit similique possimus facere nulla.
+							</CardContent>
+							<div
+								style={{
+									borderTopLeftRadius: 15,
+									borderBottomRightRadius: 15,
+									height: "40px",
+									width: "40px",
+									position: "absolute",
+									bottom: 0,
+									right: 0,
+									background: "#0556f3",
+									textAlign: "center",
+									display: "flex",
+									justifyContent: "center",
+									color: "white",
+									verticalAlign: "center",
+									alignItems: "center",
+								}}
+							>
+								<p className="mb-0 h2">で</p>
+							</div>
+						</Card>
+					</Grid>
+					<Grid item xs={12} md={6} lg={3} xl={2}>
+						<Card
+							style={{
+								borderTop: "6px solid #0556f3",
+								borderRadius: 15,
+								position: "relative",
+							}}
+						>
+							<CardContent>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
+								quaerat, reiciendis totam corporis rerum inventore fuga velit, quo
+								autem eveniet, mollitia officiis nisi accusamus! Exercitationem
+								reprehenderit similique possimus facere nulla.
+							</CardContent>
+							<div
+								style={{
+									borderTopLeftRadius: 15,
+									borderBottomRightRadius: 15,
+									height: "40px",
+									width: "40px",
+									position: "absolute",
+									bottom: 0,
+									right: 0,
+									background: "#0556f3",
+									textAlign: "center",
+									display: "flex",
+									justifyContent: "center",
+									color: "white",
+									verticalAlign: "center",
+									alignItems: "center",
+								}}
+							>
+								<p className="mb-0 h2">で</p>
+							</div>
+						</Card>
+					</Grid>
+					<Grid item xs={12} md={6} lg={3} xl={2}>
+						<Card
+							style={{
+								borderTop: "6px solid #0556f3",
+								borderRadius: 15,
+								position: "relative",
+							}}
+						>
+							<CardContent>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
+								quaerat, reiciendis totam corporis rerum inventore fuga velit, quo
+								autem eveniet, mollitia officiis nisi accusamus! Exercitationem
+								reprehenderit similique possimus facere nulla.
+							</CardContent>
+							<div
+								style={{
+									borderTopLeftRadius: 15,
+									borderBottomRightRadius: 15,
+									height: "40px",
+									width: "40px",
+									position: "absolute",
+									bottom: 0,
+									right: 0,
+									background: "#0556f3",
+									textAlign: "center",
+									display: "flex",
+									justifyContent: "center",
+									color: "white",
+									verticalAlign: "center",
+									alignItems: "center",
+								}}
+							>
+								<p className="mb-0 h2">で</p>
+							</div>
+						</Card>
+					</Grid>
+					<Grid item xs={12} md={6} lg={3} xl={2}>
+						<Card
+							style={{
+								borderTop: "6px solid #0556f3",
+								borderRadius: 15,
+								position: "relative",
+							}}
+						>
+							<CardContent>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
+								quaerat, reiciendis totam corporis rerum inventore fuga velit, quo
+								autem eveniet, mollitia officiis nisi accusamus! Exercitationem
+								reprehenderit similique possimus facere nulla.
+							</CardContent>
+							<div
+								style={{
+									borderTopLeftRadius: 15,
+									borderBottomRightRadius: 15,
+									height: "40px",
+									width: "40px",
+									position: "absolute",
+									bottom: 0,
+									right: 0,
+									background: "#0556f3",
+									textAlign: "center",
+									display: "flex",
+									justifyContent: "center",
+									color: "white",
+									verticalAlign: "center",
+									alignItems: "center",
+								}}
+							>
+								<p className="mb-0 h2">で</p>
+							</div>
 						</Card>
 					</Grid>
 				</Grid>
