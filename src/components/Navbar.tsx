@@ -237,12 +237,6 @@ const Navbar: FC = () => {
 
 					<Divider className={classes.divider} />
 
-					<ListItem button onClick={() => scrollToElement("galeria")}>
-						<ListItemText primary="Galería" />
-					</ListItem>
-
-					<Divider className={classes.divider} />
-
 					<ListItem button onClick={() => scrollToElement("contacto")}>
 						<ListItemText primary="Contacto / Cómo llegar" />
 					</ListItem>

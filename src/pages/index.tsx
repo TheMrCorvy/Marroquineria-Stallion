@@ -303,52 +303,6 @@ export default function Home() {
 				</Grid>
 			</Grid>
 			<ListProductsSection />
-			<Container maxWidth="lg" id="galeria">
-				<Grid container justify="center" spacing={4}>
-					<Grid item xs={12} className={classes.textCenter}>
-						<Typography variant="h3" className={classes.title}>
-							Galería
-						</Typography>
-						<Divider />
-					</Grid>
-					<Grid item xs={12} sm={6} lg={4}>
-						<Paper className={classes.imgContainer}>
-							<Image
-								src={require("../../public/images/galery_1.jpg")}
-								alt="Tienda online de Marroquinería Stallion"
-								className={classes.image}
-							/>
-						</Paper>
-					</Grid>
-					<Grid item xs={12} sm={6} lg={4}>
-						<Paper className={classes.imgContainer}>
-							<Image
-								src={require("../../public/images/galery_2.jpg")}
-								alt="Tienda online de Marroquinería Stallion"
-								className={classes.image}
-							/>
-						</Paper>
-					</Grid>
-					<Grid item xs={12} sm={6} lg={4}>
-						<Paper className={classes.imgContainer}>
-							<Image
-								src={require("../../public/images/galery_3.jpg")}
-								alt="Tienda online de Marroquinería Stallion"
-								className={classes.image}
-							/>
-						</Paper>
-					</Grid>
-					<Grid item xs={12} sm={6} lg={4}>
-						<Paper className={classes.imgContainer}>
-							<Image
-								src={require("../../public/images/galery_4.jpg")}
-								alt="Tienda online de Marroquinería Stallion"
-								className={classes.image}
-							/>
-						</Paper>
-					</Grid>
-				</Grid>
-			</Container>
 			<Container maxWidth="lg" className={classes.contactContainer} id="contacto">
 				<Grid container justify="space-around">
 					<Grid item xs={12} className={classes.textCenter}>
