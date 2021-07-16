@@ -23,6 +23,7 @@ import PaymentIcon from "@material-ui/icons/Payment"
 import Slider from "react-slick"
 
 import ListProductsSection from "../components/ListProductsSection"
+import ImageBanner from "../components/ImageBanner"
 
 const r = (option: 1 | 2): number => {
 	// Option 1: corners option 2: middle point
@@ -152,15 +153,6 @@ export default function Home() {
 		}
 	}
 
-	const settings = {
-		dots: true,
-		accessibility: true,
-		autoPlaySpeed: 6000,
-		autoplay: true,
-		arrows: false,
-		pauseOnHover: false,
-	}
-
 	return (
 		<>
 			<Container maxWidth="lg" className={classes.galeryContainer}>
@@ -198,49 +190,7 @@ export default function Home() {
 				<Grid container justify="space-around" className={classes.galeryContainer}>
 					<Hidden xsDown>
 						<Grid item xs={12} md={6}>
-							<Slider {...settings}>
-								<div>
-									<img className={classes.maxWidthHeight} />
-									<Image
-										src="http://placekitten.com/g/400/200"
-										title={"algo"}
-										alt={"algo"}
-										width={600}
-										height={300}
-										className={classes.maxWidthHeight}
-									/>
-								</div>
-								<div>
-									<Image
-										src="http://placekitten.com/g/400/200"
-										title={"algo"}
-										width={600}
-										height={300}
-										alt={"algo"}
-										className={classes.maxWidthHeight}
-									/>
-								</div>
-								<div>
-									<Image
-										src="http://placekitten.com/g/400/200"
-										title={"algo"}
-										alt={"algo"}
-										width={600}
-										height={300}
-										className={classes.maxWidthHeight}
-									/>
-								</div>
-								<div>
-									<Image
-										src="http://placekitten.com/g/400/200"
-										title={"algo"}
-										alt={"algo"}
-										width={600}
-										height={300}
-										className={classes.maxWidthHeight}
-									/>
-								</div>
-							</Slider>
+							<ImageBanner />
 						</Grid>
 					</Hidden>
 
@@ -264,48 +214,7 @@ export default function Home() {
 					<Hidden smUp>
 						<Grid item xs={12} md={4} className={classes.imgContainer}>
 							<Grid item xs={12} md={6}>
-								<Slider {...settings}>
-									<div>
-										<Image
-											src="http://placekitten.com/g/400/200"
-											title={"algo"}
-											alt={"algo"}
-											width={600}
-											height={300}
-											className={classes.maxWidthHeight}
-										/>
-									</div>
-									<div>
-										<Image
-											src="http://placekitten.com/g/400/200"
-											title={"algo"}
-											width={600}
-											height={300}
-											alt={"algo"}
-											className={classes.maxWidthHeight}
-										/>
-									</div>
-									<div>
-										<Image
-											src="http://placekitten.com/g/400/200"
-											title={"algo"}
-											alt={"algo"}
-											width={600}
-											height={300}
-											className={classes.maxWidthHeight}
-										/>
-									</div>
-									<div>
-										<Image
-											src="http://placekitten.com/g/400/200"
-											title={"algo"}
-											alt={"algo"}
-											width={600}
-											height={300}
-											className={classes.maxWidthHeight}
-										/>
-									</div>
-								</Slider>
+								<ImageBanner />
 							</Grid>
 						</Grid>
 					</Hidden>
