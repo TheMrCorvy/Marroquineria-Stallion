@@ -10,6 +10,7 @@ import {
 	CardMedia,
 	useMediaQuery,
 	CardContent,
+	IconButton,
 } from "@material-ui/core"
 
 import { useTheme, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
@@ -18,6 +19,8 @@ import MonetizationOnIcon from "@material-ui/icons/MonetizationOn"
 import LocalShippingIcon from "@material-ui/icons/LocalShipping"
 import WhatsAppIcon from "@material-ui/icons/WhatsApp"
 import PaymentIcon from "@material-ui/icons/Payment"
+
+import Slider from "react-slick"
 
 import ListProductsSection from "../components/ListProductsSection"
 
@@ -149,6 +152,15 @@ export default function Home() {
 		}
 	}
 
+	const settings = {
+		dots: true,
+		accessibility: true,
+		autoPlaySpeed: 6000,
+		autoplay: true,
+		arrows: false,
+		pauseOnHover: false,
+	}
+
 	return (
 		<>
 			<Container maxWidth="lg" className={classes.galeryContainer}>
@@ -185,13 +197,50 @@ export default function Home() {
 				</Grid>
 				<Grid container justify="space-around" className={classes.galeryContainer}>
 					<Hidden xsDown>
-						<Grid item xs={12} md={6} className={classes.imgContainer}>
-							<Card className={classes.bigImg} elevation={5}>
-								<CardMedia
-									className={classes.maxWidthHeight}
-									image="/images/main_home.jpg"
-								/>
-							</Card>
+						<Grid item xs={12} md={6}>
+							<Slider {...settings}>
+								<div>
+									<img className={classes.maxWidthHeight} />
+									<Image
+										src="http://placekitten.com/g/400/200"
+										title={"algo"}
+										alt={"algo"}
+										width={600}
+										height={300}
+										className={classes.maxWidthHeight}
+									/>
+								</div>
+								<div>
+									<Image
+										src="http://placekitten.com/g/400/200"
+										title={"algo"}
+										width={600}
+										height={300}
+										alt={"algo"}
+										className={classes.maxWidthHeight}
+									/>
+								</div>
+								<div>
+									<Image
+										src="http://placekitten.com/g/400/200"
+										title={"algo"}
+										alt={"algo"}
+										width={600}
+										height={300}
+										className={classes.maxWidthHeight}
+									/>
+								</div>
+								<div>
+									<Image
+										src="http://placekitten.com/g/400/200"
+										title={"algo"}
+										alt={"algo"}
+										width={600}
+										height={300}
+										className={classes.maxWidthHeight}
+									/>
+								</div>
+							</Slider>
 						</Grid>
 					</Hidden>
 
@@ -214,12 +263,50 @@ export default function Home() {
 
 					<Hidden smUp>
 						<Grid item xs={12} md={4} className={classes.imgContainer}>
-							<Card className={fluidCard()} elevation={5}>
-								<CardMedia
-									className={classes.maxWidthHeight}
-									image="/images/main_home.jpg"
-								/>
-							</Card>
+							<Grid item xs={12} md={6}>
+								<Slider {...settings}>
+									<div>
+										<Image
+											src="http://placekitten.com/g/400/200"
+											title={"algo"}
+											alt={"algo"}
+											width={600}
+											height={300}
+											className={classes.maxWidthHeight}
+										/>
+									</div>
+									<div>
+										<Image
+											src="http://placekitten.com/g/400/200"
+											title={"algo"}
+											width={600}
+											height={300}
+											alt={"algo"}
+											className={classes.maxWidthHeight}
+										/>
+									</div>
+									<div>
+										<Image
+											src="http://placekitten.com/g/400/200"
+											title={"algo"}
+											alt={"algo"}
+											width={600}
+											height={300}
+											className={classes.maxWidthHeight}
+										/>
+									</div>
+									<div>
+										<Image
+											src="http://placekitten.com/g/400/200"
+											title={"algo"}
+											alt={"algo"}
+											width={600}
+											height={300}
+											className={classes.maxWidthHeight}
+										/>
+									</div>
+								</Slider>
+							</Grid>
 						</Grid>
 					</Hidden>
 				</Grid>
