@@ -1,5 +1,7 @@
 import { FC, useState, useEffect } from "react"
 
+import { useRouter } from "next/router"
+
 import {
 	Card,
 	CardActions,
@@ -80,6 +82,8 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
+	const router = useRouter()
+
 	const dispatch = useDispatch()
 
 	const classes = useStyles()
@@ -108,6 +112,8 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 
 	const buyNow = () => {
 		dispatch(addToCart(productFromProps, 1))
+
+		router.push("/checkout")
 	}
 
 	if (loading) {

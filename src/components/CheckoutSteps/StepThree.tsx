@@ -43,7 +43,7 @@ const StepThree: FC<Props> = ({ handleNext, handleBack }) => {
 				<Grid container justify="center" spacing={4} className={classes.payWithCash}>
 					<Grid item>
 						<Button variant="contained" disableElevation color="secondary">
-							Finalizar
+							Finalizar Compra
 						</Button>
 					</Grid>
 				</Grid>

@@ -1,5 +1,7 @@
 import { FC, useEffect, useState } from "react"
 
+import { useRouter } from "next/router"
+
 import {
 	Button,
 	Typography,
@@ -92,6 +94,8 @@ const useStyles = makeStyles({
 })
 
 const ShowProduct: FC = () => {
+	const router = useRouter()
+
 	const { product } = useSelector((state: RootState) => state.product)
 
 	const dispatch = useDispatch()
@@ -146,6 +150,8 @@ const ShowProduct: FC = () => {
 	const buyNow = () => {
 		if (product && units <= product.stock && units > 0) {
 			dispatch(addToCart(product, units))
+
+			router.push("/checkout")
 		}
 	}
 

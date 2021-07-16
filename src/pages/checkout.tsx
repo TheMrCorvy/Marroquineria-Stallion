@@ -122,10 +122,6 @@ const Checkout = () => {
 		}
 	}, [cart])
 
-	useEffect(() => {
-		console.log(user)
-	}, [user])
-
 	const handleNext = (nextStep: 0 | 1 | 2 | 3) => {
 		if (nextStep === 2 || nextStep === 3) {
 			setActiveStep(nextStep)
