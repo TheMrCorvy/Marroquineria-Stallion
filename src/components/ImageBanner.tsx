@@ -18,7 +18,7 @@ const ImageBanner: FC = () => {
 		<Slider {...settings}>
 			<div>
 				<Image
-					src="http://placekitten.com/g/400/200"
+					src="/images/banner_1.jpg"
 					title={"algo"}
 					alt={"algo"}
 					width={600}
@@ -27,7 +27,7 @@ const ImageBanner: FC = () => {
 			</div>
 			<div>
 				<Image
-					src="http://placekitten.com/g/400/200"
+					src="/images/banner_2.jpg"
 					title={"algo"}
 					width={600}
 					height={300}
@@ -36,7 +36,7 @@ const ImageBanner: FC = () => {
 			</div>
 			<div>
 				<Image
-					src="http://placekitten.com/g/400/200"
+					src="/images/banner_3.jpg"
 					title={"algo"}
 					alt={"algo"}
 					width={600}
@@ -45,7 +45,7 @@ const ImageBanner: FC = () => {
 			</div>
 			<div>
 				<Image
-					src="http://placekitten.com/g/400/200"
+					src="/images/banner_4.jpg"
 					title={"algo"}
 					alt={"algo"}
 					width={600}
