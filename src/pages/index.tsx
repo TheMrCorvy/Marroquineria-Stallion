@@ -4,7 +4,6 @@ import {
 	Container,
 	Grid,
 	Typography,
-	Paper,
 	Divider,
 	Hidden,
 	Card,
