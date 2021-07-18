@@ -1,20 +1,9 @@
 import { FC, MouseEvent, useState, useEffect } from "react"
 
-import {
-	Container,
-	Grid,
-	Button,
-	Typography,
-	Divider,
-	Menu,
-	MenuItem,
-	Fab,
-	Hidden,
-} from "@material-ui/core"
+import { Container, Grid, Typography, Divider, Fab, Hidden, useMediaQuery } from "@material-ui/core"
 
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import { makeStyles, createStyles, Theme, useTheme } from "@material-ui/core/styles"
 
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt"
 
 import Pagination from "@material-ui/lab/Pagination"
@@ -131,7 +120,7 @@ const placeholder = [
 		id: 0,
 		title: "",
 		description: "",
-		price: "",
+		price: 0,
 		stock: 0,
 		images: [],
 		brand: "",
@@ -141,47 +130,71 @@ const placeholder = [
 const ListProductsSection: FC = () => {
 	const { product } = useSelector((state: RootState) => state.product)
 
-	const classes = useStyles()
+	const theme = useTheme()
 
-	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+	const smallScreen = useMediaQuery(theme.breakpoints.down("sm"))
+
+	const classes = useStyles()
 
 	const [loading, setLoading] = useState(true)
 
 	const [products, setProducts] = useState<ProductCardProps[]>(placeholder)
 
+	const [totalPages, setTotalPages] = useState(1)
+
+	const [totalResults, setTotalResults] = useState(0)
+
+	const [currentPage, setCurrentPage] = useState(1)
+
+	const [fromResult, setFromResult] = useState(1)
+
+	const [toResult, setToResult] = useState(10)
+
 	useEffect(() => {
-		getProductsFromApi()
+		getProductsFromApi("?page=1")
 	}, [])
 
-	const getProductsFromApi = async (urlParams?: string) => {
-		const res = await fetch("https://api.jsonbin.io/b/60dc60a59328b059d7b3595e")
-		const data = await res.json()
+	const getProductsFromApi = async (urlParams: string) => {
+		const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
-		setProducts(data.products)
+		if (apiUrl) {
+			const res = await fetch(apiUrl + "/get-products" + urlParams)
+			const data = await res.json()
 
-		setLoading(false)
-	}
+			setProducts(data.products.data)
 
-	const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-		setAnchorEl(event.currentTarget)
-	}
+			setTotalPages(data.products.last_page)
 
-	const handleClose = () => {
-		setAnchorEl(null)
+			setTotalResults(data.products.total)
+
+			setToResult(data.products.to)
+
+			setFromResult(data.products.from)
+
+			setLoading(false)
+		}
 	}
 
 	const handlePageChange = async (event: object, page: number) => {
 		const productsContainer = document.getElementById("products-list")
 
-		if (productsContainer) {
+		const productsSection = document.getElementById("productos")
+
+		if (productsContainer && smallScreen) {
 			productsContainer.scrollTo({ top: 0, left: 0, behavior: "smooth" })
 		}
+
+		if (productsSection && !smallScreen) {
+			productsSection.scrollIntoView({ behavior: "smooth", block: "start" })
+		}
+
+		setCurrentPage(page)
 
 		setTimeout(() => {
 			setLoading(true)
 			setProducts(placeholder)
 
-			getProductsFromApi("page=" + page)
+			getProductsFromApi("?page=" + page)
 		}, 1000)
 	}
 
@@ -229,33 +242,10 @@ const ListProductsSection: FC = () => {
 							<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
 								<Typography variant="h6">Nuestros Productos</Typography>
 								<Divider />
-								{/* <Button
-									aria-controls="simple-menu"
-									aria-haspopup="true"
-									onClick={handleClick}
-									className={classes.menuBtn}
-									variant="outlined"
-									endIcon={<ExpandMoreIcon />}
-									color="primary"
-									size="small"
-								>
-									Categorías
-								</Button>
-								<Menu
-									id="simple-menu"
-									anchorEl={anchorEl}
-									keepMounted
-									open={Boolean(anchorEl)}
-									onClose={handleClose}
-								>
-									<MenuItem onClick={handleClose}>Valijas</MenuItem>
-									<MenuItem onClick={handleClose}>Cuero</MenuItem>
-									<MenuItem onClick={handleClose}>Bolsos</MenuItem>
-								</Menu> */}
 							</Grid>
 							<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
 								<Typography variant="subtitle2">
-									Mostrando 1 - 10 de 100 Resultados
+									Mostrando {fromResult} - {toResult} de {totalResults} Resultados
 								</Typography>
 							</Grid>
 
@@ -304,7 +294,7 @@ const ListProductsSection: FC = () => {
 
 					<Grid item className={classes.pagination}>
 						<Pagination
-							count={10}
+							count={totalPages}
 							color="primary"
 							onChange={handlePageChange}
 							size="small"

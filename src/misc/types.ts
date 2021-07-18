@@ -6,7 +6,7 @@ export interface ProductCardProps {
 	id: number
 	title: string
 	description: string
-	price: string | number
+	price: number
 	stock: number
 	images: Images[]
 	brand: string
@@ -27,7 +27,7 @@ export type Address = {
 export type Price = {
 	region: string
 	delay: string
-	price: string | number
+	price: string
 }
 
 export interface ShippingOption {

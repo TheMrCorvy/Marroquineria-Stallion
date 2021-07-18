@@ -116,6 +116,11 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 		router.push("/checkout")
 	}
 
+	const formatter = new Intl.NumberFormat("es-AR", {
+		style: "currency",
+		currency: "ARS",
+	})
+
 	if (loading) {
 		return (
 			<Card elevation={2} className={classes.card}>
@@ -190,7 +195,7 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 						{title}
 					</Typography>
 					<Typography variant="subtitle1" className={classes.textGreen} gutterBottom>
-						$ {price}
+						{formatter.format(price)}
 					</Typography>
 					<Typography variant="body2" color="textSecondary" component="p">
 						{desc}

@@ -165,6 +165,11 @@ const ShowProduct: FC = () => {
 		setCopied(false)
 	}
 
+	const formatter = new Intl.NumberFormat("es-AR", {
+		style: "currency",
+		currency: "ARS",
+	})
+
 	if (!product) {
 		return null
 	} else {
@@ -298,7 +303,7 @@ const ShowProduct: FC = () => {
 											/>
 										)}
 										<Typography variant="h5" style={{ paddingTop: 10 }}>
-											$ {product.price}
+											{formatter.format(product.price)}
 										</Typography>
 									</Grid>
 
