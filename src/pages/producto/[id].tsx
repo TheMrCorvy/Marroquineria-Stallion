@@ -51,8 +51,10 @@ export default function ProductView() {
 	const router = useRouter()
 
 	useEffect(() => {
-		getProductFromApi(Number(router.query.id))
-	}, [])
+		if (router.query.id) {
+			getProductFromApi(Number(router.query.id))
+		}
+	}, [router.query.id])
 
 	const getProductFromApi = async (id: number) => {
 		const apiUrl = process.env.NEXT_PUBLIC_API_URL
