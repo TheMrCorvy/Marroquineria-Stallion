@@ -98,7 +98,6 @@ const steps = ["Datos y Domicilio de Facturación", "Datos para el envío", "Pag
 
 const Checkout = () => {
 	const { cart } = useSelector((state: RootState) => state.cart)
-	const user = useSelector((state: RootState) => state.user)
 
 	const router = useRouter()
 
@@ -115,6 +114,11 @@ const Checkout = () => {
 	 * 1, 2, 3, = form steps
 	 */
 	const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3>(1)
+
+	const formatter = new Intl.NumberFormat("es-AR", {
+		style: "currency",
+		currency: "ARS",
+	})
 
 	useEffect(() => {
 		if (!cart.products[0]) {
@@ -162,7 +166,7 @@ const Checkout = () => {
 			totalPrice += product.units * Number(product.product.price)
 		})
 
-		return totalPrice
+		return formatter.format(totalPrice)
 	}
 
 	if (!cart.products[0]) {
@@ -199,7 +203,7 @@ const Checkout = () => {
 										className={classes.textGreen}
 										style={{ marginLeft: 9 }}
 									>
-										Precio Total: $ {calcTotalPrice()}
+										Precio Total: {calcTotalPrice()}
 									</Typography>
 									<Tooltip
 										title="Ver toda la lista de Productos"
@@ -258,7 +262,8 @@ const Checkout = () => {
 													paragraph
 													className={classes.textGreen}
 												>
-													$ {product.product.price} (por unidad)
+													{formatter.format(product.product.price)} (por
+													unidad)
 												</Typography>
 											</div>
 										))}

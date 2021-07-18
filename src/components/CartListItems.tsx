@@ -76,6 +76,11 @@ const CartListItems: FC = () => {
 
 	const classes = useStyles()
 
+	const formatter = new Intl.NumberFormat("es-AR", {
+		style: "currency",
+		currency: "ARS",
+	})
+
 	const cartIsEmpty = () => {
 		return (
 			<Typography variant="h5" paragraph gutterBottom>
@@ -109,7 +114,7 @@ const CartListItems: FC = () => {
 													variant="subtitle1"
 													className={classes.textGreen}
 												>
-													$ {product.product.price}
+													{formatter.format(product.product.price)}
 												</Typography>
 											</Grid>
 										</Grid>
