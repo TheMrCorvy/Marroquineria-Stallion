@@ -51,19 +51,28 @@ export default function ProductView() {
 	const router = useRouter()
 
 	useEffect(() => {
-		getProductFromApi(Number(router.query))
+		getProductFromApi(Number(router.query.id))
 	}, [])
 
 	const getProductFromApi = async (id: number) => {
-		const res = await fetch("https://api.jsonbin.io/b/60dc68bc9328b059d7b35eb0/1")
-		const data = await res.json()
+		const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
-		if (data.product) {
-			setLoading(false)
+		if (apiUrl) {
+			const res = await fetch(apiUrl + "/find-product/" + id, {
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+			})
+			const data = await res.json()
 
-			dispatch(displayProduct(data.product))
-		} else {
-			router.push("/producto-no-encontrado")
+			if (data.product) {
+				setLoading(false)
+
+				dispatch(displayProduct(data.product))
+			} else {
+				router.push("/producto-no-encontrado")
+			}
 		}
 	}
 
