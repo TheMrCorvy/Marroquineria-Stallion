@@ -158,7 +158,11 @@ const ListProductsSection: FC = () => {
 		const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 		if (apiUrl) {
-			const res = await fetch(apiUrl + "/get-products" + urlParams)
+			const res = await fetch(apiUrl + "/get-products" + urlParams, {
+				headers: {
+					Accept: "application/json",
+				},
+			})
 			const data = await res.json()
 
 			setProducts(data.products.data)

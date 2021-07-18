@@ -2,12 +2,11 @@ import { FC, useState } from "react"
 
 import {
 	Button,
-	TextField,
+	CircularProgress,
 	Dialog,
 	DialogActions,
 	DialogContent,
 	DialogTitle,
-	MenuItem,
 	ListItem,
 	ListItemText,
 	FormControl,
@@ -48,6 +47,10 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 
 	const [open, setOpen] = useState(false)
 
+	const [loading, setLoading] = useState(false)
+
+	const [message, setMessage] = useState("")
+
 	const handleClickOpen = () => {
 		setOpen(true)
 	}
@@ -56,9 +59,34 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 		setOpen(false)
 	}
 
-	const onSubmit = (data: FormInputs) => {
-		console.log("production api call")
-		console.log(data)
+	const onSubmit = async (formData: FormInputs) => {
+		setLoading(true)
+
+		const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+		if (apiUrl) {
+			const res = await fetch(apiUrl + "/ask-for-fund", {
+				body: JSON.stringify({
+					name: formData.name,
+					email: formData.email,
+					phone: formData.phone,
+					mail_body: formData.mail_body,
+				}),
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+			})
+
+			const data = await res.json()
+
+			setLoading(false)
+
+			setMessage(data.message)
+
+			console.log(data)
+		}
 	}
 
 	const selectButton = () => {
@@ -86,6 +114,168 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 		)
 	}
 
+	const renderDialogContent = () => {
+		if (!loading) {
+			return (
+				<>
+					<Grid item xs={12}>
+						<FormControl variant="outlined" fullWidth>
+							<InputLabel>Nombre</InputLabel>
+							<OutlinedInput
+								label="Nombre"
+								name="name"
+								required
+								type="text"
+								inputProps={{
+									ref: register({
+										required: {
+											value: true,
+											message: requiredMessage,
+										},
+										maxLength: {
+											value: 190,
+											message: maxCharMessage,
+										},
+										minLength: {
+											value: 5,
+											message: minCharMessage,
+										},
+									}),
+								}}
+								error={errors?.name ? true : false}
+							/>
+							{errors.name && (
+								<Typography variant="body2">{errors.name.message}</Typography>
+							)}
+						</FormControl>
+					</Grid>
+					<Grid item xs={12}>
+						<FormControl variant="outlined" fullWidth>
+							<InputLabel>Número de Teléfono</InputLabel>
+							<OutlinedInput
+								label="Número de Teléfono"
+								name="phone"
+								required
+								type="text"
+								inputProps={{
+									ref: register({
+										required: {
+											value: true,
+											message: requiredMessage,
+										},
+										maxLength: {
+											value: 190,
+											message: maxCharMessage,
+										},
+										minLength: {
+											value: 5,
+											message: minCharMessage,
+										},
+									}),
+								}}
+								error={errors?.phone ? true : false}
+							/>
+							{errors.phone && (
+								<Typography variant="body2">{errors.phone.message}</Typography>
+							)}
+						</FormControl>
+					</Grid>
+					<Grid item xs={12}>
+						<FormControl variant="outlined" fullWidth>
+							<InputLabel>Correo Electrónico</InputLabel>
+							<OutlinedInput
+								label="Correo Electrónico"
+								name="email"
+								required
+								type="email"
+								inputProps={{
+									ref: register({
+										required: {
+											value: true,
+											message: requiredMessage,
+										},
+										maxLength: {
+											value: 190,
+											message: maxCharMessage,
+										},
+										minLength: {
+											value: 5,
+											message: minCharMessage,
+										},
+										pattern: {
+											message: "El email ingresado debe ser válido.",
+											value: emailPattern,
+										},
+									}),
+								}}
+								error={errors?.email ? true : false}
+							/>
+							{errors.email && (
+								<Typography variant="body2">{errors.email.message}</Typography>
+							)}
+						</FormControl>
+					</Grid>
+					<Grid item xs={12}>
+						<FormControl variant="outlined" fullWidth>
+							<InputLabel>¿En qué podemos ayudarte?</InputLabel>
+							<OutlinedInput
+								label="¿En qué podemos ayudarte?"
+								name="mail_body"
+								placeholder={placeholder}
+								required
+								multiline
+								type="text"
+								inputProps={{
+									ref: register({
+										required: {
+											value: true,
+											message: requiredMessage,
+										},
+										minLength: {
+											value: 5,
+											message: minCharMessage,
+										},
+										maxLength: {
+											value: 190,
+											message: maxCharMessage,
+										},
+									}),
+								}}
+								error={errors?.mail_body ? true : false}
+							/>
+							{errors.mail_body && (
+								<Typography variant="body2">{errors.mail_body.message}</Typography>
+							)}
+						</FormControl>
+					</Grid>
+					{message && (
+						<Grid item xs={12}>
+							<Typography variant="h6" style={{ marginTop: 20 }}>
+								{message}
+							</Typography>
+						</Grid>
+					)}
+				</>
+			)
+		} else {
+			return (
+				<Grid
+					item
+					xs={12}
+					style={{
+						display: "flex",
+						textAlign: "center",
+						justifyContent: "center",
+						verticalAlign: "center",
+						alignItems: "center",
+					}}
+				>
+					<CircularProgress />
+				</Grid>
+			)
+		}
+	}
+
 	return (
 		<>
 			{selectButton()}
@@ -101,140 +291,7 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 					<DialogTitle id="form-dialog-title">Pedir una cotización</DialogTitle>
 					<DialogContent>
 						<Grid container justify="space-around" spacing={2}>
-							<Grid item xs={12}>
-								<FormControl variant="outlined" fullWidth>
-									<InputLabel>Nombre</InputLabel>
-									<OutlinedInput
-										label="Nombre"
-										name="name"
-										required
-										type="text"
-										inputProps={{
-											ref: register({
-												required: {
-													value: true,
-													message: requiredMessage,
-												},
-												maxLength: {
-													value: 190,
-													message: maxCharMessage,
-												},
-												minLength: {
-													value: 5,
-													message: minCharMessage,
-												},
-											}),
-										}}
-										error={errors?.name ? true : false}
-									/>
-									{errors.name && (
-										<Typography variant="body2">
-											{errors.name.message}
-										</Typography>
-									)}
-								</FormControl>
-							</Grid>
-							<Grid item xs={12}>
-								<FormControl variant="outlined" fullWidth>
-									<InputLabel>Número de Teléfono</InputLabel>
-									<OutlinedInput
-										label="Número de Teléfono"
-										name="phone"
-										required
-										type="text"
-										inputProps={{
-											ref: register({
-												required: {
-													value: true,
-													message: requiredMessage,
-												},
-												maxLength: {
-													value: 190,
-													message: maxCharMessage,
-												},
-												minLength: {
-													value: 5,
-													message: minCharMessage,
-												},
-											}),
-										}}
-										error={errors?.phone ? true : false}
-									/>
-									{errors.phone && (
-										<Typography variant="body2">
-											{errors.phone.message}
-										</Typography>
-									)}
-								</FormControl>
-							</Grid>
-							<Grid item xs={12}>
-								<FormControl variant="outlined" fullWidth>
-									<InputLabel>Correo Electrónico</InputLabel>
-									<OutlinedInput
-										label="Correo Electrónico"
-										name="email"
-										required
-										type="email"
-										inputProps={{
-											ref: register({
-												required: {
-													value: true,
-													message: requiredMessage,
-												},
-												maxLength: {
-													value: 190,
-													message: maxCharMessage,
-												},
-												minLength: {
-													value: 5,
-													message: minCharMessage,
-												},
-												pattern: {
-													message: "El email ingresado debe ser válido.",
-													value: emailPattern,
-												},
-											}),
-										}}
-										error={errors?.email ? true : false}
-									/>
-									{errors.email && (
-										<Typography variant="body2">
-											{errors.email.message}
-										</Typography>
-									)}
-								</FormControl>
-							</Grid>
-							<Grid item xs={12}>
-								<FormControl variant="outlined" fullWidth>
-									<InputLabel>¿En qué podemos ayudarte?</InputLabel>
-									<OutlinedInput
-										label="¿En qué podemos ayudarte?"
-										name="mail_body"
-										placeholder={placeholder}
-										required
-										multiline
-										type="text"
-										inputProps={{
-											ref: register({
-												required: {
-													value: true,
-													message: requiredMessage,
-												},
-												minLength: {
-													value: 5,
-													message: minCharMessage,
-												},
-											}),
-										}}
-										error={errors?.mail_body ? true : false}
-									/>
-									{errors.mail_body && (
-										<Typography variant="body2">
-											{errors.mail_body.message}
-										</Typography>
-									)}
-								</FormControl>
-							</Grid>
+							{renderDialogContent()}
 						</Grid>
 					</DialogContent>
 					<DialogActions>
