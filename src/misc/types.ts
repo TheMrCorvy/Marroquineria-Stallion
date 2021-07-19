@@ -32,7 +32,7 @@ export type Price = {
 
 export interface ShippingOption {
 	method: string
-	price: Price
+	shipping_zone: Price
 }
 
 export interface User {

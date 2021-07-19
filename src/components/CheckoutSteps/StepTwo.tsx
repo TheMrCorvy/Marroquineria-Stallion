@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState } from "react"
+import { FC, ChangeEvent, useState, useEffect } from "react"
 
 import {
 	Button,
@@ -13,6 +13,7 @@ import {
 	FormControlLabel,
 	RadioGroup,
 	Radio,
+	CircularProgress,
 } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
@@ -33,36 +34,21 @@ type Props = {
 
 interface ShippingOption {
 	method: string
-	prices: Price[]
+	shipping_zones: Price[]
 }
 
 const requiredMessage = "Este campo es obligatorio."
 const minCharMessage = "Este campo debe tener al menos 5 caractéres."
 const maxCharMessage = "Este campo no puede contener más de 190 caractéres."
 
-const shippingOptions: ShippingOption[] = [
+const placeholder: ShippingOption[] = [
 	{
-		method: "Lo retiraré en el local",
-		prices: [
+		method: "",
+		shipping_zones: [
 			{
-				region: "Direción del Local: San José 155, Ciudad Autónoma de Buenos Aires",
-				delay: "No hay.",
-				price: "Sin Costo.",
-			},
-		],
-	},
-	{
-		method: "Moto Mensajera",
-		prices: [
-			{
-				region: "Ciudad Autónoma de Buenos Aires",
-				delay: "De 1 a 3 días hábiles.",
-				price: "$ 500",
-			},
-			{
-				region: "Provincia / Gran Buenos Aires",
-				delay: "De 1 a 5 días hábiles.",
-				price: "$ 900",
+				region: "",
+				delay: "",
+				price: "",
 			},
 		],
 	},
@@ -81,12 +67,47 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 
 	const { register, errors, handleSubmit } = useForm()
 
-	const [radioValue, setRadioValue] = useState(shippingOptions[0].prices[0].region)
+	const [radioValue, setRadioValue] = useState("")
+
+	const [loading, setLoading] = useState(true)
+
+	const [shippingOptions, setShippingOptions] = useState<ShippingOption[]>(placeholder)
 
 	const [method, setMethod] = useState({
-		price: shippingOptions[0].prices[0],
-		method: shippingOptions[0].method,
+		shipping_zone: placeholder[0].shipping_zones[0],
+		method: "",
 	})
+
+	useEffect(() => {
+		getShippingOptions()
+	}, [])
+
+	const getShippingOptions = async () => {
+		const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+		if (apiUrl) {
+			const res = await fetch(apiUrl + "/get-shipping-options", {
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+			})
+			const data = await res.json()
+
+			if (data.shipping_options) {
+				setLoading(false)
+
+				setShippingOptions(data.shipping_options)
+
+				setRadioValue(data.shipping_options[0].shipping_zones[0].region)
+
+				setMethod({
+					shipping_zone: data.shipping_options[0].shipping_zones[0],
+					method: data.shipping_options[0].method,
+				})
+			}
+		}
+	}
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const target = event.target as HTMLInputElement
@@ -96,12 +117,14 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 		setRadioValue(target.value)
 
 		if (inputMethod) {
-			const shippingInfo = shippingOptions[Number(inputMethod)].prices.filter((price) => {
-				return price.region === target.value
-			})
+			const shippingInfo = shippingOptions[Number(inputMethod)].shipping_zones.filter(
+				(zone) => {
+					return zone.region === target.value
+				}
+			)
 
 			setMethod({
-				price: shippingInfo[0],
+				shipping_zone: shippingInfo[0],
 				method: shippingOptions[Number(inputMethod)].method,
 			})
 		}
@@ -399,87 +422,99 @@ const StepTwo: FC<Props> = ({ handleNext, handleBack }) => {
 				<Grid item xs={12} className={classes.textCenter} style={{ marginTop: "3rem" }}>
 					<Typography variant="subtitle1">Opciones de Entrega</Typography>
 				</Grid>
-				{shippingOptions.map((option, index) => (
-					<Grid item xs={12} key={index}>
-						<Accordion
-							defaultExpanded={index === 0 ? true : false}
-							style={{ background: "#f3f3f3" }}
-						>
-							<AccordionSummary
-								expandIcon={<ExpandMoreIcon />}
-								aria-controls="panel1a-content"
-								id="panel1a-header"
-							>
-								<Typography>{option.method}</Typography>
-							</AccordionSummary>
-							<AccordionDetails>
-								<Grid container justify="space-around" spacing={4}>
-									<Grid item xs={12}>
-										<RadioGroup
-											aria-label="gender"
-											name="gender1"
-											value={radioValue}
-											onChange={handleChange}
-										>
-											{option.prices.map((price, i) => (
-												<div
-													key={i}
-													style={{
-														marginBottom: "3rem",
-													}}
-												>
-													<FormControlLabel
-														value={price.region}
-														control={
-															<Radio
-																checked={
-																	price.region === radioValue
-																}
-																name={"" + index}
-															/>
-														}
-														label={price.region}
-													/>
-													<Typography variant="body2" color="secondary">
-														Costo Adicional: {price.price}
-													</Typography>
-													<Typography variant="body2">
-														Demora de Entrega: {price.delay}
-													</Typography>
-												</div>
-											))}
-										</RadioGroup>
-									</Grid>
 
-									{index !== 0 ? (
-										renderForm()
-									) : (
-										<Grid
-											container
-											justify="space-around"
-											spacing={4}
-											style={{ paddingBottom: 20 }}
-										>
-											<Grid item>
-												<Button onClick={() => handleBack(1)}>Atrás</Button>
-											</Grid>
-											<Grid item>
-												<Button
-													variant="contained"
-													color="primary"
-													disableElevation
-													onClick={nextStep}
-												>
-													Continuar
-												</Button>
-											</Grid>
-										</Grid>
-									)}
-								</Grid>
-							</AccordionDetails>
-						</Accordion>
+				{loading ? (
+					<Grid item xs={12} className={classes.textCenter}>
+						<CircularProgress />
 					</Grid>
-				))}
+				) : (
+					shippingOptions.map((option, index) => (
+						<Grid item xs={12} key={index}>
+							<Accordion
+								defaultExpanded={index === 0 ? true : false}
+								style={{ background: "#f3f3f3" }}
+							>
+								<AccordionSummary
+									expandIcon={<ExpandMoreIcon />}
+									aria-controls="panel1a-content"
+									id="panel1a-header"
+								>
+									<Typography>{option.method}</Typography>
+								</AccordionSummary>
+								<AccordionDetails>
+									<Grid container justify="space-around" spacing={4}>
+										<Grid item xs={12}>
+											<RadioGroup
+												aria-label="gender"
+												name="gender1"
+												value={radioValue}
+												onChange={handleChange}
+											>
+												{option.shipping_zones.map((zone, i) => (
+													<div
+														key={i}
+														style={{
+															marginBottom: "3rem",
+														}}
+													>
+														<FormControlLabel
+															value={zone.region}
+															control={
+																<Radio
+																	checked={
+																		zone.region === radioValue
+																	}
+																	name={"" + index}
+																/>
+															}
+															label={zone.region}
+														/>
+														<Typography
+															variant="body2"
+															color="secondary"
+														>
+															Costo Adicional: {zone.price}
+														</Typography>
+														<Typography variant="body2">
+															Demora de Entrega: {zone.delay}
+														</Typography>
+													</div>
+												))}
+											</RadioGroup>
+										</Grid>
+
+										{index !== 0 ? (
+											renderForm()
+										) : (
+											<Grid
+												container
+												justify="space-around"
+												spacing={4}
+												style={{ paddingBottom: 20 }}
+											>
+												<Grid item>
+													<Button onClick={() => handleBack(1)}>
+														Atrás
+													</Button>
+												</Grid>
+												<Grid item>
+													<Button
+														variant="contained"
+														color="primary"
+														disableElevation
+														onClick={nextStep}
+													>
+														Continuar
+													</Button>
+												</Grid>
+											</Grid>
+										)}
+									</Grid>
+								</AccordionDetails>
+							</Accordion>
+						</Grid>
+					))
+				)}
 			</Grid>
 		</form>
 	)
