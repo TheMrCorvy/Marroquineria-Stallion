@@ -394,7 +394,7 @@ const MercadoPagoCheckout: FC = () => {
 						size="large"
 						onClick={handleSubmit(onSubmit)}
 					>
-						Finalizar
+						Finalizar Compra
 					</Button>
 				</Grid>
 			</Grid>
