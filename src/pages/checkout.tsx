@@ -113,7 +113,7 @@ const Checkout = () => {
 	 * 0 = go back to the page
 	 * 1, 2, 3, = form steps
 	 */
-	const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3>(2)
+	const [activeStep, setActiveStep] = useState<0 | 1 | 2 | 3>(1)
 
 	const formatter = new Intl.NumberFormat("es-AR", {
 		style: "currency",
