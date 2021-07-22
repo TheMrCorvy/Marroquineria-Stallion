@@ -188,7 +188,7 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 					<Typography
 						gutterBottom
 						paragraph
-						variant={title.length >= 20 ? "subtitle1" : "h4"}
+						variant="subtitle1"
 						component="h2"
 						className={classes.textCenter}
 					>

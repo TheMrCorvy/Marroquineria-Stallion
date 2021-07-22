@@ -36,7 +36,7 @@ type FormInputs = {
 
 const requiredMessage = "Este campo es obligatorio."
 const minCharMessage = "Este campo debe tener al menos 5 caractéres."
-const maxCharMessage = "Este campo no puede contener más de 190 caractéres."
+const maxCharMessage = "Este campo no puede contener más de 250 caractéres."
 const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 
 const placeholder =
@@ -133,7 +133,7 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 											message: requiredMessage,
 										},
 										maxLength: {
-											value: 190,
+											value: 250,
 											message: maxCharMessage,
 										},
 										minLength: {
@@ -164,7 +164,7 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 											message: requiredMessage,
 										},
 										maxLength: {
-											value: 190,
+											value: 250,
 											message: maxCharMessage,
 										},
 										minLength: {
@@ -195,7 +195,7 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 											message: requiredMessage,
 										},
 										maxLength: {
-											value: 190,
+											value: 250,
 											message: maxCharMessage,
 										},
 										minLength: {
@@ -236,7 +236,7 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 											message: minCharMessage,
 										},
 										maxLength: {
-											value: 190,
+											value: 250,
 											message: maxCharMessage,
 										},
 									}),
