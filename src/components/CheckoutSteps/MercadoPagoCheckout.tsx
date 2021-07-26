@@ -23,12 +23,16 @@ interface FormData {
 	securityCode: string
 }
 
+interface Props {
+	onLoading: (message: string, loading: boolean) => void
+}
+
 const requiredMessage = "Este campo es obligatorio."
 const minCharMessage = "Este campo debe tener al menos 5 caractéres."
 const maxCharMessage = "Este campo no puede contener más de 190 caractéres."
 const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 
-const MercadoPagoCheckout: FC = () => {
+const MercadoPagoCheckout: FC<Props> = ({ onLoading }) => {
 	const user = useSelector((state: RootState) => state.user)
 	const { cart } = useSelector((state: RootState) => state.cart)
 
@@ -37,6 +41,8 @@ const MercadoPagoCheckout: FC = () => {
 	const [cardToken, setCardToken] = useState("")
 
 	const [cardNetwork, setCardNetwork] = useState("")
+
+	const [loading, setLoading] = useState(false)
 
 	const { register, errors, handleSubmit } = useForm()
 
@@ -119,9 +125,18 @@ const MercadoPagoCheckout: FC = () => {
 
 		setCardNetwork("")
 		setCardToken("")
+
+		onLoading(data.message, false)
 	}
 
 	const onSubmit = async (data: FormData) => {
+		setLoading(true)
+
+		onLoading(
+			"Por favor espere mientras procesamos todos los datos. Esto puede demorar unos momentos.",
+			true
+		)
+
 		getCardNetwork(data.cardNumber)
 
 		getCardToken()
@@ -449,6 +464,20 @@ const MercadoPagoCheckout: FC = () => {
 						)}
 					</FormControl>
 				</Grid>
+				<Grid item xs={12} style={{ textAlign: "center" }}>
+					<Typography variant="body2">
+						Este formulario fue proveido por{" "}
+						<Typography
+							component="span"
+							variant="body2"
+							color="primary"
+							style={{ textDecoration: "underline" }}
+						>
+							MercadoPago
+						</Typography>{" "}
+						para mantener a salvo los datos de tu tarjeta e identidad.
+					</Typography>
+				</Grid>
 				<Grid item xs={12} style={{ textAlign: "center", marginTop: "3rem" }}>
 					<Button
 						variant="contained"
@@ -456,6 +485,7 @@ const MercadoPagoCheckout: FC = () => {
 						disableElevation
 						size="large"
 						onClick={handleSubmit(onSubmit)}
+						disabled={loading}
 					>
 						Finalizar Compra
 					</Button>

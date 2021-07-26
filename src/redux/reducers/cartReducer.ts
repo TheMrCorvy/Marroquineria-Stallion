@@ -10,6 +10,8 @@ import {
 	REMOVE_ITEM_FROM_CART,
 	RemoveFromCartAction,
 	INITIALIZE_CART,
+	CLEAR_CART,
+	ClearCartAction,
 } from "../types"
 
 let initialState: CartState = {
@@ -51,6 +53,16 @@ const cartReducer = (state = initialState, action: CartAction): CartState => {
 
 		case REMOVE_ITEM_FROM_CART:
 			return removeFromCart(state, action)
+
+		case CLEAR_CART:
+			return storeState({
+				...state,
+				cart: {
+					...state.cart,
+					count: 0,
+					products: [],
+				},
+			})
 
 		default:
 			return state

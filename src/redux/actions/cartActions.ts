@@ -13,6 +13,8 @@ import {
 	INITIALIZE_CART,
 	CartState,
 	InitializeCartAction,
+	ClearCartAction,
+	CLEAR_CART,
 } from "../types"
 
 export const initializeCart = (cart: CartState): InitializeCartAction => {
@@ -63,5 +65,11 @@ export const removeItemFromCart = (productId: number): RemoveFromCartAction => {
 	return {
 		type: REMOVE_ITEM_FROM_CART,
 		payload: productId,
+	}
+}
+
+export const clearCart = (): ClearCartAction => {
+	return {
+		type: CLEAR_CART,
 	}
 }

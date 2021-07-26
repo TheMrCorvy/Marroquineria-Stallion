@@ -17,8 +17,9 @@ import { makeStyles } from "@material-ui/core/styles"
 
 import MercadoPagoCheckout from "./MercadoPagoCheckout"
 
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux/store"
+import { clearCart } from "../../redux/actions/cartActions"
 
 type Props = {
 	handleBack: (prevStep: 1 | 2 | 3) => void
@@ -51,9 +52,11 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 	const user = useSelector((state: RootState) => state.user)
 	const { cart } = useSelector((state: RootState) => state.cart)
 
+	const dispatch = useDispatch()
+
 	const classes = useStyles()
 
-	// 0 = mercadopago 1 = pago en efectivo
+	// 0 = mercadopago 1 = cash
 	const [method, setMethod] = useState<0 | 1>(0)
 
 	const [dialog, setDialog] = useState({
@@ -139,7 +142,7 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 			})
 
 			setTimeout(() => {
-				//dispatch to clear the cart items
+				dispatch(clearCart())
 			}, 15000)
 		}
 	}
@@ -149,7 +152,7 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 			loading: false,
 			message: dialog.message,
 		})
-		// dispatch to clear cart items
+		dispatch(clearCart())
 	}
 
 	const handleLoading = (message: string, loading: boolean) => {
@@ -164,7 +167,7 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 					message,
 				})
 
-				//dispatch to clear the cart items
+				dispatch(clearCart())
 			}, 15000)
 		} else {
 			setDialog({ loading, message })
