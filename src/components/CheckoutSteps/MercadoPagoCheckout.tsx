@@ -30,6 +30,7 @@ const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 
 const MercadoPagoCheckout: FC = () => {
 	const user = useSelector((state: RootState) => state.user)
+	const { cart } = useSelector((state: RootState) => state.cart)
 
 	const [docType, setDocType] = useState("DNI")
 
@@ -46,21 +47,14 @@ const MercadoPagoCheckout: FC = () => {
 	}, [])
 
 	useEffect(() => {
-		console.log({
-			network: cardNetwork,
-			token: cardToken,
-		})
-	}, [cardNetwork, cardToken])
-
-	const onSubmit = async (data: FormData) => {
 		const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
-		console.log(data)
+		if (cardNetwork && cardToken && apiUrl) {
+			payWithMercadopago(apiUrl)
+		}
+	}, [cardNetwork, cardToken])
 
-		getCardNetwork(data.cardNumber)
-
-		getCardToken()
-
+	const payWithMercadopago = async (apiUrl: string) => {
 		const billingInfo = {
 			name: user.name,
 			email: user.email,
@@ -81,23 +75,56 @@ const MercadoPagoCheckout: FC = () => {
 			},
 		}
 
-		if (apiUrl) {
-			const res = await fetch(apiUrl + "/prueba", {
-				body: JSON.stringify({
-					billing_info: JSON.stringify(billingInfo),
-					shipping_info: JSON.stringify(shippingInfo),
-				}),
-				method: "POST",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-				},
-			})
+		let totalPrice: number = 0
 
-			const resData = await res.json()
+		cart.products.forEach((product) => {
+			totalPrice += product.units * Number(product.product.price)
+		})
 
-			console.log(resData)
+		const cartItems = cart.products.map((product) => {
+			return {
+				id: product.product.id,
+				amount: product.units,
+			}
+		})
+
+		const bodyRequest = {
+			method: "mercadopago",
+			billing_info: JSON.stringify(billingInfo),
+			shipping_info: JSON.stringify(shippingInfo),
+			total_price: totalPrice,
+			cart_items: cartItems,
+			email: user.email,
+			shipping_option_id: user.shipping.shippingOption
+				? user.shipping.shippingOption.shipping_zone.id
+				: 1,
+			card_network: cardNetwork,
+			card_token: cardToken,
 		}
+
+		const res = await fetch(apiUrl + "/buy", {
+			body: JSON.stringify(bodyRequest),
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+		})
+
+		const data = await res.json()
+
+		console.log("***********")
+		console.log(data)
+		console.log("***********")
+
+		setCardNetwork("")
+		setCardToken("")
+	}
+
+	const onSubmit = async (data: FormData) => {
+		getCardNetwork(data.cardNumber)
+
+		getCardToken()
 	}
 
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -117,7 +144,7 @@ const MercadoPagoCheckout: FC = () => {
 					setCardNetwork(response[0].id)
 				}
 
-				console.log(response)
+				// console.log(response)
 			}
 		)
 	}
@@ -133,7 +160,7 @@ const MercadoPagoCheckout: FC = () => {
 				} else {
 					setCardToken(response.id)
 				}
-				console.log(response)
+				// console.log(response)
 			}
 		)
 	}
