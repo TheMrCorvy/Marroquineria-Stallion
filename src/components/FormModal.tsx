@@ -164,7 +164,7 @@ const FormModal: FC<Props> = ({ layoutOption }) => {
 											message: requiredMessage,
 										},
 										maxLength: {
-											value: 250,
+											value: 16,
 											message: maxCharMessage,
 										},
 										minLength: {
