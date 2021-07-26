@@ -1,13 +1,15 @@
 import { FC, ChangeEvent, useState } from "react"
 
-import { Button, Grid, AppBar, Tabs, Tab, Typography } from "@material-ui/core"
+import { Button, Grid, AppBar, Tabs, Tab } from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
 import MercadoPagoCheckout from "./MercadoPagoCheckout"
 
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
+
 type Props = {
-	handleNext: (nextStep: 1 | 2 | 3) => void
 	handleBack: (prevStep: 1 | 2 | 3) => void
 }
 
@@ -25,7 +27,10 @@ const useStyles = makeStyles({
 	},
 })
 
-const StepThree: FC<Props> = ({ handleNext, handleBack }) => {
+const StepThree: FC<Props> = ({ handleBack }) => {
+	const user = useSelector((state: RootState) => state.user)
+	const { cart } = useSelector((state: RootState) => state.cart)
+
 	const classes = useStyles()
 
 	// 0 = mercadopago 1 = pago en efectivo
@@ -35,6 +40,70 @@ const StepThree: FC<Props> = ({ handleNext, handleBack }) => {
 		setMethod(newValue)
 	}
 
+	const payWithCash = async () => {
+		const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+		if (apiUrl) {
+			const billingInfo = {
+				name: user.name,
+				email: user.email,
+				dni_or_cuil: user.dniOrCuil,
+				billing_address: user.billingAddress,
+			}
+
+			const shippingInfo = {
+				name: user.name,
+				email: user.email,
+				phone_number: user.phoneNumber,
+				send: user.shipping.send,
+				shipping_address: user.shipping.shippingAddress,
+				shipping_option: {
+					method: user.shipping.shippingOption?.method,
+					region: user.shipping.shippingOption?.shipping_zone.region,
+					shipping_id: user.shipping.shippingOption?.shipping_zone.id,
+				},
+			}
+
+			let totalPrice: number = 0
+
+			cart.products.forEach((product) => {
+				totalPrice += product.units * Number(product.product.price)
+			})
+
+			const cartItems = cart.products.map((product) => {
+				return {
+					id: product.product.id,
+					amount: product.units,
+				}
+			})
+
+			const bodyRequest = {
+				method: "cash",
+				billing_info: JSON.stringify(billingInfo),
+				shipping_info: JSON.stringify(shippingInfo),
+				total_price: totalPrice,
+				cart_items: cartItems,
+				email: user.email,
+				shipping_option_id: user.shipping.shippingOption
+					? user.shipping.shippingOption.shipping_zone.id
+					: 1,
+			}
+
+			const res = await fetch(apiUrl + "/buy", {
+				body: JSON.stringify(bodyRequest),
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+			})
+
+			const data = await res.json()
+
+			console.log(data)
+		}
+	}
+
 	const renderPanels = () => {
 		if (!method) {
 			return <MercadoPagoCheckout />
@@ -42,7 +111,12 @@ const StepThree: FC<Props> = ({ handleNext, handleBack }) => {
 			return (
 				<Grid container justify="center" spacing={4} className={classes.payWithCash}>
 					<Grid item>
-						<Button variant="contained" disableElevation color="secondary">
+						<Button
+							variant="contained"
+							disableElevation
+							color="secondary"
+							onClick={payWithCash}
+						>
 							Finalizar Compra
 						</Button>
 					</Grid>

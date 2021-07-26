@@ -1,16 +1,11 @@
 import { FC, useState, useEffect } from "react"
 
-import {
-	TextField,
-	Grid,
-	FormControl,
-	Typography,
-	Select,
-	MenuItem,
-	Button,
-} from "@material-ui/core"
+import { TextField, Grid, FormControl, Typography, Button } from "@material-ui/core"
 
 import { useForm } from "react-hook-form"
+
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
 
 declare global {
 	interface Window {
@@ -34,6 +29,8 @@ const maxCharMessage = "Este campo no puede contener más de 190 caractéres."
 const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
 
 const MercadoPagoCheckout: FC = () => {
+	const user = useSelector((state: RootState) => state.user)
+
 	const [docType, setDocType] = useState("DNI")
 
 	const [cardToken, setCardToken] = useState("")
@@ -55,13 +52,52 @@ const MercadoPagoCheckout: FC = () => {
 		})
 	}, [cardNetwork, cardToken])
 
-	const onSubmit = (data: FormData) => {
-		console.log("production api call")
+	const onSubmit = async (data: FormData) => {
+		const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
 		console.log(data)
 
 		getCardNetwork(data.cardNumber)
 
 		getCardToken()
+
+		const billingInfo = {
+			name: user.name,
+			email: user.email,
+			dni_or_cuil: user.dniOrCuil,
+			billing_address: user.billingAddress,
+		}
+
+		const shippingInfo = {
+			name: user.name,
+			email: user.email,
+			phone_number: user.phoneNumber,
+			send: user.shipping.send,
+			shipping_address: user.shipping.shippingAddress,
+			shipping_option: {
+				method: user.shipping.shippingOption?.method,
+				region: user.shipping.shippingOption?.shipping_zone.region,
+				shipping_id: user.shipping.shippingOption?.shipping_zone.id,
+			},
+		}
+
+		if (apiUrl) {
+			const res = await fetch(apiUrl + "/prueba", {
+				body: JSON.stringify({
+					billing_info: JSON.stringify(billingInfo),
+					shipping_info: JSON.stringify(shippingInfo),
+				}),
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+			})
+
+			const resData = await res.json()
+
+			console.log(resData)
+		}
 	}
 
 	const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {

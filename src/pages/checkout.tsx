@@ -149,7 +149,7 @@ const Checkout = () => {
 			case 2:
 				return <StepTwo handleNext={handleNext} handleBack={handleBack} />
 			case 3:
-				return <StepThree handleNext={handleNext} handleBack={handleBack} />
+				return <StepThree handleBack={handleBack} />
 			default:
 				return <StepOne handleNext={handleNext} handleBack={handleBack} />
 		}

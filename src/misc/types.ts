@@ -28,6 +28,7 @@ export type Price = {
 	region: string
 	delay: string
 	price: string
+	id: number
 }
 
 export interface ShippingOption {

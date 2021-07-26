@@ -49,6 +49,7 @@ const placeholder: ShippingOption[] = [
 				region: "",
 				delay: "",
 				price: "",
+				id: 0,
 			},
 		],
 	},
