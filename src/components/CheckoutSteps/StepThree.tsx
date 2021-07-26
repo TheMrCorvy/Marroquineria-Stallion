@@ -1,6 +1,17 @@
 import { FC, ChangeEvent, useState } from "react"
 
-import { Button, Grid, AppBar, Tabs, Tab } from "@material-ui/core"
+import {
+	Button,
+	Grid,
+	AppBar,
+	Tabs,
+	Tab,
+	DialogTitle,
+	Dialog,
+	DialogContent,
+	CircularProgress,
+	Typography,
+} from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
@@ -25,6 +36,15 @@ const useStyles = makeStyles({
 	marginTop: {
 		marginTop: "4rem",
 	},
+	center: {
+		display: "flex",
+		justifyContent: "center",
+		textAlign: "center",
+		alignItems: "center",
+		verticalAlign: "center",
+		paddingTop: "3rem",
+		paddingBottom: "3rem",
+	},
 })
 
 const StepThree: FC<Props> = ({ handleBack }) => {
@@ -36,6 +56,11 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 	// 0 = mercadopago 1 = pago en efectivo
 	const [method, setMethod] = useState<0 | 1>(0)
 
+	const [dialog, setDialog] = useState({
+		loading: false,
+		message: "",
+	})
+
 	const handleChange = (event: ChangeEvent<{}>, newValue: 0 | 1) => {
 		setMethod(newValue)
 	}
@@ -44,6 +69,12 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 		const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 		if (apiUrl) {
+			setDialog({
+				loading: true,
+				message:
+					"Por favor espere mientras procesamos todos los datos. Esto puede demorar unos momentos.",
+			})
+
 			const billingInfo = {
 				name: user.name,
 				email: user.email,
@@ -101,12 +132,48 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 			const data = await res.json()
 
 			console.log(data)
+
+			setDialog({
+				loading: true,
+				message: data.message,
+			})
+
+			setTimeout(() => {
+				//dispatch to clear the cart items
+			}, 15000)
+		}
+	}
+
+	const handleClose = () => {
+		setDialog({
+			loading: false,
+			message: dialog.message,
+		})
+		// dispatch to clear cart items
+	}
+
+	const handleLoading = (message: string, loading: boolean) => {
+		if (!loading) {
+			setDialog({
+				loading: true,
+				message,
+			})
+			setTimeout(() => {
+				setDialog({
+					loading,
+					message,
+				})
+
+				//dispatch to clear the cart items
+			}, 15000)
+		} else {
+			setDialog({ loading, message })
 		}
 	}
 
 	const renderPanels = () => {
 		if (!method) {
-			return <MercadoPagoCheckout />
+			return <MercadoPagoCheckout onLoading={handleLoading} />
 		} else {
 			return (
 				<Grid container justify="center" spacing={4} className={classes.payWithCash}>
@@ -116,6 +183,7 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 							disableElevation
 							color="secondary"
 							onClick={payWithCash}
+							disabled={dialog.loading}
 						>
 							Finalizar Compra
 						</Button>
@@ -150,6 +218,27 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 					</Grid>
 				</Grid>
 			</Grid>
+			<Dialog
+				onClose={handleClose}
+				aria-labelledby="simple-dialog-title"
+				open={dialog.loading}
+				fullWidth
+				maxWidth="xl"
+			>
+				<DialogTitle id="simple-dialog-title">
+					Por favor espere mientras procesamos todos los datos.
+				</DialogTitle>
+				<DialogContent className={classes.center}>
+					<Grid container justify="center">
+						<Grid item xs={12} className={classes.center} style={{ paddingTop: 0 }}>
+							<CircularProgress color="secondary" />
+						</Grid>
+						<Grid item xs={12}>
+							<Typography variant="body2">{dialog.message}</Typography>
+						</Grid>
+					</Grid>
+				</DialogContent>
+			</Dialog>
 		</>
 	)
 }
