@@ -8,7 +8,6 @@ import {
 	Toolbar,
 	IconButton,
 	Typography,
-	InputBase,
 	MenuItem,
 	Menu,
 	Drawer,
@@ -32,8 +31,10 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 import { toggleCartModal } from "../redux/actions/cartActions"
+
 import FormModal from "./FormModal"
 import ShippingDialog from "./ShippingDialog"
+import HowToBuy from "./HowToBuy"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -44,11 +45,8 @@ const useStyles = makeStyles((theme: Theme) =>
 			marginRight: theme.spacing(2),
 		},
 		title: {
-			display: "none",
+			display: "block",
 			textTransform: "capitalize",
-			[theme.breakpoints.up("sm")]: {
-				display: "block",
-			},
 		},
 		search: {
 			position: "relative",
@@ -245,6 +243,12 @@ const Navbar: FC = () => {
 
 					<ListItem button>
 						<ShippingDialog layout={3} />
+					</ListItem>
+
+					<Divider className={classes.divider} />
+
+					<ListItem button>
+						<HowToBuy />
 					</ListItem>
 
 					<Divider className={classes.divider} />
