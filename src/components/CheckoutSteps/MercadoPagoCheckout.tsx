@@ -47,7 +47,7 @@ const MercadoPagoCheckout: FC<Props> = ({ onLoading }) => {
 	const { register, errors, handleSubmit } = useForm()
 
 	useEffect(() => {
-		window.Mercadopago.setPublishableKey(process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY)
+		window.Mercadopago.setPublishableKey("APP_USR-e740afc0-e3b4-41b2-aba1-377e90990e31")
 
 		window.Mercadopago.getIdentificationTypes()
 	}, [])
