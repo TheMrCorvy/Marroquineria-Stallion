@@ -10,6 +10,7 @@ export interface ProductCardProps {
 	stock: number
 	images: Images[]
 	brand: string
+	type: string
 }
 
 /*********************************************************************************** User */

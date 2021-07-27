@@ -242,6 +242,15 @@ const ShowProduct: FC = () => {
 												>
 													Marca: {product.brand}
 												</Typography>
+												<Typography
+													variant="subtitle2"
+													color="primary"
+													paragraph
+													gutterBottom
+													className={classes.brand}
+												>
+													Categoría: {product.type}
+												</Typography>
 											</Grid>
 											<Grid item xs={12} className={classes.textCenter}>
 												<Tooltip title="Compartir" placement="right">
