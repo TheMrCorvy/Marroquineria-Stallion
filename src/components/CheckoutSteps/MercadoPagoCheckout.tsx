@@ -47,7 +47,8 @@ const MercadoPagoCheckout: FC<Props> = ({ onLoading }) => {
 	const { register, errors, handleSubmit } = useForm()
 
 	useEffect(() => {
-		window.Mercadopago.setPublishableKey("APP_USR-e740afc0-e3b4-41b2-aba1-377e90990e31")
+		window.Mercadopago.setPublishableKey("TEST-da970522-a69d-42a4-b95b-2d0ac61eaf5b")
+		// window.Mercadopago.setPublishableKey("APP_USR-e740afc0-e3b4-41b2-aba1-377e90990e31")
 
 		window.Mercadopago.getIdentificationTypes()
 	}, [])
@@ -147,37 +148,49 @@ const MercadoPagoCheckout: FC<Props> = ({ onLoading }) => {
 	}
 
 	const getCardNetwork = async (bin: string) => {
-		await window.Mercadopago.getPaymentMethod(
-			{
-				bin,
-			},
-			(status: number, response: any) => {
-				if (status !== 200 && status !== 201) {
-					console.log("hubo un error")
-					console.log(response)
-				} else {
-					setCardNetwork(response[0].id)
+		try {
+			await window.Mercadopago.getPaymentMethod(
+				{
+					bin,
+				},
+				(status: number, response: any) => {
+					if (status !== 200 && status !== 201) {
+						console.log("hubo un error")
+						console.log(response)
+					} else {
+						setCardNetwork(response[0].id)
+					}
+	
+					// console.log(response)
 				}
+			)
+		} catch (error) {
+			console.error(error)
 
-				// console.log(response)
-			}
-		)
+			onLoading('Ocurrió un error antes de que pudieramos procesar su pago...', false)
+		}
 	}
 
 	const getCardToken = async () => {
 		const mercadoPagoForm = document.getElementById("paymentForm")
 
-		return await window.Mercadopago.createToken(
-			mercadoPagoForm,
-			(status: number, response: any) => {
-				if (status != 200 && status != 201) {
-					console.log(response.cause[0].description)
-				} else {
-					setCardToken(response.id)
+		try {
+			return await window.Mercadopago.createToken(
+				mercadoPagoForm,
+				(status: number, response: any) => {
+					if (status != 200 && status != 201) {
+						console.log(response.cause[0].description)
+					} else {
+						setCardToken(response.id)
+					}
+					// console.log(response)
 				}
-				// console.log(response)
-			}
-		)
+			)
+		} catch (error) {
+			console.error(error)
+
+			onLoading('Ocurrió un error antes de que pudieramos procesar su pago...', false)
+		}
 	}
 
 	return (

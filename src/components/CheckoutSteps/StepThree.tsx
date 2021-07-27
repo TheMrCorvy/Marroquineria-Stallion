@@ -59,6 +59,8 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 	// 0 = mercadopago 1 = cash
 	const [method, setMethod] = useState<0 | 1>(0)
 
+	const [showSpinner, setShowSpinner] = useState(true)
+
 	const [dialog, setDialog] = useState({
 		loading: false,
 		message: "",
@@ -141,9 +143,11 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 				message: data.message,
 			})
 
+			setShowSpinner(false)
+
 			setTimeout(() => {
 				dispatch(clearCart())
-			}, 15000)
+			}, 60000)
 		}
 	}
 
@@ -161,6 +165,9 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 				loading: true,
 				message,
 			})
+
+			setShowSpinner(false)
+
 			setTimeout(() => {
 				setDialog({
 					loading,
@@ -168,7 +175,7 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 				})
 
 				dispatch(clearCart())
-			}, 15000)
+			}, 60000)
 		} else {
 			setDialog({ loading, message })
 		}
@@ -233,11 +240,18 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 				</DialogTitle>
 				<DialogContent className={classes.center}>
 					<Grid container justify="center">
-						<Grid item xs={12} className={classes.center} style={{ paddingTop: 0 }}>
-							<CircularProgress color="secondary" />
-						</Grid>
+						{showSpinner && (
+							<Grid item xs={12} className={classes.center} style={{ paddingTop: 0 }}>
+								<CircularProgress color="secondary" />
+							</Grid>
+						)}
 						<Grid item xs={12}>
-							<Typography variant="body2">{dialog.message}</Typography>
+							<Typography
+								variant={showSpinner ? "body2" : "h5"}
+								color={showSpinner ? "inherit" : "secondary"}
+							>
+								{dialog.message}
+							</Typography>
 						</Grid>
 					</Grid>
 				</DialogContent>

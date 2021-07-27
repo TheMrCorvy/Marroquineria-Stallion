@@ -298,9 +298,9 @@ const Navbar: FC = () => {
 							</Button>
 						</Link>
 
-						<div className={classes.grow} />
+						{/* <div className={classes.grow} /> */}
 
-						<div className={classes.search}>
+						{/* <div className={classes.search}>
 							<div className={classes.searchIcon}>
 								<SearchIcon />
 							</div>
@@ -313,7 +313,7 @@ const Navbar: FC = () => {
 								inputProps={{ "aria-label": "search" }}
 								onClick={() => scrollToElement("productos")}
 							/>
-						</div>
+						</div> */}
 
 						<div className={classes.grow} />
 
