@@ -14,6 +14,8 @@ import store from "../redux/store"
 
 import Layout from "../components/Layout"
 
+import "../misc/styles.css"
+
 function MyApp({ Component, pageProps }: AppProps) {
 	useEffect(() => {
 		// Remove the server-side injected CSS.

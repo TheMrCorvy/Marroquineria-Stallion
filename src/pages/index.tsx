@@ -10,7 +10,6 @@ import {
 	CardMedia,
 	useMediaQuery,
 	CardContent,
-	IconButton,
 } from "@material-ui/core"
 
 import { useTheme, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
@@ -20,10 +19,9 @@ import LocalShippingIcon from "@material-ui/icons/LocalShipping"
 import WhatsAppIcon from "@material-ui/icons/WhatsApp"
 import PaymentIcon from "@material-ui/icons/Payment"
 
-import Slider from "react-slick"
-
 import ListProductsSection from "../components/ListProductsSection"
 import ImageBanner from "../components/ImageBanner"
+import ProductsOnSaleSection from "../components/ProductsOnSaleSection"
 
 const r = (option: 1 | 2): number => {
 	// Option 1: corners option 2: middle point
@@ -297,6 +295,7 @@ export default function Home() {
 					/>
 				</Grid>
 			</Grid>
+			<ProductsOnSaleSection />
 			<ListProductsSection />
 			<Container maxWidth="lg" className={classes.contactContainer} id="contacto">
 				<Grid container justify="space-around">
