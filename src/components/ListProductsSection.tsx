@@ -124,6 +124,8 @@ const placeholder = [
 		stock: 0,
 		images: [],
 		brand: "",
+		type: "",
+		discount: null,
 	},
 ]
 
@@ -143,8 +145,6 @@ const ListProductsSection: FC = () => {
 	const [totalPages, setTotalPages] = useState(1)
 
 	const [totalResults, setTotalResults] = useState(0)
-
-	const [currentPage, setCurrentPage] = useState(1)
 
 	const [fromResult, setFromResult] = useState(1)
 
@@ -191,8 +191,6 @@ const ListProductsSection: FC = () => {
 		if (productsSection && !smallScreen) {
 			productsSection.scrollIntoView({ behavior: "smooth", block: "start" })
 		}
-
-		setCurrentPage(page)
 
 		setTimeout(() => {
 			setLoading(true)

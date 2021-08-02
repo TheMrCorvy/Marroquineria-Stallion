@@ -1,151 +1,147 @@
 import { FC, useEffect, useState } from "react"
 
-import {
-	Container,
-	Grid,
-	Card,
-	CardHeader,
-	CardMedia,
-	CardContent,
-	CardActions,
-	Typography,
-	Button,
-	CardActionArea,
-} from "@material-ui/core"
+import { Container, Grid, Typography } from "@material-ui/core"
+
+import Pagination from "@material-ui/lab/Pagination"
 
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
-import { green } from "@material-ui/core/colors"
+import { ProductCardProps } from "../misc/types"
+import SaleCard from "./SaleCard"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
 		container: {
 			marginTop: "5rem",
 			marginBottom: "5rem",
-		},
-		card: {
-			borderRadius: 15,
-			position: "relative",
-
-			[theme.breakpoints.down("sm")]: {
-				width: "30vw",
-			},
+			background: "#f3f3f3",
+			padding: "3rem",
 			[theme.breakpoints.down("xs")]: {
-				width: "25rem",
-				maxWidth: "85vw",
+				paddingRight: 0,
+				paddingLeft: 0,
 			},
 		},
-		textGreen: {
-			color: green[600],
-			marginLeft: 25,
-		},
-		media: {
-			height: 0,
-			paddingTop: "60%",
-			borderRadius: 15,
-			boxShadow:
-				"0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)",
-			marginBottom: "1rem",
+		pagination: {
+			marginTop: "3rem",
+			display: "flex",
+			justifyContent: "center",
+			textAlign: "center",
+			alignItems: "center",
 		},
 		textCenter: {
 			textAlign: "center",
-			textTransform: "capitalize",
 		},
-		cardActions: {
+		column: {
 			display: "flex",
-			justifyContent: "space-around",
-			marginBottom: 5,
-		},
-		btn: {
-			borderRadius: 7,
+			justifyContent: "center",
+			verticalAlign: "center",
+			textAlign: "center",
+
+			padding: "1rem",
 		},
 	})
 )
 
+const placeholder = [
+	{
+		id: 0,
+		title: "",
+		description: "",
+		price: 0,
+		stock: 0,
+		images: [],
+		brand: "",
+		type: "",
+		discount: null,
+	},
+]
+
 const ProductsOnSaleSection: FC = () => {
 	const classes = useStyles()
-	return (
-		<Container maxWidth="xl" className={classes.container}>
-			<Grid container justify="space-around">
-				<Grid item xs={12} md={4} lg={3}>
-					<Card className={classes.card}>
-						<div className="ribbon ribbon-top-right">
-							<span>¡¡ oferta !!</span>
-						</div>
-						<div className="ribbon ribbon-bottom-left">
-							<span>¡¡ oferta !!</span>
-						</div>
-						<CardHeader
-							avatar={
-								<Button
-									variant="contained"
-									size="small"
-									color="secondary"
-									disableElevation
-								>
-									XX %
-								</Button>
-							}
+
+	const [loading, setLoading] = useState(true)
+
+	const [products, setProducts] = useState<ProductCardProps[]>(placeholder)
+
+	const [totalPages, setTotalPages] = useState(1)
+
+	const [totalResults, setTotalResults] = useState(0)
+
+	const [sectionIsNull, setSectionIsNull] = useState(true)
+
+	useEffect(() => {
+		getProductsFromApi("?page=1")
+	}, [])
+
+	const getProductsFromApi = async (urlParams: string) => {
+		const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+		if (apiUrl) {
+			const res = await fetch(apiUrl + "/get-offers" + urlParams, {
+				headers: {
+					Accept: "application/json",
+				},
+			})
+			const data = await res.json()
+
+			setProducts(data.offers.data)
+
+			setTotalPages(data.offers.last_page)
+
+			setTotalResults(data.offers.total)
+
+			setLoading(false)
+
+			if (data.offers.total !== 0) {
+				setSectionIsNull(false)
+			}
+		}
+	}
+
+	const handlePageChange = async (event: object, page: number) => {
+		const salesList = document.getElementById("sales-list")
+
+		if (salesList) {
+			salesList.scrollIntoView({ behavior: "smooth", block: "start" })
+		}
+
+		setTimeout(() => {
+			setLoading(true)
+			setProducts(placeholder)
+
+			getProductsFromApi("?page=" + page)
+		}, 1000)
+	}
+
+	if (sectionIsNull) {
+		return null
+	} else {
+		return (
+			<Container maxWidth="xl" className={classes.container} id="sales-list">
+				<Grid container justify="space-around" spacing={0}>
+					<Grid item xs={12} className={classes.textCenter}>
+						<Typography paragraph gutterBottom variant="h6">
+							Aprovechá nuestras {totalResults} Ofertas disponibles por tiempo
+							limitado
+						</Typography>
+					</Grid>
+					{products.map((product, index: number) => (
+						<Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.column}>
+							<SaleCard key={index} productFromProps={product} loading={loading} />
+						</Grid>
+					))}
+					<Grid item xs={12} className={classes.pagination}>
+						<Pagination
+							count={totalPages}
+							color="primary"
+							onChange={handlePageChange}
+							size="small"
 						/>
-						<CardContent>
-							<CardActionArea>
-								<CardMedia
-									className={classes.media}
-									title="oferta"
-									image="https://t3.ftcdn.net/jpg/00/76/16/06/240_F_76160632_yXDNvyf4zbDuoSjxT4zrmMxUJ8wsJSF8.jpg"
-								/>
-							</CardActionArea>
-							<Typography
-								gutterBottom
-								paragraph
-								variant="subtitle1"
-								component="h2"
-								className={classes.textCenter}
-							>
-								titulo
-							</Typography>
-							<Typography variant="body2" paragraph gutterBottom>
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde earum
-								est error hic, non temporibus in nesciunt vel nam culpa quibusdam
-								provident, ad consequuntur magnam placeat architecto illo nobis ea!
-							</Typography>
-							<Typography className={classes.textCenter}>
-								<Typography
-									component="strong"
-									color="secondary"
-									style={{ textDecoration: "line-through" }}
-								>
-									$ 11.000,00
-								</Typography>
-								<Typography component="strong" className={classes.textGreen}>
-									¡¡ $ 11.000,00 !!
-								</Typography>
-							</Typography>
-						</CardContent>
-						<CardActions className={classes.cardActions}>
-							<Button
-								size="small"
-								color="primary"
-								variant="outlined"
-								className={classes.btn}
-							>
-								Agregar al Carrito
-							</Button>
-							<Button
-								size="small"
-								color="secondary"
-								variant="contained"
-								className={classes.btn}
-								disableElevation
-							>
-								Comprar Ahora
-							</Button>
-						</CardActions>
-					</Card>
+					</Grid>
 				</Grid>
-			</Grid>
-		</Container>
-	)
+			</Container>
+		)
+	}
 }
 
 export default ProductsOnSaleSection
