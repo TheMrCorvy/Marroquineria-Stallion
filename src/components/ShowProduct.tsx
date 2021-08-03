@@ -34,6 +34,7 @@ import { RootState } from "../redux/store"
 import { clearProduct } from "../redux/actions/productActions"
 import { addToCart } from "../redux/actions/cartActions"
 import DialogTransition from "./DialogTransition"
+import { ProductCardProps } from "../misc/types"
 
 const useStyles = makeStyles({
 	container: {
@@ -169,6 +170,35 @@ const ShowProduct: FC = () => {
 		style: "currency",
 		currency: "ARS",
 	})
+
+	const showPrice = (product: ProductCardProps) => {
+		if (product.discount) {
+			const priceToSubstract = (product.discount * product.price) / 100
+
+			return (
+				<>
+					<Typography
+						variant="h5"
+						style={{ paddingTop: 10, textDecoration: "line-through" }}
+						color="secondary"
+					>
+						{formatter.format(product.price)}
+					</Typography>
+					<Typography variant="h5" style={{ paddingTop: 10 }}>
+						¡¡ {formatter.format(product.price - priceToSubstract)} !!
+					</Typography>
+				</>
+			)
+		} else {
+			return (
+				<>
+					<Typography variant="h5" style={{ paddingTop: 10 }}>
+						{formatter.format(product.price)}
+					</Typography>
+				</>
+			)
+		}
+	}
 
 	if (!product) {
 		return null
@@ -311,9 +341,7 @@ const ShowProduct: FC = () => {
 												className={classes.mainImg}
 											/>
 										)}
-										<Typography variant="h5" style={{ paddingTop: 10 }}>
-											{formatter.format(product.price)}
-										</Typography>
+										{showPrice(product)}
 									</Grid>
 
 									<Grid item xs={12} md={3}>
@@ -324,9 +352,22 @@ const ShowProduct: FC = () => {
 											spacing={4}
 										>
 											<Grid item xs={12} className={classes.textCenter}>
-												<Typography variant="subtitle1" color="primary">
+												<Typography
+													variant="subtitle1"
+													color="primary"
+													paragraph
+												>
 													Unidades en Stock: {product.stock}
 												</Typography>
+												{product.discount && (
+													<Typography
+														variant="h6"
+														color="secondary"
+														paragraph
+													>
+														Descuento Limitado: {product.discount}%
+													</Typography>
+												)}
 											</Grid>
 											<Grid item xs={12} className={classes.textCenter}>
 												<TextField
