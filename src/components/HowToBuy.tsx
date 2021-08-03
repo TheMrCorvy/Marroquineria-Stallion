@@ -11,10 +11,6 @@ import {
 	Divider,
 } from "@material-ui/core"
 
-import { useTheme, makeStyles, createStyles, Theme } from "@material-ui/core/styles"
-
-import CloseIcon from "@material-ui/icons/Close"
-
 import DialogTransition from "./DialogTransition"
 
 const HowToBuy: FC = () => {
@@ -46,8 +42,8 @@ const HowToBuy: FC = () => {
 					<ol>
 						<li style={{ marginBottom: 20 }}>
 							<Typography variant="body2">
-								Haz clic en el botón de "Agregar al Carrito". Esto agregará el
-								producto a tu carrito.
+								Haz clic en el botón de &quot;Agregar al Carrito&quot;. Esto
+								agregará el producto a tu carrito.
 							</Typography>
 						</li>
 						<li style={{ marginBottom: 20 }}>
@@ -57,19 +53,20 @@ const HowToBuy: FC = () => {
 							</Typography>
 							<Typography variant="body2">
 								O, si estás visitandonos desde tu celular, encontrarás el ícono del
-								Carrito de Compras haciendo click en el ícono de "opciones" arriba a
-								la derecha.
+								Carrito de Compras haciendo click en el ícono de
+								&quot;opciones&quot; arriba a la derecha.
 							</Typography>
 						</li>
 						<li style={{ marginBottom: 20 }}>
 							<Typography variant="body2">
 								Puedes seguir agregando otros productos a tu carrito, o sino haz
-								clic en "Comprar Ahora" dentro de tu Carrito de Compras.
+								clic en &quot;Comprar Ahora&quot; dentro de tu Carrito de Compras.
 							</Typography>
 						</li>
 						<li style={{ marginBottom: 20 }}>
 							<Typography variant="body2">
-								Completa con tus datos de facturación, y haz click en "Continuar".
+								Completa con tus datos de facturación, y haz click en
+								&quot;Continuar&quot;.
 							</Typography>
 						</li>
 						<li style={{ marginBottom: 20 }}>
@@ -85,7 +82,7 @@ const HowToBuy: FC = () => {
 						<li style={{ marginBottom: 20 }}>
 							<Typography variant="body2">
 								Elige el medio de pago, y completa con tus datos, de ser necesario.
-								Una vez hecho esto, haz click en "Finalizar Compra".
+								Una vez hecho esto, haz click en &quot;Finalizar Compra&quot;.
 							</Typography>
 						</li>
 						<li style={{ marginBottom: 20 }}>
