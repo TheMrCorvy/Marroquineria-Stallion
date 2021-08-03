@@ -37,6 +37,7 @@ import { RootState } from "../redux/store"
 import StepOne from "../components/CheckoutSteps/StepOne"
 import StepTwo from "../components/CheckoutSteps/StepTwo"
 import StepThree from "../components/CheckoutSteps/StepThree"
+import { ProductCardProps } from "../misc/types"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -163,10 +164,44 @@ const Checkout = () => {
 		let totalPrice: number = 0
 
 		cart.products.forEach((product) => {
-			totalPrice += product.units * Number(product.product.price)
+			if (product.product.discount) {
+				const priceToSubstract = (product.product.discount * product.product.price) / 100
+
+				totalPrice += product.units * Number(product.product.price - priceToSubstract)
+			} else {
+				totalPrice += product.units * Number(product.product.price)
+			}
 		})
 
 		return formatter.format(totalPrice)
+	}
+
+	const showPrice = (product: ProductCardProps) => {
+		if (product.discount) {
+			const priceToSubstract = (product.discount * product.price) / 100
+
+			return (
+				<Typography
+					variant="subtitle2"
+					gutterBottom
+					paragraph
+					className={classes.textGreen}
+				>
+					{formatter.format(product.price - priceToSubstract)} (por unidad)
+				</Typography>
+			)
+		} else {
+			return (
+				<Typography
+					variant="subtitle2"
+					gutterBottom
+					paragraph
+					className={classes.textGreen}
+				>
+					{formatter.format(product.price)} (por unidad)
+				</Typography>
+			)
+		}
 	}
 
 	if (!cart.products[0]) {
@@ -256,15 +291,7 @@ const Checkout = () => {
 												>
 													{product.units} Unidad/es
 												</Typography>
-												<Typography
-													variant="subtitle2"
-													gutterBottom
-													paragraph
-													className={classes.textGreen}
-												>
-													{formatter.format(product.product.price)} (por
-													unidad)
-												</Typography>
+												{showPrice(product.product)}
 											</div>
 										))}
 									</CardContent>

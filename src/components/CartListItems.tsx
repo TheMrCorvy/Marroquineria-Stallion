@@ -13,6 +13,7 @@ import Image from "next/image"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 import { addOrRemoveUnits, removeItemFromCart } from "../redux/actions/cartActions"
+import { ProductCardProps } from "../misc/types"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -99,6 +100,23 @@ const CartListItems: FC = () => {
 		dispatch(removeItemFromCart(productId))
 	}
 
+	const showPrice = (product: ProductCardProps) => {
+		if (product.discount) {
+			const priceToSubstract = (product.discount * product.price) / 100
+			return (
+				<Typography variant="subtitle1" className={classes.textGreen}>
+					{formatter.format(product.price - priceToSubstract)}
+				</Typography>
+			)
+		} else {
+			return (
+				<Typography variant="subtitle1" className={classes.textGreen}>
+					{formatter.format(product.price)}
+				</Typography>
+			)
+		}
+	}
+
 	return (
 		<Grid container justify="center" spacing={4}>
 			{cart.products.length === 0
@@ -110,12 +128,7 @@ const CartListItems: FC = () => {
 									<Grid item>
 										<Grid container justify="space-between">
 											<Grid item xs={12}>
-												<Typography
-													variant="subtitle1"
-													className={classes.textGreen}
-												>
-													{formatter.format(product.product.price)}
-												</Typography>
+												{showPrice(product.product)}
 											</Grid>
 										</Grid>
 										<Grid item xs={12} className={classes.marginTop}>
