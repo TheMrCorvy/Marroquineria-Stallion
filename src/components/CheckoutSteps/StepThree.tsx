@@ -103,7 +103,14 @@ const StepThree: FC<Props> = ({ handleBack }) => {
 			let totalPrice: number = 0
 
 			cart.products.forEach((product) => {
-				totalPrice += product.units * Number(product.product.price)
+				if (product.product.discount) {
+					const priceToSubstract =
+						(product.product.discount * product.product.price) / 100
+
+					totalPrice += product.units * Number(product.product.price - priceToSubstract)
+				} else {
+					totalPrice += product.units * Number(product.product.price)
+				}
 			})
 
 			const cartItems = cart.products.map((product) => {

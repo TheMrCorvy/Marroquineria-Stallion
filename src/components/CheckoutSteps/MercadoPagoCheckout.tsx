@@ -48,7 +48,6 @@ const MercadoPagoCheckout: FC<Props> = ({ onLoading }) => {
 
 	useEffect(() => {
 		window.Mercadopago.setPublishableKey("TEST-da970522-a69d-42a4-b95b-2d0ac61eaf5b")
-		// window.Mercadopago.setPublishableKey("APP_USR-e740afc0-e3b4-41b2-aba1-377e90990e31")
 
 		window.Mercadopago.getIdentificationTypes()
 	}, [])
@@ -85,7 +84,13 @@ const MercadoPagoCheckout: FC<Props> = ({ onLoading }) => {
 		let totalPrice: number = 0
 
 		cart.products.forEach((product) => {
-			totalPrice += product.units * Number(product.product.price)
+			if (product.product.discount) {
+				const priceToSubstract = (product.product.discount * product.product.price) / 100
+
+				totalPrice += product.units * Number(product.product.price - priceToSubstract)
+			} else {
+				totalPrice += product.units * Number(product.product.price)
+			}
 		})
 
 		const cartItems = cart.products.map((product) => {
@@ -160,14 +165,14 @@ const MercadoPagoCheckout: FC<Props> = ({ onLoading }) => {
 					} else {
 						setCardNetwork(response[0].id)
 					}
-	
+
 					// console.log(response)
 				}
 			)
 		} catch (error) {
 			console.error(error)
 
-			onLoading('Ocurrió un error antes de que pudieramos procesar su pago...', false)
+			onLoading("Ocurrió un error antes de que pudieramos procesar su pago...", false)
 		}
 	}
 
@@ -189,7 +194,7 @@ const MercadoPagoCheckout: FC<Props> = ({ onLoading }) => {
 		} catch (error) {
 			console.error(error)
 
-			onLoading('Ocurrió un error antes de que pudieramos procesar su pago...', false)
+			onLoading("Ocurrió un error antes de que pudieramos procesar su pago...", false)
 		}
 	}
 

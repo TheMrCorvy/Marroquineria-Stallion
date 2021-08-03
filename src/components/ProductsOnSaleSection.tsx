@@ -126,8 +126,17 @@ const ProductsOnSaleSection: FC = () => {
 						</Typography>
 					</Grid>
 					{products.map((product, index: number) => (
-						<Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.column}>
-							<SaleCard key={index} productFromProps={product} loading={loading} />
+						<Grid
+							key={index}
+							item
+							xs={12}
+							sm={6}
+							md={4}
+							lg={3}
+							xl={2}
+							className={classes.column}
+						>
+							<SaleCard productFromProps={product} loading={loading} />
 						</Grid>
 					))}
 					<Grid item xs={12} className={classes.pagination}>
