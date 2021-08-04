@@ -55,7 +55,7 @@ const Categories: FC<Props> = ({ onClick }) => {
 					<Grid container justify="space-around" spacing={4}>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
 							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("mochilas")}>
+								<CardActionArea onClick={() => onClick("/mochilas")}>
 									<CardContent>
 										<CardMedia
 											className={classes.media}
@@ -70,7 +70,7 @@ const Categories: FC<Props> = ({ onClick }) => {
 						</Grid>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
 							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("bolsos")}>
+								<CardActionArea onClick={() => onClick("/bolsos")}>
 									<CardContent>
 										<CardMedia
 											className={classes.media}
@@ -85,7 +85,7 @@ const Categories: FC<Props> = ({ onClick }) => {
 						</Grid>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
 							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("maletines")}>
+								<CardActionArea onClick={() => onClick("/maletines")}>
 									<CardContent>
 										<CardMedia
 											className={classes.media}
@@ -100,7 +100,7 @@ const Categories: FC<Props> = ({ onClick }) => {
 						</Grid>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
 							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("valijas")}>
+								<CardActionArea onClick={() => onClick("/valijas")}>
 									<CardContent>
 										<CardMedia
 											className={classes.media}
@@ -119,7 +119,7 @@ const Categories: FC<Props> = ({ onClick }) => {
 					<Grid container justify="space-around" spacing={4}>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
 							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("carteras")}>
+								<CardActionArea onClick={() => onClick("/carteras")}>
 									<CardContent>
 										<CardMedia
 											className={classes.media}
@@ -134,7 +134,7 @@ const Categories: FC<Props> = ({ onClick }) => {
 						</Grid>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
 							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("fabricados")}>
+								<CardActionArea onClick={() => onClick("/fabricados")}>
 									<CardContent>
 										<CardMedia
 											className={classes.media}
@@ -149,7 +149,7 @@ const Categories: FC<Props> = ({ onClick }) => {
 						</Grid>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
 							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("billeteras")}>
+								<CardActionArea onClick={() => onClick("/billeteras")}>
 									<CardContent>
 										<CardMedia
 											className={classes.media}
@@ -164,7 +164,7 @@ const Categories: FC<Props> = ({ onClick }) => {
 						</Grid>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
 							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("riñoneras")}>
+								<CardActionArea onClick={() => onClick("/riñoneras")}>
 									<CardContent>
 										<CardMedia
 											className={classes.media}
