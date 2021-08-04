@@ -75,7 +75,7 @@ const HowToBuy: FC = () => {
 								dirección en la que quieras recibir tus productos.
 							</Typography>
 							<Typography>
-								Los envíos los realizamos mediante Moto Mensajera para CABA, y GBA,
+								Los envíos los realizamos mediante Moto Mensajería para CABA, y GBA,
 								o también por Correo Aregntino a cualquier parte del país.
 							</Typography>
 						</li>

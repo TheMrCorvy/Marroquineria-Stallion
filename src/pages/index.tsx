@@ -171,7 +171,7 @@ export default function Home() {
 							</Grid>
 							<Grid item xs={12}>
 								<Typography variant="subtitle1">
-									Tienda de Equipaje en Ciudad Autónoma de Buenos Aires
+									Tienda de Marroquinería en Ciudad Autónoma de Buenos Aires
 								</Typography>
 							</Grid>
 						</Grid>
