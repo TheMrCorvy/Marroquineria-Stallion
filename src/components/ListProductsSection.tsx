@@ -15,6 +15,7 @@ import { ProductCardProps } from "../misc/types"
 
 import ProductCard from "./ProductCard"
 import ShowProduct from "./ShowProduct"
+import Categories from "./Categories"
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -209,102 +210,109 @@ const ListProductsSection: FC = () => {
 		}
 	}
 
+	const handleClick = (category: string) => {}
+
 	return (
-		<div style={{ paddingTop: "5rem" }} id="productos">
-			<Container maxWidth="lg" className={classes.galeryContainer}>
-				<div className={!product ? classes.bgLow : classes.bgHigh} />
+		<>
+			<Categories onClick={handleClick} />
 
-				<Grid
-					item
-					xs={12}
-					style={{
-						visibility: product ? "visible" : "hidden",
-						opacity: product ? 1 : 0,
-						transition: "1.5s",
-					}}
-				>
-					<ShowProduct />
-				</Grid>
+			<div style={{ paddingTop: "5rem" }} id="productos">
+				<Container maxWidth="lg" className={classes.galeryContainer}>
+					<div className={!product ? classes.bgLow : classes.bgHigh} />
 
-				<Grid container justify="center" spacing={4}>
-					<Grid item className={classes.bgRed}>
-						<Grid container justify="space-around">
-							<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
-								<Typography
-									color="inherit"
-									style={{ color: "white" }}
-									variant="body1"
-								>
-									Inicio{" "}
-									<Typography component="span" color="textPrimary">
-										/ Productos
+					<Grid
+						item
+						xs={12}
+						style={{
+							visibility: product ? "visible" : "hidden",
+							opacity: product ? 1 : 0,
+							transition: "1.5s",
+						}}
+					>
+						<ShowProduct />
+					</Grid>
+
+					<Grid container justify="center" spacing={4}>
+						<Grid item className={classes.bgRed}>
+							<Grid container justify="space-around">
+								<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
+									<Typography
+										color="inherit"
+										style={{ color: "white" }}
+										variant="body1"
+									>
+										Inicio{" "}
+										<Typography component="span" color="textPrimary">
+											/ Productos
+										</Typography>
 									</Typography>
-								</Typography>
-							</Grid>
-							<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
-								<Typography variant="h6">Nuestros Productos</Typography>
-								<Divider />
-							</Grid>
-							<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
-								<Typography variant="subtitle2">
-									Mostrando {fromResult} - {toResult} de {totalResults} Resultados
-								</Typography>
-							</Grid>
+								</Grid>
+								<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
+									<Typography variant="h6">Nuestros Productos</Typography>
+									<Divider />
+								</Grid>
+								<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
+									<Typography variant="subtitle2">
+										Mostrando {fromResult} - {toResult} de {totalResults}{" "}
+										Resultados
+									</Typography>
+								</Grid>
 
-							<Grid item xs={12}>
-								<Grid
-									container
-									justify="space-around"
-									spacing={4}
-									className={classes.productList}
-									id="products-list"
-								>
-									{products.map((product, index) => (
-										<Grid
-											item
-											xs={12}
-											sm={6}
-											md={4}
-											lg={3}
-											key={index}
-											id={"producto-" + index}
-										>
-											<ProductCard
-												productFromProps={product}
-												loading={loading}
-											/>
-										</Grid>
-									))}
+								<Grid item xs={12}>
+									<Grid
+										container
+										justify="space-around"
+										spacing={4}
+										className={classes.productList}
+										id="products-list"
+									>
+										{products.map((product, index) => (
+											<Grid
+												item
+												xs={12}
+												sm={6}
+												md={4}
+												lg={3}
+												key={index}
+												id={"producto-" + index}
+											>
+												<ProductCard
+													productFromProps={product}
+													loading={loading}
+												/>
+											</Grid>
+										))}
+									</Grid>
 								</Grid>
 							</Grid>
 						</Grid>
-					</Grid>
 
-					<Hidden mdUp>
-						<Grid item xs={12} className={classes.textCenter}>
-							<Fab
+						<Hidden mdUp>
+							<Grid item xs={12} className={classes.textCenter}>
+								<Fab
+									color="primary"
+									aria-label="scroll"
+									size="small"
+									className={classes.scrollBtn}
+									onClick={scrollProducts}
+								>
+									<ArrowRightAltIcon />
+								</Fab>
+							</Grid>
+						</Hidden>
+
+						<Grid item className={classes.pagination}>
+							<Pagination
+								count={totalPages}
 								color="primary"
-								aria-label="scroll"
+								onChange={handlePageChange}
 								size="small"
-								className={classes.scrollBtn}
-								onClick={scrollProducts}
-							>
-								<ArrowRightAltIcon />
-							</Fab>
+							/>
 						</Grid>
-					</Hidden>
-
-					<Grid item className={classes.pagination}>
-						<Pagination
-							count={totalPages}
-							color="primary"
-							onChange={handlePageChange}
-							size="small"
-						/>
 					</Grid>
-				</Grid>
-			</Container>
-		</div>
+				</Container>
+			</div>
+		</>
 	)
 }
 

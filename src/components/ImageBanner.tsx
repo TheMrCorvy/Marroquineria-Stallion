@@ -8,7 +8,7 @@ const ImageBanner: FC = () => {
 	const settings = {
 		dots: true,
 		accessibility: true,
-		autoPlaySpeed: 10000,
+		autoplaySpeed: 10000,
 		autoplay: true,
 		arrows: false,
 		pauseOnHover: false,

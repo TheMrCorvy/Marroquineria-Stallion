@@ -125,3 +125,8 @@
 	bottom: 30px;
 	transform: rotate(-225deg);
 }
+
+.slick-prev:before,
+.slick-next:before {
+	color: black;
+}
