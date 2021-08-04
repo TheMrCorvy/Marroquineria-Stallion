@@ -1,6 +1,14 @@
 import { FC } from "react"
 
-import { Container, Grid, Card, CardActionArea, CardMedia, Typography } from "@material-ui/core"
+import {
+	Container,
+	Grid,
+	Card,
+	CardContent,
+	CardActionArea,
+	CardMedia,
+	Typography,
+} from "@material-ui/core"
 
 import { makeStyles } from "@material-ui/core/styles"
 
@@ -25,10 +33,12 @@ const useStyles = makeStyles({
 	},
 	textCenter: {
 		textAlign: "center",
+		marginTop: "2rem",
 	},
 	media: {
 		height: 0,
 		paddingTop: "100%",
+		borderRadius: 5,
 	},
 })
 
@@ -41,54 +51,62 @@ const Categories: FC<Props> = ({ onClick }) => {
 				<div>
 					<Grid container justify="space-around" spacing={4}>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card>
+							<Card elevation={2}>
 								<CardActionArea onClick={() => onClick("mochilas")}>
-									<CardMedia
-										className={classes.media}
-										image="/images/categories/backpack.png"
-									/>
-									<Typography variant="h6" className={classes.textCenter}>
-										Mochilas
-									</Typography>
+									<CardContent>
+										<CardMedia
+											className={classes.media}
+											image="/images/categories/backpack.png"
+										/>
+										<Typography variant="h6" className={classes.textCenter}>
+											Mochilas
+										</Typography>
+									</CardContent>
 								</CardActionArea>
 							</Card>
 						</Grid>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card>
-								<CardActionArea onClick={() => onClick("maletines")}>
-									<CardMedia
-										className={classes.media}
-										image="/images/categories/briefcase.png"
-									/>
-									<Typography variant="h6" className={classes.textCenter}>
-										Maletines
-									</Typography>
-								</CardActionArea>
-							</Card>
-						</Grid>
-						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card>
+							<Card elevation={2}>
 								<CardActionArea onClick={() => onClick("bolsos")}>
-									<CardMedia
-										className={classes.media}
-										image="/images/categories/bag.png"
-									/>
-									<Typography variant="h6" className={classes.textCenter}>
-										Bolsos
-									</Typography>
+									<CardContent>
+										<CardMedia
+											className={classes.media}
+											image="/images/categories/bag.png"
+										/>
+										<Typography variant="h6" className={classes.textCenter}>
+											Bolsos
+										</Typography>
+									</CardContent>
 								</CardActionArea>
 							</Card>
 						</Grid>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card>
+							<Card elevation={2}>
+								<CardActionArea onClick={() => onClick("maletines")}>
+									<CardContent>
+										<CardMedia
+											className={classes.media}
+											image="/images/categories/briefcase.png"
+										/>
+										<Typography variant="h6" className={classes.textCenter}>
+											Maletines
+										</Typography>
+									</CardContent>
+								</CardActionArea>
+							</Card>
+						</Grid>
+						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
+							<Card elevation={2}>
 								<CardActionArea onClick={() => onClick("valijas")}>
-									<CardMedia
-										className={classes.media}
-										image="/images/categories/baggage.jpg"
-									/>
-									<Typography variant="h6" className={classes.textCenter}>
-										Valijas
-									</Typography>
+									<CardContent>
+										<CardMedia
+											className={classes.media}
+											image="/images/categories/baggage.jpg"
+										/>
+										<Typography variant="h6" className={classes.textCenter}>
+											Valijas
+										</Typography>
+									</CardContent>
 								</CardActionArea>
 							</Card>
 						</Grid>
@@ -97,54 +115,62 @@ const Categories: FC<Props> = ({ onClick }) => {
 				<div>
 					<Grid container justify="space-around" spacing={4}>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card>
+							<Card elevation={2}>
 								<CardActionArea onClick={() => onClick("carteras")}>
-									<CardMedia
-										className={classes.media}
-										image="/images/categories/hand-bag.jpg"
-									/>
-									<Typography variant="h6" className={classes.textCenter}>
-										Carteras
-									</Typography>
+									<CardContent>
+										<CardMedia
+											className={classes.media}
+											image="/images/categories/hand-bag.jpg"
+										/>
+										<Typography variant="h6" className={classes.textCenter}>
+											Carteras
+										</Typography>
+									</CardContent>
 								</CardActionArea>
 							</Card>
 						</Grid>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card>
+							<Card elevation={2}>
 								<CardActionArea onClick={() => onClick("fabricados")}>
-									<CardMedia
-										className={classes.media}
-										image="/images/categories/hand-made.jpg"
-									/>
-									<Typography variant="h6" className={classes.textCenter}>
-										Productos Fabricados
-									</Typography>
+									<CardContent>
+										<CardMedia
+											className={classes.media}
+											image="/images/categories/hand-made.jpg"
+										/>
+										<Typography variant="h6" className={classes.textCenter}>
+											Productos Fabricados
+										</Typography>
+									</CardContent>
 								</CardActionArea>
 							</Card>
 						</Grid>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card>
+							<Card elevation={2}>
 								<CardActionArea onClick={() => onClick("billeteras")}>
-									<CardMedia
-										className={classes.media}
-										image="/images/categories/wallet.png"
-									/>
-									<Typography variant="h6" className={classes.textCenter}>
-										Billeteras
-									</Typography>
+									<CardContent>
+										<CardMedia
+											className={classes.media}
+											image="/images/categories/wallet.png"
+										/>
+										<Typography variant="h6" className={classes.textCenter}>
+											Billeteras
+										</Typography>
+									</CardContent>
 								</CardActionArea>
 							</Card>
 						</Grid>
 						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card>
+							<Card elevation={2}>
 								<CardActionArea onClick={() => onClick("riñoneras")}>
-									<CardMedia
-										className={classes.media}
-										image="/images/categories/fanny-pack.png"
-									/>
-									<Typography variant="h6" className={classes.textCenter}>
-										Riñoneras
-									</Typography>
+									<CardContent>
+										<CardMedia
+											className={classes.media}
+											image="/images/categories/fanny-pack.png"
+										/>
+										<Typography variant="h6" className={classes.textCenter}>
+											Riñoneras
+										</Typography>
+									</CardContent>
 								</CardActionArea>
 							</Card>
 						</Grid>

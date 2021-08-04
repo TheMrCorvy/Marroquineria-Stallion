@@ -1,6 +1,15 @@
 import { FC, MouseEvent, useState, useEffect } from "react"
 
-import { Container, Grid, Typography, Divider, Fab, Hidden, useMediaQuery } from "@material-ui/core"
+import {
+	Container,
+	Grid,
+	Typography,
+	Divider,
+	Fab,
+	Hidden,
+	useMediaQuery,
+	Button,
+} from "@material-ui/core"
 
 import { makeStyles, createStyles, Theme, useTheme } from "@material-ui/core/styles"
 
@@ -72,7 +81,6 @@ const useStyles = makeStyles((theme: Theme) =>
 			},
 		},
 		menuBtn: {
-			marginTop: 20,
 			color: "white",
 			borderColor: "white",
 			borderRadius: 7,
@@ -151,20 +159,24 @@ const ListProductsSection: FC = () => {
 
 	const [toResult, setToResult] = useState(10)
 
+	const [category, setCategory] = useState("/")
+
 	useEffect(() => {
 		getProductsFromApi("?page=1")
-	}, [])
+	}, [category])
 
 	const getProductsFromApi = async (urlParams: string) => {
 		const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 		if (apiUrl) {
-			const res = await fetch(apiUrl + "/get-products" + urlParams, {
+			const res = await fetch(apiUrl + "/get-products" + category + urlParams, {
 				headers: {
 					Accept: "application/json",
 				},
 			})
 			const data = await res.json()
+
+			console.log(data)
 
 			setProducts(data.products.data)
 
@@ -210,7 +222,22 @@ const ListProductsSection: FC = () => {
 		}
 	}
 
-	const handleClick = (category: string) => {}
+	const handleClick = (selectedCategory: string) => {
+		if (category === "/" && selectedCategory === "") return
+
+		const productsSection = document.getElementById("productos")
+
+		if (productsSection) {
+			productsSection.scrollIntoView({ behavior: "smooth", block: "start" })
+		}
+
+		setTimeout(() => {
+			setLoading(true)
+			setProducts(placeholder)
+
+			setCategory("/" + selectedCategory)
+		}, 1000)
+	}
 
 	return (
 		<>
@@ -236,16 +263,14 @@ const ListProductsSection: FC = () => {
 						<Grid item className={classes.bgRed}>
 							<Grid container justify="space-around">
 								<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
-									<Typography
+									<Button
+										variant="outlined"
 										color="inherit"
-										style={{ color: "white" }}
-										variant="body1"
+										className={classes.menuBtn}
+										onClick={() => handleClick("")}
 									>
-										Inicio{" "}
-										<Typography component="span" color="textPrimary">
-											/ Productos
-										</Typography>
-									</Typography>
+										Ver Todos Los Productos
+									</Button>
 								</Grid>
 								<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
 									<Typography variant="h6">Nuestros Productos</Typography>
