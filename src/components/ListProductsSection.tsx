@@ -121,6 +121,12 @@ const useStyles = makeStyles((theme: Theme) =>
 			opacity: 1,
 			transition: "visibility 0s, opacity 1s linear",
 		},
+		notFound: {
+			textAlign: "center",
+			color: "white",
+			paddingTop: "13vh",
+			paddingBottom: "13vh",
+		},
 	})
 )
 
@@ -291,22 +297,34 @@ const ListProductsSection: FC = () => {
 										className={classes.productList}
 										id="products-list"
 									>
-										{products.map((product, index) => (
-											<Grid
-												item
-												xs={12}
-												sm={6}
-												md={4}
-												lg={3}
-												key={index}
-												id={"producto-" + index}
-											>
-												<ProductCard
-													productFromProps={product}
-													loading={loading}
-												/>
+										{products.length >= 1 ? (
+											products.map((product, index) => (
+												<Grid
+													item
+													xs={12}
+													sm={6}
+													md={4}
+													lg={3}
+													key={index}
+													id={"producto-" + index}
+												>
+													<ProductCard
+														productFromProps={product}
+														loading={loading}
+													/>
+												</Grid>
+											))
+										) : (
+											<Grid item xs={12}>
+												<Typography
+													variant="h5"
+													className={classes.notFound}
+												>
+													No se encontró ningún producto en esa
+													categoría...
+												</Typography>
 											</Grid>
-										))}
+										)}
 									</Grid>
 								</Grid>
 							</Grid>
