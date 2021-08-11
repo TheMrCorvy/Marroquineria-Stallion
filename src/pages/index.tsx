@@ -361,7 +361,7 @@ export default function Home() {
 						<Grid container justify="center" style={{ textAlign: "left" }}>
 							<Grid item xs={12} md={6}>
 								<Grid container spacing={1}>
-									<Grid item xs={12}>
+									{/* <Grid item xs={12}>
 										<Typography variant="body1">
 											Lunes: 8:30 - 18:00 hs
 										</Typography>
@@ -384,6 +384,14 @@ export default function Home() {
 									<Grid item xs={12}>
 										<Typography variant="body1">
 											Viernes: 8:30 - 18:00 hs
+										</Typography>
+									</Grid> */}
+									<Grid item xs={12}>
+										<Typography variant="body1" paragraph>
+											De Lunes a Viernes, de 08:30 a 18:00
+										</Typography>
+										<Typography variant="body1">
+											(No se cierra al mediodía)
 										</Typography>
 									</Grid>
 								</Grid>
