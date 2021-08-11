@@ -165,7 +165,7 @@ const ListProductsSection: FC = () => {
 
 	const [toResult, setToResult] = useState(10)
 
-	const [category, setCategory] = useState("/")
+	const [category, setCategory] = useState("")
 
 	useEffect(() => {
 		getProductsFromApi("?page=1")
@@ -181,8 +181,6 @@ const ListProductsSection: FC = () => {
 				},
 			})
 			const data = await res.json()
-
-			console.log(data)
 
 			setProducts(data.products.data)
 
@@ -229,7 +227,7 @@ const ListProductsSection: FC = () => {
 	}
 
 	const handleClick = (selectedCategory: string) => {
-		if (category === "/" && selectedCategory === "") return
+		if (category === "" && selectedCategory === "") return
 
 		const productsSection = document.getElementById("productos")
 
@@ -241,7 +239,7 @@ const ListProductsSection: FC = () => {
 			setLoading(true)
 			setProducts(placeholder)
 
-			setCategory("/" + selectedCategory)
+			setCategory(selectedCategory)
 		}, 1000)
 	}
 
