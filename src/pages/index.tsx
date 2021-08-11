@@ -83,7 +83,10 @@ const useStyles = makeStyles((theme: Theme) =>
 			borderTop: "6px solid #0556f3",
 			borderRadius: 15,
 			position: "relative",
-			minHeight: "10rem",
+			minHeight: "100%",
+			display: "flex",
+			alignItems: "center",
+			verticalAlign: "center",
 		},
 		infoIcon: {
 			borderTopLeftRadius: 15,
@@ -199,9 +202,14 @@ export default function Home() {
 								<Typography variant="h6" paragraph gutterBottom>
 									Envíos
 								</Typography>
+								<Typography variant="subtitle1">CABA y Conurbano</Typography>
 								<Typography variant="body2" paragraph gutterBottom>
-									Envíos a todo el país mediante Correo Argentino, o también moto
-									mensajera solo para CABA y GBA
+									Contamos con moto mensajería de confianza (consultanos el
+									precio).
+								</Typography>
+								<Typography variant="subtitle1">Interior</Typography>
+								<Typography variant="body2" paragraph gutterBottom>
+									Correo Argentino, el transporte es tu elección.
 								</Typography>
 							</CardContent>
 							<div className={classes.infoIcon}>
@@ -213,11 +221,17 @@ export default function Home() {
 						<Card className={classes.infoCard}>
 							<CardContent>
 								<Typography variant="h6" paragraph gutterBottom>
-									Contacto
+									Ayuda y Contacto
 								</Typography>
-								<Typography variant="body2" paragraph gutterBottom>
+								{/* <Typography variant="body2" paragraph gutterBottom>
 									Siéntete libre de contactarnos para consultar sobre precios de
 									cotización o acerca cualquiera de nuestros productos
+								</Typography> */}
+								<Typography variant="body2" paragraph gutterBottom>
+									Email: mercedesdelvalleaguirre@gmail.com
+								</Typography>
+								<Typography variant="body2" paragraph gutterBottom>
+									Teléfono: 011 4381-6833
 								</Typography>
 							</CardContent>
 							<div className={classes.infoIcon}>
@@ -235,6 +249,58 @@ export default function Home() {
 									Aceptamos pagos mediante cualquier tarjeta de débito o crédito,
 									o en efectivo en el local
 								</Typography>
+								<Grid container justify="space-around">
+									<Grid item>
+										<Image
+											src={
+												"https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/visa@2x.png"
+											}
+											alt="Métodos de pago aceptados"
+											width={45}
+											height={30}
+										/>
+									</Grid>
+									<Grid item>
+										<Image
+											src={
+												"https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/mastercard@2x.png"
+											}
+											alt="Métodos de pago aceptados"
+											width={45}
+											height={30}
+										/>
+									</Grid>
+									<Grid item>
+										<Image
+											src={
+												"https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/amex@2x.png"
+											}
+											alt="Métodos de pago aceptados"
+											width={45}
+											height={30}
+										/>
+									</Grid>
+									<Grid item>
+										<Image
+											src={
+												"https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/ar/cabal@2x.png"
+											}
+											alt="Métodos de pago aceptados"
+											width={45}
+											height={30}
+										/>
+									</Grid>
+									<Grid item>
+										<Image
+											src={
+												"https://d26lpennugtm8s.cloudfront.net/assets/common/img/logos/payment/mercadopago@2x.png"
+											}
+											alt="Métodos de pago aceptados"
+											width={45}
+											height={30}
+										/>
+									</Grid>
+								</Grid>
 							</CardContent>
 							<div className={classes.infoIcon}>
 								<PaymentIcon />
