@@ -2,56 +2,71 @@ import { FC } from "react"
 
 import Slider from "react-slick"
 
-import Image from "next/image"
+import { Card, CardMedia } from "@material-ui/core"
+
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyle = makeStyles({
+	media: {
+		height: 0,
+		paddingTop: "56.52%", // 16:9
+		backgroundSize: "contain",
+	},
+})
 
 const ImageBanner: FC = () => {
 	const settings = {
 		dots: true,
 		accessibility: true,
-		autoplaySpeed: 10000,
-		autoplay: true,
-		arrows: false,
+		autoplaySpeed: 5000,
+		autoplay: false,
+		arrows: true,
 		pauseOnHover: false,
 	}
 
+	const classes = useStyle()
+
 	return (
 		<Slider {...settings}>
-			<div>
-				<Image
-					src="/images/banner_1.jpg"
-					title={"algo"}
-					alt={"algo"}
-					width={600}
-					height={300}
-				/>
-			</div>
-			<div>
-				<Image
-					src="/images/banner_2.jpg"
-					title={"algo"}
-					width={600}
-					height={300}
-					alt={"algo"}
-				/>
-			</div>
-			<div>
-				<Image
-					src="/images/banner_3.jpg"
-					title={"algo"}
-					alt={"algo"}
-					width={600}
-					height={300}
-				/>
-			</div>
-			<div>
-				<Image
-					src="/images/banner_4.jpg"
-					title={"algo"}
-					alt={"algo"}
-					width={600}
-					height={300}
-				/>
-			</div>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_1.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_2.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_3.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_4.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_5.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_6.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_7.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_8.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_9.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_9.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_10.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_11.jpeg" />
+			</Card>
+			<Card elevation={0}>
+				<CardMedia className={classes.media} image="/images/banner/banner_12.jpeg" />
+			</Card>
 		</Slider>
 	)
 }
