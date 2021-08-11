@@ -1,18 +1,8 @@
 import Image from "next/image"
 
-import {
-	Container,
-	Grid,
-	Typography,
-	Divider,
-	Hidden,
-	Card,
-	CardMedia,
-	useMediaQuery,
-	CardContent,
-} from "@material-ui/core"
+import { Container, Grid, Typography, Divider, Hidden, Card, CardContent } from "@material-ui/core"
 
-import { useTheme, makeStyles, Theme, createStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles"
 
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn"
 import LocalShippingIcon from "@material-ui/icons/LocalShipping"
@@ -22,17 +12,6 @@ import PaymentIcon from "@material-ui/icons/Payment"
 import ListProductsSection from "../components/ListProductsSection"
 import ImageBanner from "../components/ImageBanner"
 import ProductsOnSaleSection from "../components/ProductsOnSaleSection"
-
-const r = (option: 1 | 2): number => {
-	// Option 1: corners option 2: middle point
-	if (option === 1) {
-		// A random number between 40 & 30
-		return Math.floor(Math.random() * (40 - 30 + 1)) + 30
-	} else {
-		// A random number between 52 & 48
-		return Math.floor(Math.random() * (52 - 48 + 1)) + 48
-	}
-}
 
 const useStyles = makeStyles((theme: Theme) =>
 	createStyles({
@@ -82,17 +61,9 @@ const useStyles = makeStyles((theme: Theme) =>
 			textAlign: "center",
 			marginTop: 50,
 		},
-		randomRadius: {
-			width: "100%",
-			height: 250,
-			borderRadius: `${r(2)}% ${r(1)}% ${r(1)}% ${r(2)}% / ${r(1)}% ${r(2)}% ${r(1)}% ${r(
-				2
-			)}%`,
-		},
-		smallScreenImg: {
-			width: "100%",
-			height: 250,
-			borderRadius: 13,
+		media: {
+			height: 0,
+			paddingTop: "56.52%", // 16:9
 		},
 		maxWidthHeight: {
 			width: "100%",
@@ -138,19 +109,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Home() {
 	const classes = useStyles()
-
-	const theme = useTheme()
-
-	const smallScreen = useMediaQuery(theme.breakpoints.down("sm"))
-
-	const fluidCard = () => {
-		if (smallScreen) {
-			return classes.smallScreenImg
-		} else {
-			return classes.randomRadius
-		}
-	}
-
 	return (
 		<>
 			<Container maxWidth="lg" className={classes.galeryContainer}>
@@ -176,13 +134,12 @@ export default function Home() {
 							</Grid>
 						</Grid>
 					</Grid>
-					<Grid item xs={12} md={4} className={classes.imgContainer}>
-						<Card className={fluidCard()} elevation={5}>
-							<CardMedia
-								className={classes.maxWidthHeight}
-								image="https://t3.ftcdn.net/jpg/00/76/16/06/240_F_76160632_yXDNvyf4zbDuoSjxT4zrmMxUJ8wsJSF8.jpg"
-							/>
-						</Card>
+					<Grid item xs={8} md={4} lg={3} className={classes.imgContainer}>
+						<Image
+							src={require("../../public/images/logo.png")}
+							alt="Tienda online de Marroquinería Stallion"
+							className={classes.image}
+						/>
 					</Grid>
 				</Grid>
 				<Grid container justify="space-around" className={classes.galeryContainer}>
