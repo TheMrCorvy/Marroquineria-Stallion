@@ -8,7 +8,13 @@ import {
 	CardActionArea,
 	CardMedia,
 	Typography,
+	Accordion,
+	AccordionSummary,
+	AccordionDetails,
+	Link,
 } from "@material-ui/core"
+
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
 import { makeStyles } from "@material-ui/core/styles"
 
@@ -39,6 +45,16 @@ const useStyles = makeStyles({
 		height: 0,
 		paddingTop: "100%",
 		borderRadius: 5,
+	},
+	accordion: {
+		marginTop: "3rem",
+		borderRadius: 8,
+		"&::before": {
+			backgroundColor: "#fff",
+		},
+	},
+	link: {
+		textTransform: "capitalize",
 	},
 })
 
@@ -180,6 +196,27 @@ const Categories: FC<Props> = ({ onClick }) => {
 					</Grid>
 				</div>
 			</Slider>
+
+			<Accordion className={classes.accordion} style={{ borderRadius: 8 }} elevation={2}>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+					<Typography variant="h6">Todas las Categorías:</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Grid container spacing={4} component="ul">
+						{categoriesArray.map((category, index: number) => (
+							<Grid item key={index} component="li" xs={12} sm={6} md={4} lg={3}>
+								<Link
+									href="#"
+									onClick={() => onClick("/" + category)}
+									className={classes.link}
+								>
+									{category}
+								</Link>
+							</Grid>
+						))}
+					</Grid>
+				</AccordionDetails>
+			</Accordion>
 		</Container>
 	)
 }
@@ -189,3 +226,41 @@ export default Categories
 interface Props {
 	onClick: (category: string) => void
 }
+
+const categoriesArray = [
+	"accesorios",
+	"accesorios - mujer",
+	"accesorios de viaje",
+	"bandoleras",
+	"barbijos / cubrebocas",
+	"billeteras",
+	"billeteras - hombre",
+	"billeteras - mujer",
+	"billeteras - tarjetero",
+	"billeteras de cuero - hombre",
+	"billeteras de cuero - mujer",
+	"bolsos",
+	"botineros",
+	"botineros",
+	"carteras",
+	"carteras simil cuero",
+	"cartucheras",
+	"maletines",
+	"mochilas",
+	"mochilas escolares",
+	"mochilas porta-notebooks",
+	"mochilas urbanas",
+	"morrales",
+	"paraguas",
+	"paraguas - hombre",
+	"paraguas - mujer",
+	"porta cosméticos",
+	"porta-notebooks",
+	"portafolio",
+	"portafolios",
+	"portafolios porta-notebooks",
+	"portafolios simil cuero",
+	"productos fabricados",
+	"riñoneras",
+	"valijas",
+]
