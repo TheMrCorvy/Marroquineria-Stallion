@@ -62,7 +62,7 @@ const Categories: FC<Props> = ({ onClick }) => {
 	const classes = useStyles()
 
 	return (
-		<Container maxWidth="lg" className={classes.container}>
+		<Container maxWidth="lg" className={classes.container} id="categorias">
 			<Typography variant="h4" className={classes.textCenter}>
 				Tenemos Stock de:
 			</Typography>

@@ -162,7 +162,14 @@ const Navbar: FC = () => {
 		if (option === "desktop") {
 			return (
 				<div className={classes.sectionDesktop}>
-					<FormModal layoutOption={1} />
+					<Button
+						color="inherit"
+						className={classes.navbarBtn}
+						onClick={() => scrollToElement("categorias")}
+						size="small"
+					>
+						Categorías
+					</Button>
 					<ShippingDialog className={classes.navbarBtn} layout={1} />
 					<Button
 						color="inherit"
@@ -198,10 +205,6 @@ const Navbar: FC = () => {
 					open={isMobileMenuOpen}
 					onClose={handleMobileMenuClose}
 				>
-					<MenuItem onClick={handleMobileMenuClose}>
-						<FormModal layoutOption={2} />
-					</MenuItem>
-
 					<Divider className={classes.divider} />
 
 					<MenuItem onClick={() => scrollToElement("productos")}>Productos</MenuItem>
@@ -253,7 +256,9 @@ const Navbar: FC = () => {
 
 					<Divider className={classes.divider} />
 
-					<FormModal layoutOption={3} />
+					<ListItem button onClick={() => scrollToElement("categorias")}>
+						<ListItemText primary="Categorías" />
+					</ListItem>
 
 					<Divider className={classes.divider} />
 
