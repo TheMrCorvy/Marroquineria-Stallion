@@ -309,15 +309,6 @@ export default function Home() {
 					</Grid>
 				</Grid>
 			</Container>
-			<Grid container justify="center" className={classes.marginTop}>
-				<Grid item xs={6} md={3} lg={2} className={classes.imgContainer}>
-					<Image
-						src={require("../../public/images/logo.png")}
-						alt="Tienda online de Marroquinería Stallion"
-						className={classes.image}
-					/>
-				</Grid>
-			</Grid>
 			<ProductsOnSaleSection />
 			<ListProductsSection />
 			<Container maxWidth="lg" className={classes.contactContainer} id="contacto">
