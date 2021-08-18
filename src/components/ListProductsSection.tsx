@@ -182,6 +182,8 @@ const ListProductsSection: FC = () => {
 			})
 			const data = await res.json()
 
+			console.log(data.endpoint)
+
 			setProducts(data.products.data)
 
 			setTotalPages(data.products.last_page)

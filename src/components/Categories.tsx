@@ -67,134 +67,40 @@ const Categories: FC<Props> = ({ onClick }) => {
 				Tenemos Stock de:
 			</Typography>
 			<Slider {...settings}>
-				<div>
-					<Grid container justify="space-around" spacing={4}>
-						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("/mochilas")}>
-									<CardContent>
-										<CardMedia
-											className={classes.media}
-											image="/images/categories/backpack.png"
-										/>
-										<Typography variant="h6" className={classes.textCenter}>
-											Mochilas
-										</Typography>
-									</CardContent>
-								</CardActionArea>
-							</Card>
+				{mainCategories.map((part, index: number) => (
+					<div key={index}>
+						<Grid container justify="space-around" spacing={4}>
+							{part.map((category, i: number) => (
+								<Grid
+									key={i}
+									item
+									xs={12}
+									md={4}
+									lg={3}
+									xl={2}
+									className={classes.column}
+								>
+									<Card elevation={2}>
+										<CardActionArea onClick={() => onClick(category.endpoint)}>
+											<CardContent>
+												<CardMedia
+													className={classes.media}
+													image={category.imageUrl}
+												/>
+												<Typography
+													variant="h6"
+													className={classes.textCenter}
+												>
+													{category.name}
+												</Typography>
+											</CardContent>
+										</CardActionArea>
+									</Card>
+								</Grid>
+							))}
 						</Grid>
-						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("/bolsos")}>
-									<CardContent>
-										<CardMedia
-											className={classes.media}
-											image="/images/categories/bag.png"
-										/>
-										<Typography variant="h6" className={classes.textCenter}>
-											Bolsos
-										</Typography>
-									</CardContent>
-								</CardActionArea>
-							</Card>
-						</Grid>
-						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("/maletines")}>
-									<CardContent>
-										<CardMedia
-											className={classes.media}
-											image="/images/categories/briefcase.png"
-										/>
-										<Typography variant="h6" className={classes.textCenter}>
-											Maletines
-										</Typography>
-									</CardContent>
-								</CardActionArea>
-							</Card>
-						</Grid>
-						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("/valijas")}>
-									<CardContent>
-										<CardMedia
-											className={classes.media}
-											image="/images/categories/baggage.jpg"
-										/>
-										<Typography variant="h6" className={classes.textCenter}>
-											Valijas
-										</Typography>
-									</CardContent>
-								</CardActionArea>
-							</Card>
-						</Grid>
-					</Grid>
-				</div>
-				<div>
-					<Grid container justify="space-around" spacing={4}>
-						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("/carteras")}>
-									<CardContent>
-										<CardMedia
-											className={classes.media}
-											image="/images/categories/hand-bag.jpg"
-										/>
-										<Typography variant="h6" className={classes.textCenter}>
-											Carteras
-										</Typography>
-									</CardContent>
-								</CardActionArea>
-							</Card>
-						</Grid>
-						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("/fabricados")}>
-									<CardContent>
-										<CardMedia
-											className={classes.media}
-											image="/images/categories/hand-made.jpg"
-										/>
-										<Typography variant="h6" className={classes.textCenter}>
-											Productos Fabricados
-										</Typography>
-									</CardContent>
-								</CardActionArea>
-							</Card>
-						</Grid>
-						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("/billeteras")}>
-									<CardContent>
-										<CardMedia
-											className={classes.media}
-											image="/images/categories/wallet.png"
-										/>
-										<Typography variant="h6" className={classes.textCenter}>
-											Billeteras
-										</Typography>
-									</CardContent>
-								</CardActionArea>
-							</Card>
-						</Grid>
-						<Grid item xs={12} md={4} lg={3} xl={2} className={classes.column}>
-							<Card elevation={2}>
-								<CardActionArea onClick={() => onClick("/riñoneras")}>
-									<CardContent>
-										<CardMedia
-											className={classes.media}
-											image="/images/categories/fanny-pack.png"
-										/>
-										<Typography variant="h6" className={classes.textCenter}>
-											Riñoneras
-										</Typography>
-									</CardContent>
-								</CardActionArea>
-							</Card>
-						</Grid>
-					</Grid>
-				</div>
+					</div>
+				))}
 			</Slider>
 
 			<Accordion className={classes.accordion} style={{ borderRadius: 8 }} elevation={2}>
@@ -243,24 +149,83 @@ const categoriesArray = [
 	"botineros",
 	"botineros",
 	"carteras",
-	"carteras simil cuero",
+	"carteras de dama",
+	"carteras (simil cuero)",
 	"cartucheras",
 	"maletines",
 	"mochilas",
 	"mochilas escolares",
-	"mochilas porta-notebooks",
+	"mochilas porta notebooks",
 	"mochilas urbanas",
 	"morrales",
 	"paraguas",
-	"paraguas - hombre",
-	"paraguas - mujer",
+	"paraguas de hombre y de mujer",
 	"porta cosméticos",
-	"porta-notebooks",
+	"porta notebooks",
 	"portafolio",
 	"portafolios",
-	"portafolios porta-notebooks",
-	"portafolios simil cuero",
+	"portafolios porta notebooks",
+	"portafolios (simil cuero)",
 	"productos fabricados",
 	"riñoneras",
 	"valijas",
+]
+
+const mainCategories = [
+	[
+		{
+			name: "Riñoneras",
+			imageUrl: "/images/categories/riñoneras.jpeg",
+			endpoint: "/riñoneras",
+		},
+		{
+			name: "Accesorios de Viaje",
+			imageUrl: "/images/categories/accesorios-de-viaje.jpeg",
+			endpoint: "/accesorios de viaje",
+		},
+		{
+			name: "Valijas",
+			imageUrl: "/images/categories/valijas.jpeg",
+			endpoint: "/valijas",
+		},
+		{
+			name: "Morrales",
+			imageUrl: "/images/categories/morrales.jpeg",
+			endpoint: "/morrales",
+		},
+	],
+	[
+		{
+			name: "Mochilas",
+			imageUrl: "/images/categories/mochilas.jpeg",
+			endpoint: "/mochilas",
+		},
+		{
+			name: "Mochilas Urbanas",
+			imageUrl: "/images/categories/mochilas-urbanas.jpeg",
+			endpoint: "/mochilas urbanas",
+		},
+		{
+			name: "Carteras de Dama",
+			imageUrl: "/images/categories/carteras-de-dama.jpeg",
+			endpoint: "/carteras de dama",
+		},
+		{
+			name: "Portafolios (Simil Cuero)",
+			imageUrl: "/images/categories/portafolios.jpeg",
+			endpoint: "/portafolios (simil cuero)",
+		},
+	],
+	[
+		{
+			name: "Mochilas Porta Notebooks",
+			imageUrl: "/images/categories/porta-notebooks.jpeg",
+			endpoint: "/porta notebooks",
+		},
+		{
+			name: "Paraguas de Hombre y de Mujer",
+			imageUrl: "/images/categories/paraguas.jpeg",
+			endpoint: "/paraguas de hombre y de mujer",
+		},
+	],
 ]
