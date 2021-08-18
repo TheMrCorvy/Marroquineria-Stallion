@@ -32,7 +32,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../redux/store"
 import { toggleCartModal } from "../redux/actions/cartActions"
 
-import FormModal from "./FormModal"
 import ShippingDialog from "./ShippingDialog"
 import HowToBuy from "./HowToBuy"
 
