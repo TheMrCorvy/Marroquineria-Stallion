@@ -39,6 +39,7 @@ import { toggleCartModal } from "../redux/actions/cartActions";
 
 import ShippingDialog from "./ShippingDialog";
 import HowToBuy from "./HowToBuy";
+import MegaMenu from "./MegaMenu";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -173,14 +174,7 @@ const Navbar: FC = () => {
     if (option === "desktop") {
       return (
         <div className={classes.sectionDesktop}>
-          <Button
-            color="inherit"
-            className={classes.navbarBtn}
-            onClick={() => scrollToElement("categorias")}
-            size="small"
-          >
-            Categorías
-          </Button>
+          <MegaMenu className={classes.navbarBtn} />
           <ShippingDialog className={classes.navbarBtn} layout={1} />
           <Button
             color="inherit"
@@ -216,6 +210,10 @@ const Navbar: FC = () => {
           open={isMobileMenuOpen}
           onClose={handleMobileMenuClose}
         >
+          <MenuItem onClick={() => scrollToElement("categorias")}>
+            Categorías
+          </MenuItem>
+
           <Divider className={classes.divider} />
 
           <MenuItem onClick={() => scrollToElement("productos")}>
