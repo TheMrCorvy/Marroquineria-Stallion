@@ -18,30 +18,63 @@ const MegaMenu: FC<Props> = ({ className }) => {
       </Button>
       <div
         className="dropdown-content"
-        style={{ display: isShown ? "block" : "none" }}
+        style={{ display: isShown ? "block" : "none", transition: "1s" }}
         onMouseLeave={() => setIsShown(false)}
       >
         <div className="header">
-          <h2>Mega Menu</h2>
+          <h2>Todas las Categorías Disponibles</h2>
         </div>
         <div className="row">
           <div className="column">
-            <h3>Category 1</h3>
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <a href="#">Accesorios</a>
+            <a href="#">Accesorios de Mujer</a>
+            <a href="#">Accesorios de Viaje</a>
+            <a href="#">Bandoleras</a>
           </div>
           <div className="column">
-            <h3>Category 2</h3>
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <a href="#">Barbijos / Cubrebocas</a>
+            <a href="#">Billeteras</a>
+            <a href="#">Billeteras - Hombre</a>
+            <a href="#">Billeteras - Mujer</a>
           </div>
           <div className="column">
-            <h3>Category 3</h3>
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <a href="#">Billeteras - Tarjetero</a>
+            <a href="#">Billeteras de Cuero - Hombre</a>
+            <a href="#">Billeteras de Cuero - Mujer</a>
+            <a href="#">Bolsos</a>
+          </div>
+          <div className="column">
+            <a href="#">Botineros</a>
+            <a href="#">Carteras</a>
+            <a href="#">Carteras de Dama</a>
+            <a href="#">Carteras (Simil Cuero)</a>
+          </div>
+          <div className="column">
+            <a href="#">Cartucheras</a>
+            <a href="#">Maletines</a>
+            <a href="#">Mochilas</a>
+            <a href="#">Mochilas Escolares</a>
+          </div>
+          <div className="column">
+            <a href="#">Mochilas Porta Notebooks</a>
+            <a href="#">Mochila Urbanas</a>
+            <a href="#">Morrales</a>
+            <a href="#">Paraguas</a>
+          </div>
+          <div className="column">
+            <a href="#">Paraguas de Hombre y de Mujer</a>
+            <a href="#">Porta Cosméticos</a>
+            <a href="#">Porta Notebooks</a>
+          </div>
+          <div className="column">
+            <a href="#">Portafolios</a>
+            <a href="#">Portafolios Porta Notebooks</a>
+            <a href="#">Portafolios (Simil Cuero)</a>
+            <a href="#">Productos Fabricados</a>
+          </div>
+          <div className="column">
+            <a href="#">Riñoneras</a>
+            <a href="#">Valijas</a>
           </div>
         </div>
       </div>
