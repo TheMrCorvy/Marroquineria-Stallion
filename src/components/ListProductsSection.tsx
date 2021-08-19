@@ -182,29 +182,31 @@ const ListProductsSection: FC = () => {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
         if (apiUrl) {
-            const res = await fetch(
+            const data = fetch(
                 apiUrl + "/get-products" + category + urlParams,
                 {
                     headers: {
                         Accept: "application/json",
                     },
                 }
-            );
-            const data = await res.json();
+            )
+                .then((res) => res.json())
+                .then((data) => {
+                    setProducts(data.products.data);
 
-            console.log(data.endpoint);
+                    setTotalPages(data.products.last_page);
 
-            setProducts(data.products.data);
+                    setTotalResults(data.products.total);
 
-            setTotalPages(data.products.last_page);
+                    setToResult(data.products.to);
 
-            setTotalResults(data.products.total);
+                    setFromResult(data.products.from);
 
-            setToResult(data.products.to);
-
-            setFromResult(data.products.from);
-
-            setLoading(false);
+                    setLoading(false);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
         }
     };
 
@@ -262,7 +264,7 @@ const ListProductsSection: FC = () => {
             setProducts(placeholder);
 
             dispatch(selectCategory(selectedCategory));
-        }, 1000);
+        }, 8000);
     };
 
     return (

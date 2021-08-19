@@ -38,7 +38,7 @@ const MegaMenu: FC<Props> = ({ className }) => {
             </Button>
             <div
                 className="dropdown-content"
-                style={{ top: isShown ? 7 : -1000, transition: "1.3s" }}
+                style={{ top: isShown ? 7 : -800, transition: "1.3s" }}
                 onMouseLeave={() => setIsShown(false)}
             >
                 <div className="header">
