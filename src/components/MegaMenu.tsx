@@ -7,17 +7,15 @@ const MegaMenu: FC<Props> = ({ className }) => {
 
   return (
     <>
-      <div className="dropdown" id="dropdown">
-        <Button
-          color="inherit"
-          className={className}
-          component="a"
-          size="small"
-          onMouseEnter={() => setIsShown(true)}
-        >
-          Categorías
-        </Button>
-      </div>
+      <Button
+        color="inherit"
+        className={className}
+        component="a"
+        size="small"
+        onMouseEnter={() => setIsShown(true)}
+      >
+        Categorías
+      </Button>
       <div
         className="dropdown-content"
         style={{ display: isShown ? "block" : "none" }}
