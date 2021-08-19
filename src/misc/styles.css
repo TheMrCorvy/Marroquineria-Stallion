@@ -154,16 +154,15 @@
 }
 
 .dropdown-content {
-  display: none;
+  display: block;
   position: absolute;
   background-color: #212121;
   width: 100%;
   left: 0;
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
     0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-  z-index: 1000;
+  z-index: 1;
   margin-top: 3.5rem;
-  transition: 1s;
   font-family: "Roboto Slab, serif";
   color: white;
 }
