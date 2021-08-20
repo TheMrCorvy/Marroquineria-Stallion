@@ -63,6 +63,9 @@ const useStyles = makeStyles({
         paddingLeft: "1rem",
         paddingRight: "1rem",
     },
+    card: {
+        borderRadius: 8,
+    },
 });
 
 const Categories: FC<Props> = ({ onClick }) => {
@@ -91,7 +94,7 @@ const Categories: FC<Props> = ({ onClick }) => {
                                     xl={2}
                                     className={classes.column}
                                 >
-                                    <Card elevation={2}>
+                                    <Card className={classes.card}>
                                         <CardActionArea
                                             onClick={() =>
                                                 onClick(category.endpoint)
@@ -123,7 +126,6 @@ const Categories: FC<Props> = ({ onClick }) => {
             <Accordion
                 className={classes.accordion}
                 style={{ borderRadius: 8 }}
-                elevation={2}
             >
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <Typography variant="h6">Todas las Categorías:</Typography>
