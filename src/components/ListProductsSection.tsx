@@ -248,7 +248,10 @@ const ListProductsSection: FC = () => {
     };
 
     const handleClick = (selectedCategory: string) => {
-        if (!category && !selectedCategory) return;
+        if (!category && selectedCategory === "") {
+            console.log({ category, selectedCategory });
+            return;
+        }
 
         const productsSection = document.getElementById("productos");
 
@@ -264,7 +267,7 @@ const ListProductsSection: FC = () => {
             setProducts(placeholder);
 
             dispatch(selectCategory(selectedCategory));
-        }, 8000);
+        }, 1000);
     };
 
     return (

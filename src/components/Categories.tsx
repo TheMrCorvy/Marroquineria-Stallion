@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, MouseEvent } from "react";
 
 import {
     Container,
@@ -71,6 +71,12 @@ const useStyles = makeStyles({
 const Categories: FC<Props> = ({ onClick }) => {
     const classes = useStyles();
 
+    const chooseCategory = (e: MouseEvent, selectedCategory: string) => {
+        e.preventDefault();
+
+        onClick(selectedCategory);
+    };
+
     return (
         <Container maxWidth="lg" className={classes.container} id="categorias">
             <Typography
@@ -96,8 +102,11 @@ const Categories: FC<Props> = ({ onClick }) => {
                                 >
                                     <Card className={classes.card}>
                                         <CardActionArea
-                                            onClick={() =>
-                                                onClick(category.endpoint)
+                                            onClick={(e) =>
+                                                chooseCategory(
+                                                    e,
+                                                    category.endpoint
+                                                )
                                             }
                                         >
                                             <CardContent>
@@ -144,7 +153,9 @@ const Categories: FC<Props> = ({ onClick }) => {
                             >
                                 <Link
                                     href="#"
-                                    onClick={() => onClick("/" + category)}
+                                    onClick={(e) =>
+                                        chooseCategory(e, "/" + category)
+                                    }
                                     className={classes.link}
                                 >
                                     {category}
