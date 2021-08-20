@@ -79,12 +79,6 @@ const ImageBanner: FC = () => {
             <Card elevation={0}>
                 <CardMedia
                     className={classes.media}
-                    image="/images/banner/banner_9.jpeg"
-                />
-            </Card>
-            <Card elevation={0}>
-                <CardMedia
-                    className={classes.media}
                     image="/images/banner/banner_10.jpeg"
                 />
             </Card>
