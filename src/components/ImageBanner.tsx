@@ -43,6 +43,12 @@ const ImageBanner: FC = () => {
             <Card elevation={0}>
                 <CardMedia
                     className={classes.media}
+                    image="/images/banner/banner_6.jpeg"
+                />
+            </Card>
+            <Card elevation={0}>
+                <CardMedia
+                    className={classes.media}
                     image="/images/banner/banner_3.jpeg"
                 />
             </Card>
@@ -52,10 +58,28 @@ const ImageBanner: FC = () => {
                     image="/images/banner/banner_4.jpeg"
                 />
             </Card>
+             <Card elevation={0}>
+                <CardMedia
+                    className={classes.media}
+                    image="/images/banner/banner_9.jpeg"
+                />
+            </Card>
             <Card elevation={0}>
                 <CardMedia
                     className={classes.media}
-                    image="/images/banner/banner_6.jpeg"
+                    image="/images/banner/banner_11.jpeg"
+                />
+            </Card>
+            <Card elevation={0}>
+                <CardMedia
+                    className={classes.media}
+                    image="/images/banner/banner_10.jpeg"
+                />
+            </Card>
+            <Card elevation={0}>
+                <CardMedia
+                    className={classes.media}
+                    image="/images/banner/banner_12.jpeg"
                 />
             </Card>
             <Card elevation={0}>
@@ -68,30 +92,6 @@ const ImageBanner: FC = () => {
                 <CardMedia
                     className={classes.media}
                     image="/images/banner/banner_8.jpeg"
-                />
-            </Card>
-            <Card elevation={0}>
-                <CardMedia
-                    className={classes.media}
-                    image="/images/banner/banner_9.jpeg"
-                />
-            </Card>
-            <Card elevation={0}>
-                <CardMedia
-                    className={classes.media}
-                    image="/images/banner/banner_10.jpeg"
-                />
-            </Card>
-            <Card elevation={0}>
-                <CardMedia
-                    className={classes.media}
-                    image="/images/banner/banner_11.jpeg"
-                />
-            </Card>
-            <Card elevation={0}>
-                <CardMedia
-                    className={classes.media}
-                    image="/images/banner/banner_12.jpeg"
                 />
             </Card>
         </Slider>
