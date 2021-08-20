@@ -32,6 +32,9 @@ const settings = {
 const useStyles = makeStyles({
     container: {
         padding: "3rem",
+        background: "#f5f5f5",
+        marginTop: "3rem",
+        borderRadius: 8,
     },
     column: {
         marginTop: "1rem",
@@ -56,6 +59,10 @@ const useStyles = makeStyles({
     link: {
         textTransform: "capitalize",
     },
+    banner: {
+        paddingLeft: "1rem",
+        paddingRight: "1rem",
+    },
 });
 
 const Categories: FC<Props> = ({ onClick }) => {
@@ -63,12 +70,16 @@ const Categories: FC<Props> = ({ onClick }) => {
 
     return (
         <Container maxWidth="lg" className={classes.container} id="categorias">
-            <Typography variant="h4" className={classes.textCenter}>
+            <Typography
+                variant="h4"
+                className={classes.textCenter}
+                style={{ marginTop: 0, marginBottom: "2rem" }}
+            >
                 Tenemos Stock de:
             </Typography>
             <Slider {...settings}>
                 {mainCategories.map((part, index: number) => (
-                    <div key={index}>
+                    <div key={index} className={classes.banner}>
                         <Grid container justify="space-around" spacing={4}>
                             {part.map((category, i: number) => (
                                 <Grid
