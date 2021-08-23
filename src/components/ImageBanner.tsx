@@ -73,13 +73,13 @@ const ImageBanner: FC = () => {
             <Card elevation={0}>
                 <CardMedia
                     className={classes.media}
-                    image="/images/banner/banner_10.jpeg"
+                    image="/images/banner/banner_12.jpeg"
                 />
             </Card>
             <Card elevation={0}>
                 <CardMedia
                     className={classes.media}
-                    image="/images/banner/banner_12.jpeg"
+                    image="/images/banner/banner_10.jpeg"
                 />
             </Card>
             <Card elevation={0}>
