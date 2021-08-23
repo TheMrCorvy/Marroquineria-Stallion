@@ -359,7 +359,7 @@ const ShowProduct: FC = () => {
 												>
 													Unidades en Stock: {product.stock}
 												</Typography>
-												{product.discount && (
+												{(product.discount !== null || product.discount!== 0) && (
 													<Typography
 														variant="h6"
 														color="secondary"
