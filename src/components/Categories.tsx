@@ -97,7 +97,6 @@ const Categories: FC<Props> = ({ onClick }) => {
                                     xs={12}
                                     md={4}
                                     lg={3}
-                                    xl={2}
                                     className={classes.column}
                                 >
                                     <Card className={classes.card}>
