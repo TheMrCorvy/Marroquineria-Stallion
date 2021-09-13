@@ -171,6 +171,14 @@ const ShowProduct: FC = () => {
 		currency: "ARS",
 	})
 
+	const title = () => {
+		if (product?.stock === 0) {
+			return "SIN STOCK - " + product?.title
+		} else {
+			return product?.title
+		}
+	}
+
 	const showPrice = (product: ProductCardProps) => {
 		if (product.discount) {
 			const priceToSubstract = (product.discount * product.price) / 100
@@ -214,13 +222,13 @@ const ShowProduct: FC = () => {
 								color="textPrimary"
 								className={classes.title}
 							>
-								/ {product.title}
+								/ {title()}
 							</Typography>
 						</Typography>
 					</Grid>
 					<Grid item xs={12} sm={12} md={4} className={classes.textCenter}>
 						<Typography variant="h6" className={classes.title}>
-							{product.title}
+							{title()}
 						</Typography>
 						<Divider />
 					</Grid>
@@ -256,7 +264,7 @@ const ShowProduct: FC = () => {
 													className={classes.title}
 													paragraph
 												>
-													{product.title}
+													{title()}
 												</Typography>
 											</Grid>
 											<Grid item xs={12}>
@@ -310,8 +318,8 @@ const ShowProduct: FC = () => {
 															>
 																<Image
 																	src={image.img_url}
-																	title={product.title}
-																	alt={product.title}
+																	title={title()}
+																	alt={title()}
 																	width={150}
 																	height={150}
 																	className={classes.img}
@@ -333,8 +341,8 @@ const ShowProduct: FC = () => {
 										{activeImg && (
 											<Image
 												src={activeImg}
-												title={product.title}
-												alt={product.title}
+												title={title()}
+												alt={title()}
 												width="auto"
 												height="auto"
 												layout="responsive"
@@ -359,15 +367,16 @@ const ShowProduct: FC = () => {
 												>
 													Unidades en Stock: {product.stock}
 												</Typography>
-												{(product.discount !== null && product.discount !== 0) && (
-													<Typography
-														variant="h6"
-														color="secondary"
-														paragraph
-													>
-														Descuento Limitado: {product.discount}%
-													</Typography>
-												)}
+												{product.discount !== null &&
+													product.discount !== 0 && (
+														<Typography
+															variant="h6"
+															color="secondary"
+															paragraph
+														>
+															Descuento Limitado: {product.discount}%
+														</Typography>
+													)}
 											</Grid>
 											<Grid item xs={12} className={classes.textCenter}>
 												<TextField
@@ -412,6 +421,7 @@ const ShowProduct: FC = () => {
 													disableElevation
 													fullWidth
 													onClick={dispatchAddToCart}
+													disabled={!product.stock}
 												>
 													Agregar al carrito
 												</Button>
@@ -427,6 +437,7 @@ const ShowProduct: FC = () => {
 													endIcon={<ShopTwoIcon />}
 													fullWidth
 													onClick={buyNow}
+													disabled={!product.stock}
 												>
 													Comprar ahora
 												</Button>

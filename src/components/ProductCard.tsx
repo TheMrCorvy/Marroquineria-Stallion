@@ -88,7 +88,7 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 
 	const classes = useStyles()
 
-	const { title, images, description, price } = productFromProps
+	const { title, images, description, price, stock } = productFromProps
 
 	const [desc, setDesc] = useState(description)
 
@@ -192,7 +192,7 @@ const ProductCard: FC<Props> = ({ productFromProps, loading }) => {
 						component="h2"
 						className={classes.textCenter}
 					>
-						{title}
+						{stock === 0 ? "SIN STOCK - " + title : title}
 					</Typography>
 					<Typography variant="subtitle1" className={classes.textGreen} gutterBottom>
 						{formatter.format(price)}
