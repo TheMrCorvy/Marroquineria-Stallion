@@ -85,7 +85,7 @@ export default function ProductView() {
 					<CircularProgress color="secondary" />
 				</Backdrop>
 			)}
-			<ListProductsSection />
+			<ListProductsSection alt />
 
 			<Container maxWidth="lg" className={classes.contactContainer} id="contacto">
 				<Grid container justify="space-around">
